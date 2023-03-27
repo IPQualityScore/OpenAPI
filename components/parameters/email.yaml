@@ -1,0 +1,64 @@
+# Copyright IPQualityScore LLC 2023
+fastParam:
+  in: query
+  name: fast
+  description: >
+    When this parameter is enabled our API will not perform an SMTP check with the mail service
+    provider, which greatly increases the API speed. Syntax and DNS checks are still performed
+    on the email address as well as our disposable email detection service. This option is
+    intended for services that require decision making in a time sensitive manner.
+  schema:
+    type: boolean
+timeoutParam:
+  in: query
+  name: timeout
+  description: >
+    Maximum number of seconds to wait for a reply from a mail service provider. If your
+    implementation requirements do not need an immediate response, we recommend bumping this
+    value to 20. Any results which experience a connection timeout will return the "timed_out"
+    variable as true. Default value is 7 seconds.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 60
+domainParam:
+  in: query
+  name: suggest_domain
+  description: >
+    Force analyze if the email address's domain has a typo and should be corrected to a popular
+    mail service. By default, this test is currently only performed when the email is invalid or
+    if the "recent abuse" status is true.
+  schema:
+    type: boolean
+strictnessParam:
+  in: query
+  name: strictness
+  description: >
+    Sets how strictly spam traps and honeypots are detected by our system, depending on how
+    comfortable you are with identifying emails suspected of being a spam trap. 0 is the lowest
+    level which will only return spam traps with high confidence. Strictness levels above 0 will
+    return increasingly more strict results, with level 2 providing the greatest detection
+    rates.
+  schema:
+    type: integer
+    minimum: 0
+    maximum: 2
+abuseParam:
+  in: query
+  name: abuse_strictness
+  description: >
+    Set the strictness level for machine learning pattern recognition of abusive email addresses
+    with the "recent_abuse" data point. Default level of 0 provides good coverage, however if
+    you are filtering account applications and facing advanced fraudsters then we recommend
+    increasing this value to level 1 or 2.
+  schema:
+    type: integer
+    minimum: 0
+    maximum: 2
+keyParam:
+  name: key
+  in: path
+  description: API key
+  required: true
+  schema:
+    type: string

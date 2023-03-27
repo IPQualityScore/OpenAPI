@@ -1,0 +1,47 @@
+# Proxy and VPN Detection API
+# truncated path
+# file v. 0.0.4
+# Copyright IPQualityScore LLC 2023
+description: >
+  IPQualityScore's [Proxy Detection API](https://www.ipqualityscore.com/proxy-vpn-tor-detection-service) allows you to Proactively Prevent Fraud™ via a simple API that provides over 25 data points for risk analysis, geo location, and IP intelligence. This endpoint allows on-demand lookups using our IP reputation API to accurately identify threats, bots, and compromised connections.
+parameters:
+  $ref: "../../components/parameters/all_parameters_array.yaml"
+get:
+  parameters:
+    # override ip param since it's required for this operation
+    - description: IPv4 or IPv6 address (used in GET query)
+      name: ip
+      in: query
+      required: true
+      schema:
+        type: string
+    - description: API Key (if not included in header)
+      name: key
+      in: query
+      schema:
+        type: string
+  operationId: ipLookupQueryGET
+  tags:
+    - proxy
+  summary: IP address lookup (GET)
+  description: |
+    returns detailed information about the given IP address. This produces the
+    same results as the fully-qualified route but allows the API key to be passed via a GET
+    query parameter or in the request header.
+  responses:
+    "200":
+      $ref: "../../components/responses/OK.yaml#/OK"
+post:
+  operationId: ipLookupBodyPOST
+  tags:
+    - proxy
+  summary: IP address lookup (POST)
+  description: |
+    returns JSON object with detailed information about the given IP address. This produces the
+    same results as the fully-qualified route but allows the API key to be passed via a POST
+    query parameter or in the request header.
+  requestBody:
+    $ref: "../../openapi.yaml#/components/requestBodies/Body"
+  responses:
+    "200":
+      $ref: "../../components/responses/OK.yaml#/OK"

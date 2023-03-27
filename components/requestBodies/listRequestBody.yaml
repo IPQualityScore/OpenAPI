@@ -1,0 +1,9 @@
+# Copyright IPQualityScore LLC 2023
+description: >
+  Instead of including parameters in the query of a GET request, they can
+  be included in the body of a POST request
+required: true
+content:
+  application/x-www-form-urlencoded:
+    schema:
+      $ref: "../schemas/listBody.yaml"

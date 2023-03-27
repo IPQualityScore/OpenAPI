@@ -1,0 +1,9 @@
+# Copyright IPQualityScore LLC 2023
+description: OK
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/list.yaml#/resultOK"
+  application/xml:
+    schema:
+      $ref: "../schemas/list.yaml#/resultOK"

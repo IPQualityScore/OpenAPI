@@ -1,0 +1,51 @@
+# Device Fingerprint Verification
+# https://www.ipqualityscore.com/documentation/device-fingerprint/verification
+# ver. 0.1
+# Copyright IPQualityScore LLC 2023
+description: >
+  It may be necessary to ensure that the user hasn't tampered with results after passing through a
+  JavaScript redirect. We offer a simple API that can retrieve the results server side. Requests to
+  this API and all reporting APIs will not consume an API lookup credit.
+parameters:
+  - name: key
+    description: API key
+    in: path
+    required: true
+    schema:
+      type: string
+  - name: ip
+    description: user IP address
+    in: path
+    required: true
+    schema:
+      type: string
+  - name: device_id
+    description: device_id previously returned by tracker
+    in: path
+    required: true
+    schema:
+      type: string
+get:
+  summary: verify the results of a device fingerprinting tracker
+  operationId: trackerResultsGET
+  tags:
+    - device fingerprint
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/tracker.yaml#/resultOK"
+post:
+  summary: verify the results of a device fingerprinting tracker
+  operationId: trackerResultsPOST
+  tags:
+    - device fingerprint
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/tracker.yaml#/resultOK"

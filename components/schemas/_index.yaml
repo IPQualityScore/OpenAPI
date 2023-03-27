@@ -1,0 +1,9 @@
+# Copyright IPQualityScore LLC 2023
+Strictness:
+  type: integer
+  minimum: 0
+  maximum: 3
+TransactionStrictness:
+  type: integer
+  minimum: 0
+  maximum: 2

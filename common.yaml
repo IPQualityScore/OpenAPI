@@ -1,0 +1,22 @@
+# ver. 0.0.1
+# Copyright IPQualityScore LLC 2023
+components:
+  parameters:
+    formatParam:
+      name: format
+      in: path
+      description: the format of the response. Options are "JSON" or "XML"
+      required: true
+      schema:
+        type: string
+        enum:
+          - "json"
+          - "xml"
+        # API key
+    keyRouteParam:
+      description: API key
+      name: key
+      in: path
+      required: true
+      schema:
+        type: string

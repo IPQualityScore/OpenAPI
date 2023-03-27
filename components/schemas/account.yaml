@@ -1,0 +1,35 @@
+# Copyright IPQualityScore LLC 2023
+type: object
+properties:
+  success:
+    description: Was this request successful?
+    type: boolean
+    example: true
+  message:
+    description: a simple message, either "Success" or an error related to the request
+    type: string
+    example: "Success"
+  credits:
+    description: total available credits remaining on the account
+    type: integer
+    example: 3004522
+  usage:
+    description: total number of API requests this billing cycle
+    type: integer
+    example: 478
+  proxy_usage:
+    description: number of requests to Proxy Detection API
+    type: integer
+    example: 6
+  email_usage:
+    description: number of requests to Email Validation API
+    type: integer
+    example: 472
+  fingerprint_usage:
+    description: number of requests to Device Fingerprint API
+    type: integer
+    example: 0
+  request_id:
+    description: unique identifier for this request
+    type: string
+    example: "3ift1XN"

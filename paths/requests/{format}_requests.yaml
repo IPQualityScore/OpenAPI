@@ -1,0 +1,42 @@
+# Copyright IPQualityScore LLC 2023
+# Request List API Path
+description: >
+  IPQS Request List API allows you to retrieve previous Proxy Detection API, Email Validation API and Device Fingerprinting technology requests to our API based on the date they occurred or custom variables.
+
+  You may want to retrieve the results of previous requests to our API in bulk for additional external processing. Requests via this API can be made via POST or GET. Custom tracking variables passed with your initial request must be listed on your account's custom tracking variables in order for the request to be successful. All requests to this API must contain a "type" parameter corresponding to the original request's type ("proxy", "email", "devicetracker", or "mobiletracker").
+parameters:
+  - $ref: "../../common.yaml#/components/parameters/formatParam"
+get:
+  summary: retrieve list of previous requests
+  operationId: requestsGET
+  tags:
+    - requests
+  parameters:
+    - name: key
+      description: API key. Required if not included in header.
+      in: query
+      schema:
+        type: string
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/typeParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/pageParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/limitParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/start_dateParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/stop_dateParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/tracker_idParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/device_idParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/min_fraud_scoreParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/max_fraud_scoreParam"
+    - $ref: "../../components/parameters/request_list_parameters.yaml#/ip_addressParam"
+  responses:
+    "200":
+      $ref: "../../components/responses/listOK.yaml"
+post:
+  summary: retrieve list of previous requests
+  operationId: requestsPOST
+  tags:
+    - requests
+  requestBody:
+    $ref: "../../components/requestBodies/listRequestBody.yaml"
+  responses:
+    "200":
+      $ref: "../../components/responses/listOK.yaml"

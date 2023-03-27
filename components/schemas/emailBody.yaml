@@ -1,0 +1,23 @@
+# Copyright IPQualityScore LLC 2023
+type: object
+properties:
+  key:
+    type: string
+  email:
+    type: string
+  fast:
+    type: boolean
+  timeout:
+    type: integer
+    minimum: 1
+    maximum: 60
+  suggest_domain:
+    type: boolean
+  strictness:
+    type: integer
+    minimum: 0
+    maximum: 2
+  abuse_strictness:
+    type: integer
+    minimum: 0
+    maximum: 2

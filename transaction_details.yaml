@@ -1,0 +1,201 @@
+# Transaction Details OpenAPI Component
+# ver. 0.0.1
+# Copyright IPQualityScore LLC 2023
+phoneLineType:
+  type: string
+  enum:
+    - "Landline"
+    - "Wireless"
+    - "Toll Free"
+    - "VOIP"
+    - "Satellite"
+    - "Premium Rate"
+    - "Pager"
+    - "Internet Service Provider"
+    - "Unknown"
+transaction_details:
+  type: object
+  properties:
+    risk_score:
+      type: number
+      description: >
+        Confidence that this user or transaction is exhibiting malicious behavior.
+        Scores are 0 - 100, with 75+ as suspicious and 90+ as high risk. This value uses different
+        calculations with less weight on the IP reputation compared to the overall "Fraud Score".
+    risk_factors:
+      type: string
+      description: >
+        Explanation for elevated Risk Scores to better understand why the payment or user was
+        associated with fraudulent behavior and considered a high risk.
+    valid_billing_address:
+      type: boolean
+      description: Physical address validation and reputation analysis.
+    valid_shipping_address:
+      type: boolean
+      description: Physical address validation and reputation analysis.
+    valid_billing_email:
+      type: boolean
+      description: >
+        Light abusive check and reputation analysis for the email address. It is recommended to use
+        our dedicated [Email Validation API](https://www.ipqualityscore.com/documentation/email-validation/overview)
+        for deeper analysis.
+    valid_shipping_email:
+      type: boolean
+      description: >
+        Light abusive check and reputation analysis for the email address. It is recommended to use
+        our dedicated [Email Validation API](https://www.ipqualityscore.com/documentation/email-validation/overview)
+        for deeper analysis.
+    leaked_billing_email:
+      type: boolean
+      description: >
+        Indicates if the email address has recently been exposed or compromised in a database
+        breach.
+    leaked_shipping_email:
+      type: boolean
+      description: >
+        Indicates if the email address has recently been exposed or compromised in a database
+        breach.
+    user_activity:
+      type: string
+      enum:
+        - "high"
+        - "medium"
+        - "low"
+        - "none"
+      description: >
+        Frequency at which this user makes legitimate purchases, account registrations, and engages
+        in legitimate customer behavior online. Values can be "high", "medium", "low", or "none".
+        Values of "high" or "medium" are strong signals of healthy usage. New user data without a
+        history of legitimate behavior will have a value as "none". This field is restricted to
+        higher plan tiers.
+    leaked_user_data:
+      type: boolean
+      description: >
+        Indicates if the email address has recently been exposed or compromised in a database
+        breach.
+    risky_billing_phone:
+      type: boolean
+      description: Reputation analysis for abusive activity associated with the phone number.
+    risky_shipping_phone:
+      type: boolean
+      description: Reputation analysis for abusive activity associated with the phone number.
+    valid_billing_phone:
+      type: boolean
+      description: Valid & active phone number with the phone carrier (not disconnected).
+    valid_shipping_phone:
+      type: boolean
+      description: |
+        Valid & active phone number with the phone carrier (not disconnected).
+    billing_phone_carrier:
+      type: string
+      description: Phone number provider company such as "AT&T" or "Bell Canada".
+    shipping_phone_carrier:
+      type: string
+      description: Phone number provider company such as "AT&T" or "Bell Canada".
+    billing_phone_line_type:
+      $ref: "#/phoneLineType"
+      description: >
+        Landline, Wireless, Toll Free, VOIP, Satellite, Premium Rate, Pager,
+        Internet Service Provider or Unknown.
+    shipping_phone_line_type:
+      $ref: "#/phoneLineType"
+      description: >
+        Landline, Wireless, Toll Free, VOIP, Satellite, Premium Rate, Pager,
+        Internet Service Provider or Unknown.
+    billing_phone_country:
+      type: string
+      description: 2-letter country code associated with the phone number.
+    shipping_phone_country:
+      type: string
+      description: 2-letter country code associated with the phone number.
+    billing_phone_country_code:
+      type: integer
+      description: Country dialing code associated with the phone number.
+    shipping_phone_country_code:
+      type: integer
+      description: Country dialing code associated with the phone number.
+    bin_country:
+      type: string
+      description: Country associated with the credit card BIN.
+    bin_bank_name:
+      type: string
+      description: |
+        The bank or processor name associated with the credit card BIN, such as
+        Citibank, Chase, Capital One, etc.
+    bin_type:
+      type: string
+      enum: ["Credit", "Debit", "Prepaid", "Virtual"]
+      description: |
+        Type of card associated with the credit card BIN. Values can be "Credit",
+        "Debit", "Prepaid", or "Virtual". Prepaid and Virtual credit cards carry
+        slightly higher risk.
+    risky_username:
+      type: boolean
+      description: Username frequently associated with fraudulent behavior.
+    is_prepaid_card:
+      type: boolean
+      description: Status of the credit card as prepaid.
+    fraudulent_behavior:
+      type: boolean
+      description: |
+        Indicates high risk behavior patterns and a high chance of fraud.
+    phone_name_identity_match:
+      type: string
+      enum: ["Unknown", "Match", "Mismatch", "No Match"]
+      description: |
+        Enterprise Account Feature — Indicates a reverse identity match between
+        the billing phone number and first/last name.
+        * "Unknown" - no checks processed
+        * "Match" - positive identity match
+        * "Mismatch" - data matches another user
+        * "No Match" - could not pair identity data
+    phone_email_identity_match:
+      type: string
+      enum: ["Unknown", "Match", "Mismatch", "No Match"]
+      description: |
+        Enterprise Account Feature — Indicates a reverse identity match between
+        the billing phone number and email address.
+        * "Unknown" - no checks processed
+        * "Match" - positive identity match
+        * "Mismatch" - data matches another user
+        * "No Match" - could not pair identity data
+    phone_address_identity_match:
+      type: string
+      enum: ["Unknown", "Match", "Mismatch", "No Match"]
+      description: |
+        Enterprise Account Feature — Indicates a reverse identity match between
+        the billing phone number and physical address.
+        * "Unknown" - no checks processed
+        * "Match" - positive identity match
+        * "Mismatch" - data matches another user
+        * "No Match" - could not pair identity data
+    email_name_identity_match:
+      type: string
+      enum: ["Unknown", "Match", "Mismatch", "No Match"]
+      description: |
+        Enterprise Account Feature — Indicates a reverse identity match between
+        the billing email address and first/last names.
+        * "Unknown" - no checks processed
+        * "Match" - positive identity match
+        * "Mismatch" - data matches another user
+        * "No Match" - could not pair identity data
+    name_address_identity_match:
+      type: string
+      enum: ["Unknown", "Match", "Mismatch", "No Match"]
+      description: |
+        Enterprise Account Feature — Indicates a reverse identity match between
+        the billing first/last name and physical address
+        * "Unknown" - no checks processed
+        * "Match" - positive identity match
+        * "Mismatch" - data matches another user
+        * "No Match" - could not pair identity data
+    address_email_identity_match:
+      type: string
+      enum: ["Unknown", "Match", "Mismatch", "No Match"]
+      description: |
+        Enterprise Account Feature — Indicates a reverse identity match between
+        the billing physical address and email address
+        * "Unknown" - no checks processed
+        * "Match" - positive identity match
+        * "Mismatch" - data matches another user
+        * "No Match" - could not pair identity data

@@ -1,0 +1,119 @@
+# Copyright IPQualityScore LLC 2023
+resultOK:
+  type: object
+  properties:
+    unsafe:
+      type: boolean
+      description: >
+        Is this domain suspected of being unsafe due to phishing, malware, spamming, or abusive behavior? View the confidence level by analyzing the "risk_score".
+    domain:
+      type: string
+      description: >
+        Domain name of the final destination URL of the scanned link, after following all redirects.
+    ip_address:
+      type: string
+      format: IPv4 or IPv6 address
+      description: The IP address corresponding to the server of the domain name.
+    country_code:
+      type: string
+      format: ISO 3166-1 alpha-2
+      description: >
+        The 2-digit country code corresponding to the server's IP address. For a list of all known country codes, see our [Country Code Map API](https://www.ipqualityscore.com/documentation/countries/overview)
+      example: "US"
+    language_code:
+      type: string
+      format: ISO 639-1
+      description: The 2-letter ISO code corresponding to the content's language on this URL/domain.
+      example: "en"
+    servers:
+      type: string
+      description: >
+        The server banner of the domain's IP address. Value will be
+        "N/A" if unavailable.
+      example: "nginx/1.16.0"
+    content_type:
+      type: string
+      description: >
+        MIME type of URL's content. For example "text/html; charset=UTF-8". Value will be "N/A" if unavailable.
+    risk_score:
+      type: integer
+      minimum: 0
+      maximum: 100
+      description: >
+        The IPQS risk score which estimates the confidence level for malicious URL detection. Risk Scores 85+ are high risk, while Risk Scores = 100 are confirmed as accurate.
+    status_code:
+      type: integer
+      format: HTTP Status Code
+      description: >
+        HTTP Status Code of the URL's response. This value should be "200" for a valid website. Value is "0" if URL is unreachable.
+      example: 200
+    page_size:
+      type: integer
+      description: >
+        Total number of bytes to download the URL's content. Value is "0" if URL is unreachable.
+    domain_rank:
+      type: integer
+      description: >
+        Estimated popularity rank of website globally. Value is "0" if the domain is unranked or has low traffic.
+    dns_valid:
+      type: boolean
+      description: The domain of the URL has valid DNS records.
+    suspicious:
+      type: boolean
+      description: >
+        Is this URL suspected of being malicious or used for phishing or abuse? Use in conjunction with the "risk_score" as a confidence level.
+    phishing:
+      type: boolean
+      description: Is this URL associated with malicious phishing behavior?
+    malware:
+      type: boolean
+      description: Is this URL associated with malware or viruses?
+    parking:
+      type: boolean
+      description: Is the domain of this URL currently parked with a for sale notice?
+    spamming:
+      type: boolean
+      description: Is the domain of this URL associated with email SPAM or abusive email addresses?
+    adult:
+      type: boolean
+      description: Is this URL or domain hosting dating or adult content?
+    category:
+      type: string
+      description: >
+
+      example: "Video Streaming"
+    domain_age:
+      type: object
+      properties:
+        human:
+          type: string
+          nullable: true
+          description: A human description of when this domain was registered.
+          example: "3 months ago"
+        timestamp:
+          type: integer
+          format: Unix time
+          description: The unix time since epoch when this domain was first registered.
+          example: 1568061634
+        iso:
+          type: string
+          format: date-time
+          description: The time this domain was registered in ISO8601 format.
+    redirected:
+      type: boolean
+      description: Does the URL redirect to another domain when loaded in a browser?
+    message:
+      type: string
+      description: A generic status message, either success or some form of an error notice.
+    success:
+      type: boolean
+      description: Was the request successful?
+    request_id:
+      type: string
+      description: >
+
+    errors:
+      type: array
+      items:
+        type: string
+      description: Array of errors which occurred while attempting to process this request.

@@ -1,0 +1,25 @@
+# Copyright IPQualityScore LLC 2023
+strictnessParam:
+  name: strictness
+  description: >
+    How strict should we scan this URL? Stricter checks may provide a higher false-positive rate. We recommend defaulting to level "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of abuse.
+  in: query
+  schema:
+    type: integer
+    minimum: 0
+    maximum: 2
+fastParam:
+  name: fast
+  description: When enabled, the API will provide quicker response times using lighter checks and analysis. This setting defaults to false.
+  in: query
+  schema:
+    type: boolean
+timeoutParam:
+  name: timeout
+  description: >
+    Maximum number of seconds to perform live page scanning and follow redirects. If your implementation requirements do not need an immediate response, we recommend bumping this value to 5. Default value is 2 seconds.
+  in: query
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 10

@@ -1,0 +1,213 @@
+# Copyright IPQualityScore LLC 2023
+firstSeenOrDomainAge:
+  type: object
+  properties:
+    human:
+      type: string
+      ### FOLLOWING IS REMOVED IN OAS 3.1
+      ### USE:
+        # type:
+        #   - string
+        #   - "null"
+      ### INSTEAD
+      nullable: true
+      description: a human-readable string
+      example: "3 months ago"
+    timestamp:
+      type: integer
+      description: Unix time
+      example: 1568061634
+    iso:
+      type: string
+      description: ISO8601 format
+      example: "2019-09-09T16:40:34-04:00"
+resultOK:
+  type: object
+  properties:
+    valid:
+      description: Does this email address appear valid?
+      type: boolean
+    disposable:
+      description: >
+        Is this email suspected of belonging to a temporary or disposable mail service? Usually
+        associated with fraudsters and scammers.
+      type: boolean
+    timed_out:
+      description: >
+        Did the connection to the mail service provider timeout during the verification? If so,
+        we recommend increasing the "timeout" variable above the default 7 second value. Lookups
+        that timeout with a "valid" result as false are most likely false and should be not be
+        trusted.
+      type: boolean
+    deliverability:
+      description: >
+        How likely is this email to be delivered to the user and land in their mailbox. Values
+        can be "high", "medium", or "low".
+      type: string
+      enum:
+        - "high"
+        - "medium"
+        - "low"
+    catch_all:
+      description: >
+        s this email likely to be a "catch all" where the mail server verifies all emails
+        tested against it as valid? It is difficult to determine if the address is truly valid
+        in these scenarios, since the email's server will not confirm the account's status.
+        pe: boolean
+      type: boolean
+    leaked:
+      description: >
+        Was this email address associated with a recent database leak from a third party? Leaked
+        accounts pose a risk as they may have become compromised during a database breach.
+      type: boolean
+    suspect:
+      description: >
+        This value indicates if the mail server is currently replying with a temporary error
+        and unable to verify the email address. This status will also be true for "catch all"
+        email addresses as defined below. If this value is true, then we suspect the "valid"
+        result may be tainted and there is not a guarantee that the email address is truly
+        valid.
+      type: boolean
+    smtp_score:
+      description: >
+        Validity score of email server's SMTP setup. Range: "-1" - "3". Scores above "-1" can be
+        associated with a valid email.
+        - -1: invalid email address
+        -  0: mail server exists, but is rejecting all mail
+        -  1: mail server exists, but is showing a temporary error
+        -  2: mail server exists, but accepts all email
+        -  3: mail server exists and has verified the email address
+      type: integer
+      minimum: -1
+      maximum: 3
+    overall_score:
+      description: >
+        Overall email validity score. Range: "0" - "4". Scores above "1" can
+        be associated with a valid email.
+        - 0: invalid email address
+        - 1: dns valid, unreachable mail server
+        - 2: dns valid, temporary mail rejection error
+        - 3: dns valid, accepts all mail
+        - 4: dns valid, verified email exists
+      type: integer
+      minimum: 0
+      maximum: 4
+    first_name:
+      description: >
+        Suspected first name based on email. Returns "CORPORATE" if the email is suspected of
+        being a generic company email. Returns "UNKNOWN" if the first name was not determinable.
+      type: string
+    common:
+      description: >
+        Is this email from a common email provider? ("gmail.com", "yahoo.com",
+        "hotmail.com",etc.)
+      type: boolean
+    generic:
+      description: >
+        Is this email suspected as being a catch all or shared email for a domain? ("admin@",
+        "webmaster@", "newsletter@", "sales@", "contact@", etc.)
+      type: boolean
+    dns_valid:
+      description: Does the email's hostname have valid DNS entries? Partial indication of a valid email.
+      type: boolean
+    honeypot:
+      description: >
+        Is this email believed to be a "honeypot" or "SPAM trap"? Bulk mail sent to these emails
+        increases your risk of being blacklisted by large ISPs & ending up in the spam folder.
+      type: boolean
+    spam_trap_score:
+      description: >
+        Confidence level of the email address being an active SPAM trap. Values can be "high", "medium", "low", or
+        "none". We recommend scrubbing emails with "high" or "medium" statuses. Avoid "low" emails whenever possible
+        for any promotional mailings.
+      type: string
+      enum:
+        - "high"
+        - "medium"
+        - "low"
+        - "none"
+    recent_abuse:
+      description:
+        This value will indicate if there has been any recently verified abuse across our network for this email
+        address. Abuse could be a confirmed chargeback, fake signup, compromised device, fake app install, or
+        similar malicious behavior within the past few days.
+      type: boolean
+    fraud_score:
+      description: >
+        The overall Fraud Score of the user based on the email's reputation and recent behavior across the IPQS
+        threat network. Fraud Scores >= 75 are suspicious, but not necessarily fraudulent.
+      type: number
+    frequent_complainer:
+      description: Indicates if this email frequently unsubscribes from marketing lists or reports email as SPAM.
+      type: boolean
+    suggested_domain:
+      description: >
+        Default value is "N/A". Indicates if this email's domain should in fact be corrected to a
+        popular mail service. This field is useful for catching user typos. For example, an email address with
+        "gmai.com", would display a suggested domain of "gmail.com". This feature supports all major mail
+        service providers.
+      type: string
+    domain_velocity:
+      description: >
+        Indicates the level of legitimate users interacting with the email address domain. Values can be "high",
+        "medium", "low", or "none". Domains like "IBM.com", "Microsoft.com", "Gmail.com", etc. will have "high"
+        scores as this value represents popular domains. New domains or domains that are not frequently visited by
+        legitimate users will have a value as "none". This field is restricted to upgraded plans.
+      type: string
+      enum:
+        - "high"
+        - "medium"
+        - "low"
+        - "none"
+    user_activity:
+      description: >
+        Frequency at which this email address makes legitimate purchases, account registrations, and engages in
+        legitimate user behavior online. Values can be "high", "medium", "low", or "none". Values of "high" or
+        "medium" are strong signals of healthy usage. New email addresses without a history of legitimate behavior
+        will have a value as "none". This field is restricted to higher plan tiers.
+      type: string
+      enum:
+        - "high"
+        - "medium"
+        - "low"
+        - "none"
+    associated_names:
+      description: >
+        Displays first and last names linked to the email address, if available in our data sources. Match rates
+        vary by country. This field is restricted to upgraded plans. Object value contains, "status", and "names"
+        as an array.
+      type: array
+      items:
+        type: string
+    associated_phone_numbers:
+      description: >
+        Displays phone numbers linked to the email address, if available in our data sources. Match rates vary by
+        country. This field is restricted to upgraded plans. Object value contains, "status", and "phone_numbers"
+        as an array.
+      type: array
+      items:
+        type: string
+    first_seen:
+      $ref: "#/firstSeenOrDomainAge"
+    domain_age:
+      $ref: "#/firstSeenOrDomainAge"
+    sanitized_email:
+      description: >
+        Sanitized email address with all aliases and masking removed, such as multiple periods
+        for Gmail.com
+      type: string
+    request_id:
+      description: >
+        A unique identifier for this request that can be used to lookup the request details or
+        send a postback conversion notice.
+      type: string
+    success:
+      description: Was the request successful?
+      type: boolean
+    message:
+      description: A generic status message, either success or some form of an error notice.
+      type: string
+    errors:
+      description: Array of errors which occurred while attempting to process this request.
+      items:
+        type: string

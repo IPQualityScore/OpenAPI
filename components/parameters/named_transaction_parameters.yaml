@@ -1,0 +1,276 @@
+# named_transaction_parameters.yaml
+# ver. 0.0.1
+# Copyright IPQualityScore LLC 2023
+
+# Param:
+#   name:
+#   description:
+#   in:
+#   schema:
+#     type:
+
+# billing
+billingFirstParam:
+  name: billing_first_name
+  description: The customer's billing first name.
+  in: query
+  schema:
+    type: string
+billingLastParam:
+  name: billing_last_name
+  description: The customer's billing last name.
+  in: query
+  schema:
+    type: string
+billingCompanyParam:
+  name: billing_company
+  description: The customer's billing company.
+  in: query
+  schema:
+    type: string
+billingCountryParam:
+  name: billing_country
+  description: >
+    The customer's billing country name or billing country ISO-Alpha2. (EG: United States or US)
+  in: query
+  schema:
+    type: string
+  examples:
+    - "United States"
+    - "US"
+billingAddress1Param:
+  name: billing_address_1
+  description: The customer's billing street address part 1.
+  in: query
+  schema:
+    type: string
+billingAddress2Param: 
+  name: billing_address_2
+  description: The customer's billing street address part 2.
+  in: query
+  schema:
+    type: string
+billingCityParam:
+  name: billing_city
+  description: The customer's billing city.
+  in: query
+  schema:
+    type: string
+billingRegionParam:
+  name: billing_region
+  description: The customer's billing region or state.
+  in: query
+  schema:
+    type: string
+billingPostcodeParam:
+  name: billing_postcode
+  description: The customer's billing postcode or zipcode.
+  in: query
+  schema:
+    oneOf:
+    - type: string
+    - type: integer
+billingEmailParam:
+  name: billing_email
+  description: The customer's billing email address.
+  in: query
+  schema:
+    type: string
+billingPhoneParam:
+  name: billing_phone
+  description: >
+    The customer's billing 11 to 14 digit phone number. (If less than 10 digits provided, the
+    country code will be guessed by our AI.)
+  in: query
+  schema:
+    type: integer
+    format: 11- to 14-digit phone number
+
+# shipping
+shippingFirstParam:
+  name: billing_first_name
+  description: The customer's shipping first name.
+  in: query
+  schema:
+    type: string
+shippingLastParam:
+  name: billing_last_name
+  description: The customer's shipping last name.
+  in: query
+  schema:
+    type: string
+shippingCompanyParam:
+  name: billing_company
+  description: The customer's shipping company.
+  in: query
+  schema:
+    type: string
+shippingCountryParam:
+  name: billing_country
+  description: >
+    The customer's shipping country name or shipping country ISO-Alpha2. (EG: United States or US)
+  in: query
+  schema:
+    type: string
+  examples:
+    - "United States"
+    - "US"
+shippingAddress1Param:
+  name: billing_address_1
+  description: The customer's shipping street address part 1.
+  in: query
+  schema:
+    type: string
+shippingAddress2Param: 
+  name: billing_address_2
+  description: The customer's shipping street address part 2.
+  in: query
+  schema:
+    type: string
+shippingCityParam:
+  name: billing_city
+  description: The customer's shipping city.
+  in: query
+  schema:
+    type: string
+shippingRegionParam:
+  name: billing_region
+  description: The customer's shipping region or state.
+  in: query
+  schema:
+    type: string
+shippingPostcodeParam:
+  name: billing_postcode
+  description: The customer's shipping postcode or zipcode.
+  in: query
+  schema:
+    oneOf:
+    - type: string
+    - type: integer
+shippingEmailParam:
+  name: billing_email
+  description: The customer's shipping email address.
+  in: query
+  schema:
+    type: string
+shippingPhoneParam:
+  name: billing_phone
+  description: >
+    The customer's shipping 11 to 14 digit phone number. (If less than 10 digits provided, the
+    country code will be guessed by our AI.)
+  in: query
+  schema:
+    type: integer
+    # non-standard format string is permitted for documentation purposes
+    # https://spec.openapis.org/oas/v3.0.3#data-types
+    format: 11- to 14-digit phone number
+
+usernameParam:
+  name: username
+  description: The customer's username.
+  in: query
+  schema:
+    type: string
+passwordHashParam:
+  name: password_hash
+  description: >
+    For security reasons and following industry best practices, a SHA256 hash of the user's password
+    for better user analysis.
+  in: query
+  schema:
+    type: string
+    format: SHA256
+binParam:
+  name: credit_card_bin
+  description: >
+    First six digits of the credit or debit card, referred to as the Bank Identification Number.
+  in: query
+  schema:
+    type: integer
+    minimum: 100000
+    maximum: 999999
+cardHashParam:
+  name: credit_card_hash
+  description: >
+    For security reasons and following industry best practices, a SHA256 hash of the
+    credit card number is accepted to check against blacklisted cards.
+  in: query
+  schema:
+    type: string
+    format: SHA256
+cardMonthParam:
+  name: credit_card_expiration_month
+  description: >
+    Two letter format of the credit card's expiration month. For example, May would be "05".
+  in: query
+  schema:
+    type: integer # <-- double check this
+    format: 2-digit
+    minimum: 01
+    maximum: 12
+    examples:
+      - 05
+cardYearParam:
+  name: credit_card_expiration_year
+  description: >
+    Two letter format of the credit card's expiration year. For example, 2022 would be "22".
+  in: query
+  schema:
+    type: integer
+    format: 2-digit
+    minimum: 00
+    maximum: 99
+    examples:
+      - 22
+avsParam:
+  name: avs_code
+  description: >
+    One letter Address Verification Service (AVS) response code provided by the credit card
+    processor or bank. A full list of acceptable response codes can be viewed [here](https://en.wikipedia.org/wiki/Address_verification_service).
+    If your system cannot retrieve the exact response code, values of "pass" or "fail" can be used.
+  in: query
+  schema:
+    type: string
+    examples:
+     - "N"
+     - "A"
+     - "pass"
+     - "fail"
+cvvParam:
+  name: cvv_code
+  description: >
+    One letter Card Verification Value (CVV2) response code provided by the credit card processor or
+    bank. A full list of acceptable response codes can be viewed here. If your system cannot retrieve
+    the exact response code, values of "pass" or "fail" can be used.
+  in: query
+  schema:
+    type: string
+    examples:
+      - "M"
+      - "N"
+      - "pass"
+      - "fail"
+orderAmountParam:
+  name: order_amount
+  description: Total balance of the entire order without currency symbols.
+  in: query
+  schema:
+    type: number
+orderQuantityParam:
+  name: order_quantity
+  description: Quantity of items for this order.
+  in: query
+  schema:
+    type: integer # <-- double check
+isRecurringParam:
+  name: recurring
+  description: Is this a recurring order that automatically rebills?
+  in: query
+  schema:
+    type: boolean
+recurringTimesParam:
+  name: recurring_times
+  description: >
+    	If this is a recurring order, how many times has this recurring order rebilled? For
+      example, if this is the third time the user is being billed, please enter this value as "3".
+      If this is the initial recurring order, please leave the value blank or enter "1".

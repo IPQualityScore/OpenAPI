@@ -1,0 +1,10 @@
+# Copyright IPQualityScore LLC 2023
+OK:
+  description: "The request was processed by IPQS (this includes success: true or false)"
+  content:
+    application/json:
+      schema:
+        $ref: "../schemas/resultOK.yaml#/resultOK"
+    application/xml:
+      schema:
+        $ref: "../schemas/resultOK.yaml#/resultOK"

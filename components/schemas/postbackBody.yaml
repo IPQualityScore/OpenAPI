@@ -1,0 +1,67 @@
+# postbackBody.yaml
+# ver. 0.1
+# defines the schema for the POST request body in a postback request
+# Copyright IPQualityScore LLC 2023
+type: object
+properties:
+  update:
+    description: >
+      Allows you to update the value of a variable. In a request body, you can use the keyword
+      "update" followed by the variable name in brackets, e.g. update[transactionID]. Otherwise,
+      without the keyword "update[]", the variable will be used as a lookup filter.
+    type: object
+    example: "update[transactionID]=100"
+  ConversionStatus:
+    description: Allows you to flag a request as having lead to a conversion.
+    type: boolean
+  ConversionDate:
+    description: Allows you to set a date the request was made a conversion.
+    type: string
+    oneOf:
+      - format: date
+      - format: date-time
+  ClickDate:
+    description: Allows you to alter the first seen date on a device.
+    type: string
+    oneOf:
+      - format: date
+      - format: date-time
+  user_agent:
+    type: string
+    example: "update[user_agent]=Lynx/2.8.7dev.9%20libwww-FM/2.14"
+  language:
+    type: string
+    example: "update[language]=en-US"
+  request_id:
+    description: A unique ID is provided for each request. This can be used for lookups.
+    type: string
+  type:
+    description: >
+      Required for request lookups when you don't provide a "request_id". Fetches a request of this
+      type.
+    type: string
+    enum:
+      - "proxy"
+      - "email"
+      - "devicetracker"
+      - "mobiletracker"
+  transactionID:
+    type: string
+  userID:
+    type: string
+  subUserID:
+    type: string
+  campaignID:
+    type: string
+  subCampaignID:
+    type: string
+  publisherID:
+    type: string
+  gclid:
+    type: string
+  email:
+    type: string
+  clickID:
+    type: string
+  conversionID:
+    type: string

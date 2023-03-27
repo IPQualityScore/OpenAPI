@@ -1,0 +1,47 @@
+# Copyright IPQualityScore LLC 2023
+parameters:
+  - $ref: "../../common.yaml#/components/parameters/formatParam"
+  - name: email
+    in: path
+    description: target email to be validated
+    required: true
+    schema:
+      type: string
+  - name: key
+    in: path
+    description: API key
+    required: true
+    schema:
+      type: string
+get:
+  parameters:
+    - $ref: "../../components/parameters/email.yaml#/fastParam"
+    - $ref: "../../components/parameters/email.yaml#/timeoutParam"
+    - $ref: "../../components/parameters/email.yaml#/domainParam"
+    - $ref: "../../components/parameters/email.yaml#/strictnessParam"
+    - $ref: "../../components/parameters/email.yaml#/abuseParam"
+  summary: validate email address (GET)
+  description: >
+    Analyze email address reputation in real-time with email risk analysis including the email's
+    creation date using an estimate of the email age based on when the email was first
+    discovered by IPQS.
+  operationId: validateEmailPathGET
+  tags:
+    - email
+  responses:
+    "200":
+      $ref: "../../components/responses/emailOK.yaml#/OK"
+post:
+  summary: validate email address (POST)
+  description: >
+    Analyze email address reputation in real-time with email risk analysis including the email's
+    creation date using an estimate of the email age based on when the email was first
+    discovered by IPQS.
+  operationId: validateEmailPathPOST
+  tags:
+    - email
+  requestBody:
+    $ref: "../../components/requestBodies/emailRequestBody.yaml"
+  responses:
+    "200":
+      $ref: "../../components/responses/emailOK.yaml#/OK"

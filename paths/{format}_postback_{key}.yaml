@@ -1,0 +1,80 @@
+# Copyright IPQualityScore LLC 2023
+description: >
+  You may want to update aspects of a proxy request after it happens, such as confirming the
+  conversion date and conversion status. This API allows you to update your request. Requests via
+  this API can be made via POST or GET. For the purposes of our documentation we'll demonstrate GET
+  requests. Parameters passed to the API wrapped as an update[] array will update the original
+  request. Parameters outside of the update[] array will be used to look up the request. Custom
+  tracking variables passed with your initial request must be listed on your account's custom
+  tracking variables in order for the postback update to be successful.
+
+  Ideally all postback requests will be submitted using the original "request_id". This is a system
+  unique ID that represents a single call to the API. However we realize that not every caller will
+  be able to store the ID for each request. As a result, the API allows for custom variables to be
+  used instead.
+parameters:
+  - $ref: "../common.yaml#/components/parameters/formatParam"
+  - $ref: "../common.yaml#/components/parameters/keyRouteParam"
+get:
+  summary: update previous request
+  operationId: "postbackGET"
+  tags:
+    - "postback"
+  parameters:
+    - name: request_id
+      description: >
+        Ideally all postback requests will be submitted using the original "request_id". This is a
+        system unique ID that represents a single call to the API.
+      in: query
+      schema:
+        type: string
+    - $ref: "../components/parameters/custom.yaml#/updateParam"
+    - $ref: "../components/parameters/custom.yaml#/transactionIDParam"
+    - $ref: "../components/parameters/custom.yaml#/userIDParam"
+    - $ref: "../components/parameters/custom.yaml#/subUserIDParam"
+    - $ref: "../components/parameters/custom.yaml#/campaignIDParam"
+    - $ref: "../components/parameters/custom.yaml#/subCampaignIDParam"
+    - $ref: "../components/parameters/custom.yaml#/publisherIDParam"
+    - $ref: "../components/parameters/custom.yaml#/gclidParam"
+    - $ref: "../components/parameters/custom.yaml#/emailParam"
+    - $ref: "../components/parameters/custom.yaml#/clickIDParam"
+    - $ref: "../components/parameters/custom.yaml#/conversionIDParam"
+  responses:
+    "200":
+      # the postback response will correspond to the response type of the request_id provided, or
+      # the value of the "type" parameter
+      description: OK
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: "../components/schemas/resultOK.yaml#/resultOK"
+              - $ref: "../components/schemas/emailResponse.yaml#/resultOK"
+        application/xml:
+          schema:
+            oneOf:
+              - $ref: "../components/schemas/resultOK.yaml#/resultOK"
+              - $ref: "../components/schemas/emailResponse.yaml#/resultOK"
+post:
+  summary: update previous request
+  operationId: "postbackPOST"
+  tags:
+    - "postback"
+  requestBody:
+    $ref: "../components/requestBodies/postbackRequestBody.yaml"
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: "../components/schemas/resultOK.yaml#/resultOK"
+              - $ref: "../components/schemas/emailResponse.yaml#/resultOK"
+              - $ref: "../components/schemas/tracker.yaml#/resultOK"
+        application/xml:
+          schema:
+            oneOf:
+              - $ref: "../components/schemas/resultOK.yaml#/resultOK"
+              - $ref: "../components/schemas/emailResponse.yaml#/resultOK"
+              - $ref: "../components/schemas/tracker.yaml#/resultOK"

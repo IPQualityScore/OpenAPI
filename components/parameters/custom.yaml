@@ -1,0 +1,95 @@
+# Custom.yaml
+# v. 0.0.1
+# This file contains the default custom tracking variables
+# These variables can be renamed in Settings & Account Management
+# Copyright IPQualityScore LLC 2023
+updateParam:
+  in: query
+  name: update
+  description: update associated Custom Variable to new value
+  schema:
+    type: object
+    additionalProperties: true
+    minProperties: 1
+    example: "update[transactionID]=100"
+  style: deepObject
+  explode: true
+transactionIDParam:
+  name: transactionID
+  in: query
+  schema:
+    oneOf:
+      - type: string
+      - type: integer
+userIDParam:
+    name: userID
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer
+subUserIDParam:
+    name: subUserID
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer
+campaignIDParam:
+    name: campaignID
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer
+subCampaignIDParam:
+    name: subCampaignID
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer
+publisherIDParam:
+    name: publisherID
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer
+gclidParam:
+    name: gclid
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer
+emailParam:
+    name: email
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer
+clickIDParam:
+    name: clickID
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer
+conversionIDParam:
+    name: conversionID
+    in: query
+#    description:
+    schema:
+      oneOf:
+        - type: string
+        - type: integer

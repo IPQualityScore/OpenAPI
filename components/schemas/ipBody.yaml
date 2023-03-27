@@ -1,0 +1,28 @@
+# Copyright IPQualityScore LLC 2023
+type: object
+properties:
+  key:
+    type: string
+  ip:
+    type: string
+  strictness:
+    $ref: "./components/schemas/_index.yaml#/Strictness"
+  user_agent:
+    type: string
+  user_language:
+    type: string
+  fast:
+    type: boolean
+  mobile:
+    type: boolean
+  allow_public_access_points:
+    type: boolean
+  lighter_penalties:
+    type: boolean
+  transaction_strictness:
+    $ref: "./components/schemas/_index.yaml#/TransactionStrictness"
+# Custom tracking variables (such as "userID", "transactionID") established in your account
+# settings can be passed with each API request. This allows our reporting tools to filter by
+# specific users, products, campaigns, transactions, etc. so that you can easily match up
+# records with your own system to identify fraudulent activity.
+additionalProperties: true

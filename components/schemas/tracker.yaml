@@ -1,0 +1,164 @@
+# tracker_result_parameters.yaml
+# ver. 0.1
+# Copyright IPQualityScore LLC 2023
+# defines expected result values of tracker results/API requests
+
+resultOK:
+  type: object
+  properties:
+    message:
+      type: string
+      description: >
+        A string describing the output in human terms. Generally this will only have a non-empty
+        value in the case of an error.
+    success:
+      type: boolean
+      description: Status of the request.
+    device_id:
+      type: string
+      format: SHA256 hash
+      description: >
+        The Device ID is generated as a hash from the user's device hardware and personal settings.
+        This value can be used for tracking users, detecting duplicate accounts, or passed to our
+        postback endpoint for confirmation.
+    guid:
+      type: string
+      format: SHA256 hash
+      description: >
+        Hardware tracking ID which uses a different algorithm for calculating a hash of the user's
+        device. This value can overlap with other devices that share the same hardware
+        configuration. Please use in conjunction with "guid_confidence".
+    guid_confidence:
+      type: integer
+      minimum: 0
+      maximum: 100
+      description: >
+        Accuracy of the "guid" match which associates a GUID hardware profile with other users,
+        where 0 = not likely, 100 = very likely. A result of 100 is a guaranteed match. Confidence
+        levels below 100 use an intelligent "best guess" approach. Some "guid" results may overlap
+        users, such as a device with factory settings for popular devices.
+    fraud_chance:
+      type: integer
+      minimum: 0
+      maximum: 100
+      description: >
+        How likely this device is to commit fraud or engage in abusive behavior. 0 = not likely,
+        100 = very likely. 25 is the median result. Fraud Scores >= 75 are suspicious, but not
+        necessarily fraudulent. We recommend flagging or blocking traffic with Fraud Scores >= 85,
+        but you may find it beneficial to use a higher or lower threshold.
+    is_crawler:
+      type: boolean
+      description: >
+        Is this device associated with being a confirmed crawler from a mainstream search engine
+        such as Googlebot, Bingbot, Yandex, etc.
+    connection_type:
+      type: string
+      enum:
+        - "Residential"
+        - "Corporate"
+        - "Education"
+        - "Mobile"
+        - "Data Center"
+      description: >
+        Classification of the IP address connection type as "Residential", "Corporate",
+        "Education", "Mobile", or "Data Center".
+    proxy:
+      type: boolean
+      description: Returns true if the lookup is on a Proxy, VPN, or Tor connection.
+    vpn:
+      type: boolean
+      description: >
+        Is this IP suspected of being a VPN connection? (proxy will always be true if this is true)
+    tor:
+      type: boolean
+      description: >
+        Is this IP suspected of being a Tor connection? (proxy will always be true if this is true)
+    recent_abuse:
+      type: boolean
+      description: >
+        This value will indicate if there has been any recently verified abuse across our network
+        for this user. Abuse could be a confirmed chargeback, compromised device, fake app install,
+        or similar malicious behavior within the past few days.
+    bot_status:
+      type: boolean
+      description: >
+        remium Account Feature - Indicates if this device is a bot, spoofed device, or non-human
+        request. Provides stronger confidence in decision making.
+    reasons:
+      type: array
+      items:
+        type: string
+      description: >
+        remium Account Feature - Fraud Score Insights explain how this device's Fraud Score was
+        calculated and provides further detail into enhanced Fraud Scores and penalties.
+        This data point is only available via the postback API so real-time users cannot reverse
+        engineer why they were penalized.
+    ISP:
+      type: string
+      description: Internet Service Provider of the IP address. If unavailable, then "N/A".
+    country:
+      type: string
+      description: Two letter country code of the IP address.
+      example: "US"
+    city:
+      type: string
+      description: City of IP address if available or "N/A" if unknown.
+    region:
+      type: string
+      description: Region or state of IP address if available or "N/A" if unknown.
+    timezone:
+      type: string
+      description: Timezone of IP address if available or "N/A" if unknown.
+    mobile:
+      type: boolean
+      description: Is this a mobile device?
+    operating_system:
+      type: string
+      description: Operating system name and version or "N/A" if unknown.
+    browser:
+      type: string
+      description: Browser name and version or "N/A" if unknown.
+    brand:
+      type: string
+      description: Brand name of the device or "N/A" if unknown.
+    model:
+      type: string
+      description: Model name of the device or "N/A" if unknown.
+    ip_address:
+      type: string
+      format: IPv4 or IPv6
+      description: The IP Address associated with the device in IPv4 or IPv6 format.
+    unique:
+      type: boolean
+      description: >
+        Returns false if this device ID has been seen on multiple IP addresses. Returns true if we
+        haven't seen this ID on multiple IPs.
+    canvas_hash:
+      type: string
+      format: SHA256
+      description: >
+        A hash of the user's Canvas profile, calculated by the graphics card and other device
+        hardware. This value is often not unique, so should not be used to identify a specific user.
+    webgl_hash:
+      type: string
+      format: SHA256 hash
+      description: >
+        A hash of the user's WebGL profile, calculated by the graphics card and other device
+        hardware. This value is often not unique, so should not be used to identify a specific user.
+    request_id:
+      type: string
+      description: >
+        A unique identifier for this request that can be used to lookup the request details,
+        interact with our API reports, or send a postback conversion notice.
+    fast_processing:
+      type: boolean
+      description: >
+        If this request is waiting for a callback or passing tracking variables then
+        fast_processing will be false. Requests process faster without this data.
+    time:
+      type: integer
+      description: Unix timestamp of request.
+    last_seen:
+      type: string
+      format: date-time
+      description: Time of the most recent request.

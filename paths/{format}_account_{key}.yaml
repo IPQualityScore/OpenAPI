@@ -1,0 +1,41 @@
+# Copyright IPQualityScore LLC 2023
+description: >
+  Utilize the Credit Usage API to access your account's total number of available credits and current usage for this billing period. You may chose to receive your information in either JSON or XML formats.
+parameters:
+  - $ref: "../common.yaml#/components/parameters/formatParam"
+  - name: key
+    description: API Key
+    in: path
+    required: true
+    schema:
+      type: string
+get:
+  summary: Retrieve available credits and usage for this billing period
+  operationId: creditsGET
+  tags:
+    - credit usage
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/account.yaml"
+        application/xml:
+          schema:
+            $ref: "../components/schemas/account.yaml"
+post:
+  summary: Retrieve available credits and usage for this billing period
+  operationId: creditsPOST
+  tags:
+    - credit usage
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/account.yaml"
+        application/xml:
+          schema:
+            $ref: "../components/schemas/account.yaml"

@@ -1,0 +1,56 @@
+# ver. 0.1
+# Copyright IPQualityScore LLC 2023
+description: >
+  IPQualityScore's [Malicious URL Scanner API](https://www.ipqualityscore.com/documentation/malicious-url-scanner-api/overview) scans links in real-time to detect suspicious URLs. Accurately identify phishing links, malware URLs and viruses, parked domains, and suspicious URLs with real-time risk scores. Industry leading phishing detection and domain reputation provide better signals for more accurate decision making.
+parameters:
+  - $ref: "../../common.yaml#/components/parameters/formatParam"
+get:
+  summary: analyze potentially malicious URL
+  operationId: urlQueryGET
+  tags:
+    - url
+  parameters:
+    - name: key
+      description: API key (required in query if not in header)
+      in: query
+      schema:
+        type: string
+    - name: url
+      description: the URL to be analyzed
+      in: query
+      required: true
+      schema:
+        type: string
+        format: percent-encoded URL
+    - $ref: "../../components/parameters/url_parameters.yaml#/strictnessParam"
+    - $ref: "../../components/parameters/url_parameters.yaml#/fastParam"
+    - $ref: "../../components/parameters/url_parameters.yaml#/timeoutParam"
+    - $ref: "../../components/parameters/custom.yaml#/transactionIDParam"
+    - $ref: "../../components/parameters/custom.yaml#/userIDParam"
+    - $ref: "../../components/parameters/custom.yaml#/subUserIDParam"
+    - $ref: "../../components/parameters/custom.yaml#/campaignIDParam"
+    - $ref: "../../components/parameters/custom.yaml#/subCampaignIDParam"
+    - $ref: "../../components/parameters/custom.yaml#/publisherIDParam"
+    - $ref: "../../components/parameters/custom.yaml#/gclidParam"
+    - $ref: "../../components/parameters/custom.yaml#/emailParam"
+    - $ref: "../../components/parameters/custom.yaml#/clickIDParam"
+    - $ref: "../../components/parameters/custom.yaml#/conversionIDParam"
+  responses:
+    "200":
+      $ref: "../../components/responses/urlOK.yaml"
+post:
+  summary: analyze potentially malicious URL
+  operationId: urlBodyPOST
+  tags:
+    - url
+  requestBody:
+    description: >
+      Instead of including additional parameters in the query of a GET request, they can be included in the body of a POST request
+    required: true
+    content:
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: "../../components/schemas/urlBody.yaml"
+  responses:
+    "200":
+      $ref: "../../components/responses/urlOK.yaml"

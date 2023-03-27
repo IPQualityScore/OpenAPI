@@ -1,0 +1,68 @@
+# Copyright IPQualityScore LLC 2023
+type: object
+properties:
+  key:
+    description: API key (required if not included in path or header)
+    type: string
+  type:
+    description: the type of requests you wish to list
+    type: string
+    enum:
+      - "proxy"
+      - "email"
+      - "phone"
+      - "devicetracker"
+      - "mobiletracker"
+  page:
+    description: >
+      The page number you are requesting. Defaults to 1 if not specified. Used to retrieve more results than the limit provides.
+    type: integer
+    minimum: 1
+  limit:
+    description: >
+      Allows you to specify how many results will be returned with your query up to a maximum of 250. Defaults to 25.
+    type: integer
+    minimum: 1
+    maximum: 250
+  start_date:
+    description: Fetches records newer than or equal to the date specified.
+    type: string
+    oneOf:
+      - format: date
+      - format: date-time
+    example: "2020-01-01"
+  stop_date:
+    description: Fetches records older than or equal to the date specified.
+    type: string
+    oneOf:
+      - format: date
+      - format: date-time
+    example: "2020-01-31"
+  tracker_id:
+    description: >
+      Number associated with your tracker in the IPQS device tracker management screen. This is an optional parameter used to narrow the scope of a variable lookup for a device tracker type.
+    type: integer
+  device_id:
+    description: >
+      This is an optional parameter to search all matching device ID queries with device fingerprinting.
+    type: string
+    format: SHA256 hash
+  min_fraud_score:
+    description: >
+      This is an optional parameter to limit results to only contain fraud scores greater than or equal to this number
+    type: integer
+    minimum: 0
+    maximum: 100
+    example: 45
+  max_fraud_score:
+    description: >
+      This is an optional parameter to limit results to only contain fraud scores less than or equal to this number.
+    type: integer
+    minimum: 0
+    maximum: 100
+    example: 80
+  ip_address:
+    description: >
+      This is an optional parameter to search all matching IP address queries for "proxy", "devicetracker", and "mobiletracker" types.
+    type: string
+    format: IPv4 or IPv6 address

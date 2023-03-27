@@ -1,0 +1,56 @@
+# Copyright IPQualityScore LLC 2023
+openapi: "3.0.3"
+
+info:
+  title: IPQualityScore
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: API Support
+    url: https://www.ipqualityscore.com/documentation/overview
+    email: support@ipqualityscore.com
+  license:
+    name: CopyRight IPQualityScore LLC - Proprietary (All Rights Reserved)
+    url: https://www.ipqualityscore.com/plans # See license.md
+  version: 0.0.1 # Last updated: 2023-03-16
+
+paths:
+  /{format}/postback/{key}:
+    parameters:
+      - $ref: "./common.yaml#/components/parameters/keyRouteParam"
+      - $ref: "./common.yaml#/components/parameters/formatParam"
+
+    get:
+      responses:
+        "200":
+          description: returns the updated request in the given format
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: # e.g. email_validation response
+                  - $ref: # e.g. proxy & vpn detection response
+            application/xml:
+    post:
+
+
+components:
+  parameters:
+  schemas:
+  requestBodies:
+  responses:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: IPQS-KEY
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+
+servers:
+  - url: https://ipqualityscore.com/api
+
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []

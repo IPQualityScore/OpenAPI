@@ -1,0 +1,34 @@
+# Copyright IPQualityScore LLC 2023
+resultOK:
+  type: object
+  properties:
+    success:
+      description: Was the request successful?
+      type: boolean
+    requests:
+      description: >
+        Array of result objects. Please refer to: [Proxy Detection API](https://www.ipqualityscore.com/documentation/proxy-detection/overview), [Email Validation API](https://www.ipqualityscore.com/documentation/email-validation/overview), or [Device Fingerprinting API](https://www.ipqualityscore.com/documentation/device-fingerprint/overview)
+      type: array
+      items:
+        oneOf:
+          - $ref: "./emailResponse.yaml#/resultOK"
+          - $ref: "./resultOK.yaml#/resultOK"
+          - $ref: "./tracker.yaml#/resultOK"
+    current_page:
+      description: Which page of results was returned by this query.
+      type: integer
+    total_pages:
+      description: Total number of results pages this query produced.
+      type: integer
+    request_count:
+      description: How many results are on this page.
+      type: integer
+    max_results_per_page:
+      description: How many results this response should contain.
+      type: integer
+    total_requests:
+      description: How many results exist in total for this query.
+      type: integer
+    request_id:
+      description: A unique identifier for this request.
+      type: string

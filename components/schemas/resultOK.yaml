@@ -1,0 +1,387 @@
+# resultOK.yaml
+# version 0.0.2
+# last updated 2023-03-21
+# Copyright IPQualityScore LLC 2023
+# moved to separate file for legibility and reuse
+# describes the result of an API endpoint
+success:
+  type: boolean
+  description: Was the request successful?
+message:
+  type: string
+  description: A generic status message, either success or some form of an error notice.
+request_id:
+  type: string
+  description: |
+    A unique identifier for this request that can be used to lookup the request
+    details or send a postback conversion notice.
+phoneLineType:
+  type: string
+  enum:
+    - "Landline"
+    - "Wireless"
+    - "Toll Free"
+    - "VOIP"
+    - "Satellite"
+    - "Premium Rate"
+    - "Pager"
+    - "Internet Service Provider"
+    - "Unknown"
+resultOK:
+  type: object
+  properties:
+    proxy:
+      type: boolean
+      description: |
+        Is this IP address suspected to be a proxy? (SOCKS, Elite,
+        Anonymous, VPN, Tor, etc.)
+    host:
+      type: string
+      description: Hostname of the IP address if one is available.
+    ISP:
+      type: string
+      description: ISP if one is known. Otherwise "N/A"
+    Organization:
+      type: string
+      description: |
+        Organization if one is known. Can be parent company or
+        sub company of the listed ISP. Otherwise "N/A".
+    ASN:
+      type: integer
+      description: Autonomous System Number if one is known. Null if nonexistent.
+    country_code:
+      type: string
+      description: Two character country code of IP address or "N/A" if unknown.
+    city:
+      type: string
+      description: City of IP address if available or "N/A" if unknown.
+    region:
+      type: string
+      description: Region (state) of IP address if available or "N/A" if unknown.
+    timezone:
+      type: string
+      description: Timezone of IP address if available or "N/A" if unknown.
+    latitude:
+      type: number
+      description: Latitude of IP address if available or "N/A" if unknown.
+    longitude:
+      type: number
+      description: Longitude of IP address if available or "N/A" if unknown.
+    zip_code:
+      type: string
+      description: |
+        Postal code of IP address if available or "N/A" if unknown. IP addresses
+        can relate to multiple postal codes in a city, so we recommend performing
+        analysis of similar postal codes nearby.
+    is_crawler:
+      type: boolean
+      description: |
+        Is this IP associated with being a confirmed crawler from a mainstream
+        search engine such as Googlebot, Bingbot, Yandex, etc. based on hostname
+        or IP address verification.
+    connection_type:
+      type: string
+      enum: ["Residential", "Corporate", "Education", "Mobile", "Data Center"]
+      description: Classification of the IP address connection type
+    recent_abuse:
+      type: boolean
+      description: |
+        This value will indicate if there has been any recently verified abuse
+        across our network for this IP address. Abuse could be a confirmed
+        chargeback, compromised device, fake app install, or similar malicious
+        behavior within the past few days.
+    abuse_velocity:
+      type: string
+      description: |
+        Premium Account Feature - How frequently the IP address is engaging in abuse
+        across the IPQS threat network. Values can be "high", "medium", "low", or
+        "none". Can be used in combination with the Fraud Score to identify bad
+        behavior.
+    bot_status:
+      type: boolean
+      description: |
+        Premium Account Feature - Indicates if bots or non-human traffic has
+        recently used this IP address to engage in automated fraudulent
+        behavior.Provides stronger confidence that the IP address is suspicious.
+    vpn:
+      type: boolean
+      description: |
+        Is this IP suspected of being a VPN connection? This can include data center
+        ranges which can become active VPNs at any time. The "proxy" status will
+        always be true when this value is true.
+    tor:
+      type: boolean
+      description: |
+        Is this IP suspected of being a TOR connection? This can include previously
+        active TOR nodes and exits which can become active TOR exits at any time. The
+        "proxy" status will always be true when this value is true.
+    active_vpn:
+      type: boolean
+      description: |
+        Premium Account Feature - Identifies active VPN connections used by popular
+        VPN services and private VPN servers.
+    active_tor:
+      type: boolean
+      description: |
+        Premium Account Feature - Identifies active TOR exits on the TOR network.
+    mobile:
+      type: boolean
+      description: |
+        Is this user agent a mobile browser? (will always be false if the user agent
+        is not passed in the API request)
+    fraud_score:
+      type: number
+      description: |
+        The overall fraud score of the user based on the IP, user agent, language, and
+        any other optionally passed variables. Fraud Scores >= 75 are suspicious, but
+        not necessarily fraudulent. We recommend flagging or blocking traffic with
+        Fraud Scores >= 88, but you may find it beneficial to use a higher or lower
+        threshold.
+    request_id:
+      $ref: "#/request_id"
+    operating_system:
+      type: string
+      description: |
+        Operating system name and version or "N/A" if unknown. Requires the
+        "user_agent" variable in the API Request.
+    browser:
+      type: string
+      description: |
+        Browser name and version or "N/A" if unknown. Requires the "user_agent"
+        variable in the API Request.
+    device_brand:
+      type: string
+      description: |
+        Brand name of the device or "N/A" if unknown. Requires the "user_agent"
+        variable in the API Request.
+    device_model:
+      type: string
+      description: |
+        Model name of the device or "N/A" if unknown. Requires the "user_agent"
+        variable in the API Request.
+    transaction_details:
+      type: object
+      properties:
+        risk_score:
+          type: number
+          description: |
+            Confidence that this user or transaction is exhibiting malicious behavior.
+            Scores are 0 - 100, with 75+ as suspicious and 90+ as high risk. This
+            value uses different calculations with less weight on the IP reputation
+            compared to the overall "Fraud Score".
+        risk_factors:
+          type: string
+          nullable: true
+          description: |
+            Explanation for elevated Risk Scores to better understand why the payment
+            or user was associated with fraudulent behavior and considered a high
+            risk.
+        valid_billing_address:
+          type: boolean
+          nullable: true
+          description: Physical address validation and reputation analysis.
+        valid_shipping_address:
+          type: boolean
+          nullable: true
+          description: Physical address validation and reputation analysis.
+        valid_billing_email:
+          type: boolean
+          nullable: true
+          description: |
+            Light abusive check and reputation analysis for the email address. It is
+            recommended to use our dedicated Email Validation API
+            https://www.ipqualityscore.com/documentation/email-validation/overview for
+            deeper analysis.
+        valid_shipping_email:
+          type: boolean
+          nullable: true
+          description: |
+            Light abusive check and reputation analysis for the email address. It is
+            recommended to use our dedicated Email Validation API
+            https://www.ipqualityscore.com/documentation/email-validation/overview for
+            deeper analysis.
+        leaked_billing_email:
+          type: boolean
+          nullable: true
+          description: |
+            Indicates if the email address has recently been exposed or compromised in
+            a database breach.
+        leaked_shipping_email:
+          type: boolean
+          nullable: true
+          description: |
+            Indicates if the email address has recently been exposed or compromised in
+            a database breach.
+        leaked_user_data:
+          type: boolean
+          nullable: true
+          description: |
+            Indicates if the user's data (including phone & address) have recently
+            been exposed or compromised in a database breach.
+        user_activity:
+          type: string
+          enum: ["high", "medium", "low", "none"]
+          description: |
+            Frequency at which this user makes legitimate purchases, account
+            registrations, and engages in legitimate customer behavior online. Values
+            can be "high", "medium", "low", or "none". Values of "high" or "medium"
+            are strong signals of healthy usage. New user data without a history of
+            legitimate behavior will have a value as "none". This field is restricted
+            to higher plan tiers.
+        risky_billing_phone:
+          type: boolean
+          nullable: true
+          description: |
+            Reputation analysis for abusive activity associated with the phone number.
+        risky_shipping_phone:
+          type: boolean
+          nullable: true
+          description: |
+            Reputation analysis for abusive activity associated with the phone number.
+        valid_billing_phone:
+          type: boolean
+          nullable: true
+          description: |
+            Valid & active phone number with the phone carrier (not disconnected).
+        valid_shipping_phone:
+          type: boolean
+          nullable: true
+          description: |
+            Valid & active phone number with the phone carrier (not disconnected).
+        billing_phone_carrier:
+          type: string
+          nullable: true
+          description: Phone number provider company such as "AT&T" or "Bell Canada".
+        shipping_phone_carrier:
+          type: string
+          nullable: true
+          description: Phone number provider company such as "AT&T" or "Bell Canada".
+        billing_phone_line_type:
+          $ref: "#/phoneLineType"
+          description: >
+            Landline, Wireless, Toll Free, VOIP, Satellite, Premium Rate, Pager,
+            Internet Service Provider or Unknown.
+        shipping_phone_line_type:
+          $ref: "#/phoneLineType"
+          description: >
+            Landline, Wireless, Toll Free, VOIP, Satellite, Premium Rate, Pager,
+            Internet Service Provider or Unknown.
+        billing_phone_country:
+          type: string
+          nullable: true
+          description: 2-letter country code associated with the phone number.
+        shipping_phone_country:
+          type: string
+          nullable: true
+          description: 2-letter country code associated with the phone number.
+        billing_phone_country_code:
+          type: string
+          nullable: true
+          description: Country dialing code associated with the phone number.
+        shipping_phone_country_code:
+          type: string
+          nullable: true
+          description: Country dialing code associated with the phone number.
+        bin_country:
+          type: string
+          nullable: true
+          description: Country associated with the credit card BIN.
+        bin_bank_name:
+          type: string
+          nullable: true
+          description: >
+            The bank or processor name associated with the credit card BIN, such as
+            Citibank, Chase, Capital One, etc.
+        bin_type:
+          type: string
+          enum:
+            - "Credit"
+            - "Debit"
+            - "Prepaid"
+            - "Virtual"
+            - "N/A"
+          description: >
+            Type of card associated with the credit card BIN. Values can be "Credit",
+            "Debit", "Prepaid", "Virtual", or "N/A". Prepaid and Virtual credit cards carry
+            slightly higher risk.
+        risky_username:
+          type: boolean
+          nullable: true
+          description: Username frequently associated with fraudulent behavior.
+        is_prepaid_card:
+          type: boolean
+          nullable: true
+          description: Status of the credit card as prepaid.
+        fraudulent_behavior:
+          type: boolean
+          description: |
+            Indicates high risk behavior patterns and a high chance of fraud.
+        phone_name_identity_match:
+          type: string
+          enum: ["Unknown", "Match", "Mismatch", "No Match"]
+          description: |
+            Enterprise Account Feature — Indicates a reverse identity match between
+            the billing phone number and first/last name.
+            * "Unknown" - no checks processed
+            * "Match" - positive identity match
+            * "Mismatch" - data matches another user
+            * "No Match" - could not pair identity data
+        phone_email_identity_match:
+          type: string
+          enum: ["Unknown", "Match", "Mismatch", "No Match"]
+          description: |
+            Enterprise Account Feature — Indicates a reverse identity match between
+            the billing phone number and email address.
+            * "Unknown" - no checks processed
+            * "Match" - positive identity match
+            * "Mismatch" - data matches another user
+            * "No Match" - could not pair identity data
+        phone_address_identity_match:
+          type: string
+          enum: ["Unknown", "Match", "Mismatch", "No Match"]
+          description: |
+            Enterprise Account Feature — Indicates a reverse identity match between
+            the billing phone number and physical address.
+            * "Unknown" - no checks processed
+            * "Match" - positive identity match
+            * "Mismatch" - data matches another user
+            * "No Match" - could not pair identity data
+        email_name_identity_match:
+          type: string
+          enum: ["Unknown", "Match", "Mismatch", "No Match"]
+          description: |
+            Enterprise Account Feature — Indicates a reverse identity match between
+            the billing email address and first/last names.
+            * "Unknown" - no checks processed
+            * "Match" - positive identity match
+            * "Mismatch" - data matches another user
+            * "No Match" - could not pair identity data
+        name_address_identity_match:
+          type: string
+          enum: ["Unknown", "Match", "Mismatch", "No Match"]
+          description: |
+            Enterprise Account Feature — Indicates a reverse identity match between
+            the billing first/last name and physical address
+            * "Unknown" - no checks processed
+            * "Match" - positive identity match
+            * "Mismatch" - data matches another user
+            * "No Match" - could not pair identity data
+        address_email_identity_match:
+          type: string
+          enum: ["Unknown", "Match", "Mismatch", "No Match"]
+          description: |
+            Enterprise Account Feature — Indicates a reverse identity match between
+            the billing physical address and email address
+            * "Unknown" - no checks processed
+            * "Match" - positive identity match
+            * "Mismatch" - data matches another user
+            * "No Match" - could not pair identity data
+    message:
+      $ref: "#/message"
+    success:
+      $ref: "#/success"
+    errors:
+      type: array
+      items:
+        type: string
+        description: errors which occurred while attempting to process this request

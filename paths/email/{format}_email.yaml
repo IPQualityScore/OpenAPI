@@ -1,0 +1,35 @@
+# Copyright IPQualityScore LLC 2023
+parameters:
+  - $ref: "../../common.yaml#/components/parameters/formatParam"
+get:
+  parameters:
+    - $ref: "../../components/parameters/email.yaml#/fastParam"
+    - $ref: "../../components/parameters/email.yaml#/timeoutParam"
+    - $ref: "../../components/parameters/email.yaml#/domainParam"
+    - $ref: "../../components/parameters/email.yaml#/strictnessParam"
+    - $ref: "../../components/parameters/email.yaml#/abuseParam"
+  summary: validate email address (GET)
+  description: >
+    Analyze email address reputation in real-time with email risk analysis including the email's
+    creation date using an estimate of the email age based on when the email was first
+    discovered by IPQS.
+  operationId: validateEmailGET
+  tags:
+    - email
+  responses:
+    "200":
+      $ref: "../../components/responses/emailOK.yaml#/OK"
+post:
+  summary: validate email address (POST)
+  description: >
+    Analyze email address reputation in real-time with email risk analysis including the email's
+    creation date using an estimate of the email age based on when the email was first
+    discovered by IPQS.
+  operationId: validateEmailPOST
+  tags:
+    - email
+  requestBody:
+    $ref: "../../components/requestBodies/emailRequestBody.yaml"
+  responses:
+    "200":
+      $ref: "../../components/responses/emailOK.yaml#/OK"

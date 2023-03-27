@@ -1,0 +1,81 @@
+# Copyright IPQualityScore LLC 2023
+get:
+  summary: report a fraudulent ip, email, or the request_id
+  description: >
+    Train your account's machine learning algorithms to better identify fraud for your audience.
+    This endpoint can be used to report email addresses as fraudulent. Please only report data
+    that has a high confidence of being abusive.
+  operationId: report
+  tags:
+    - report
+  parameters:
+    - $ref: "../common.yaml#/components/parameters/formatParam"
+    - description: API key
+      name: key
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: ip
+      description: IPv4 or IPv6 address to report
+      in: query
+      schema:
+        type: string
+    - name: email
+      in: query
+      description: a fraudulent email to be reported for machine learning
+      schema:
+        type: string
+    - name: request_id
+      description: a previous request which you now wish to report
+      in: query
+      schema:
+        type: string
+    - name: country
+      description: >
+        The 2 letter country code (preferred method) or full properly formatted name
+        (capitalization and spacing required) of the phone number you wish to report. Must also
+        include phone parameter in query.
+      in: query
+      schema:
+        type: string
+    - name: phone
+      description: >
+        The 9 to 20 digit phone number you wish to report. If used, country parameter must also
+        be supplied.
+      in: query
+      schema:
+        type: string
+        format: 9- to 20-digit telephone number
+  responses:
+    "200":
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Success"
+              request_id:
+                type: string
+                example: "3ift1wF"
+        application/xml:
+          schema:
+            type: object
+            xml:
+              name: result
+            properties:
+              success:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Success"
+              request_id:
+                type: string
+                example: "0w8WYS"
