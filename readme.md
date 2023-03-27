@@ -1,7 +1,12 @@
-IPQualityScore OpenAPI Definition
-Copyright IPQualityScore LLC 2023
+# IPQualityScore OpenAPI Definition
 
 This OpenAPI Definition is provided for the benefit of IPQualityScore customers to assist you in using our API. Please refer to our API Documentation. Where the documentation differs from this definition, the documentation should override this definition.
+
+Documentation is available at: https://www.ipqualityscore.com/documentation/overview
+
+---
+
+Copyright IPQualityScore LLC 2023
 
 This definition is provided in a multi-file directory hierarchy. openapi.yaml in the root directory is the root of the definition.
 
