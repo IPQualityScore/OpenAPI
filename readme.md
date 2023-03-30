@@ -35,28 +35,36 @@ Otherwise, either clone this repository via `git clone
 https://github.com/IPQualityScore/OpenAPI.git` or download and unzip the ZIP file.
 ![Download ZIP](https://cdn.ipqualityscore.com/images/ydp4djjfxikoz4q.png)
 
+
 In Postman, in the workspace of your choice, click **Import**. ![Click on
 Import](https://cdn.ipqualityscore.com/images/w28b1xztkiq5tg6.png)
+
 
 In the dialog window, click **folders**. ![click folders](https://cdn.ipqualityscore.com/images/5ke0x9xbyr65spf.png)
 )
 
+
 Upload the unzipped or cloned directory. ![upload the directory](https://cdn.ipqualityscore.com/images/sznsx39asw8481j.png)
 
+
 Select **view import settings**. ![import settings](https://cdn.ipqualityscore.com/images/850jnlcm785zy49.png)
+
 
 In **Import Settings**, under **Folder organization**, select **Tags**. This
 ensures that the requests in the collection will be organized by Postman more
 legibly. Then click the back arrow. ![organize by tags](https://cdn.ipqualityscore.com/images/i68d4ofcb99v40l.png)
 
+
 Finally, click **Import** to import the directory in Postman.
 ![import](https://cdn.ipqualityscore.com/images/6v2y0spzwkjbr5g.png)
+
 
 You should now see a collection in Postman called IPQualityScore API. In order
 to successfully make requests using the collection, you must have an API key. If
 you do not have one, you can sign up for a free account at
 [IPQualityScore.com](https://www.ipqualityscore.com/create-account)
 ![authorization](https://cdn.ipqualityscore.com/images/p322h8xg2ntv5qt.png)
+
 
 Most of our requests allow the API key to be given in the URL path, as a query
 parameter, in header, or in the body of a POST request. Regardless of which
