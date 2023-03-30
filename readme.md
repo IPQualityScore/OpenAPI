@@ -1,3 +1,5 @@
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/26205857-697d9152-0860-4142-ab9b-9c42c42f1b70?action=collection%2Ffork&collection-url=entityId%3D26205857-697d9152-0860-4142-ab9b-9c42c42f1b70%26entityType%3Dcollection%26workspaceId%3De83c6326-0ae5-4ff6-ab66-888de401daaa)
+
 # IPQualityScore OpenAPI Definition
 
 This OpenAPI Definition is provided for the benefit of IPQualityScore customers
@@ -6,8 +8,6 @@ documentation differs from this definition, the documentation should override
 this definition.
 
 Documentation is available at: https://www.ipqualityscore.com/documentation/overview
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/26205857-697d9152-0860-4142-ab9b-9c42c42f1b70?action=collection%2Ffork&collection-url=entityId%3D26205857-697d9152-0860-4142-ab9b-9c42c42f1b70%26entityType%3Dcollection%26workspaceId%3De83c6326-0ae5-4ff6-ab66-888de401daaa)
 
 ---
 
