@@ -1,0 +1,277 @@
+parameters:
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: XML
+  tags:
+    - Request List
+  parameters:
+    - name: type
+      in: query
+      required: true
+      description: The original request's type
+      example: proxy
+      schema:
+        deprecated: false
+        type: string
+        enum:
+          - proxy
+          - email
+          - phone
+          - devicetracker
+          - mobiletracker
+          - url
+          - malware_scan
+          - leaked_email
+          - leaked_username
+          - leaked_password
+    - name: page
+      in: query
+      required: false
+      description: The page number you are requesting
+      example: "1"
+      schema:
+        deprecated: false
+        type: integer
+        default: "1"
+        minimum: 1
+    - name: limit
+      in: query
+      required: false
+      description: The amount of results that will be returned
+      example: "25"
+      schema:
+        deprecated: false
+        type: integer
+        default: "25"
+        minimum: 1
+        maximum: 250
+    - name: start_date
+      in: query
+      required: true
+      description: Fetch records newer than or equal to the date specified
+      example: "2025-01-01"
+      schema:
+        deprecated: false
+        type: string
+        format: date
+    - name: stop_date
+      in: query
+      required: false
+      description: Fetch records older than or equal to the date specified
+      example: "2025-01-31"
+      schema:
+        deprecated: false
+        type: string
+        format: date
+    - name: tracker_id
+      in: query
+      required: false
+      description: Narrow the scope of a variable lookup for a device tracker type
+      example: "555"
+      schema:
+        deprecated: false
+        type: integer
+    - name: device_id
+      in: query
+      required: false
+      description: Search all matching device ID queries with device fingerprinting
+      example: a8b5fb99a8f5defdb435e86a1532bb78
+      schema:
+        deprecated: false
+        type: string
+    - name: min_fraud_score
+      in: query
+      required: false
+      description: >-
+        Limit results to only contain fraud scores greater than or equal to this
+        number
+      example: "45"
+      schema:
+        deprecated: false
+        type: integer
+        minimum: 0
+        maximum: 100
+    - name: max_fraud_score
+      in: query
+      required: false
+      description: >-
+        Limit results to only contain fraud scores less than or equal to this
+        number
+      example: "80"
+      schema:
+        deprecated: false
+        type: integer
+        minimum: 0
+        maximum: 100
+    - name: ip_address
+      in: query
+      required: false
+      description: >-
+        Search all matching IP address queries for "proxy", "devicetracker", and
+        "mobiletracker" types
+      example: 8.8.8.8
+      schema:
+        deprecated: false
+        type: string
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: text/xml;charset=UTF-8
+      description: Success
+      content:
+        application/xml:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  requests:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        success:
+                          type: boolean
+                        fraud_score:
+                          type: integer
+                        country_code:
+                          type: string
+                        region:
+                          type: string
+                        city:
+                          type: string
+                        ISP:
+                          type: string
+                        ASN:
+                          type: integer
+                        organization:
+                          type: string
+                        is_crawler:
+                          type: boolean
+                        timezone:
+                          type: string
+                        mobile:
+                          type: boolean
+                        host:
+                          type: string
+                        proxy:
+                          type: boolean
+                        vpn:
+                          type: boolean
+                        tor:
+                          type: boolean
+                        active_vpn:
+                          type: boolean
+                        active_tor:
+                          type: boolean
+                        recent_abuse:
+                          type: boolean
+                        bot_status:
+                          type: boolean
+                        connection_type:
+                          type: string
+                        abuse_velocity:
+                          type: string
+                        shared_connection:
+                          type: boolean
+                        dynamic_connection:
+                          type: boolean
+                        frequent_abuser:
+                          type: boolean
+                        high_risk_attacks:
+                          type: boolean
+                        security_scanner:
+                          type: boolean
+                        trusted_network:
+                          type: boolean
+                        zip_code:
+                          type: string
+                        latitude:
+                          type: number
+                        longitude:
+                          type: integer
+                        abuse_events:
+                          type: array
+                          items: {}
+                        request_id:
+                          type: string
+                        click_date:
+                          type: string
+                        variables:
+                          type: array
+                          items: {}
+                        ip:
+                          type: string
+                  request_count:
+                    type: integer
+                  current_page:
+                    type: integer
+                  total_pages:
+                    type: integer
+                  max_results_per_page:
+                    type: integer
+                  total_requests:
+                    type: integer
+                  request_id:
+                    type: string
+          example:
+            result:
+              success: true
+              requests:
+                - success: true
+                  fraud_score: 0
+                  country_code: US
+                  region: Colorado
+                  city: Denver
+                  ISP: Cloudflare
+                  ASN: 13335
+                  organization: Cloudflare
+                  is_crawler: false
+                  timezone: America/Denver
+                  mobile: false
+                  host: one.one.one.one
+                  proxy: false
+                  vpn: false
+                  tor: false
+                  active_vpn: false
+                  active_tor: false
+                  recent_abuse: false
+                  bot_status: true
+                  connection_type: Data Center
+                  abuse_velocity: none
+                  shared_connection: false
+                  dynamic_connection: false
+                  frequent_abuser: false
+                  high_risk_attacks: false
+                  security_scanner: false
+                  trusted_network: false
+                  zip_code: N/A
+                  latitude: 39.75
+                  longitude: -105
+                  abuse_events: []
+                  request_id: Y07hN3Mk7I
+                  click_date: "2025-06-12 21:49:17"
+                  variables: []
+                  ip: 1.1.1.1
+              request_count: 1
+              current_page: 1
+              total_pages: 507
+              max_results_per_page: 1
+              total_requests: 507
+              request_id: a3s2KXm0ur

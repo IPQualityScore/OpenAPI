@@ -1,0 +1,226 @@
+parameters:
+  - name: ipAddress
+    in: path
+    required: true
+    description: The IP address to analyze
+    example: 1.1.1.1
+    schema:
+      deprecated: false
+      type: string
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: JSON
+  tags:
+    - Proxy & VPN Detection
+  parameters:
+    - name: strictness
+      in: query
+      required: false
+      description: >-
+        How in depth (strict) the query will be. Higher values take longer to
+        process and may provide a higher false-positive rate
+      example: "0"
+      schema:
+        deprecated: false
+        type: integer
+        minimum: 0
+        maximum: 3
+    - name: user_agent
+      in: query
+      required: false
+      description: >-
+        A user agent string (browser) allowing additional checks to be performed
+        to see if the user is a bot or running an invalid browser
+      example: >-
+        Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/139.0.0.0 Safari/537.36
+      schema:
+        deprecated: false
+        type: string
+    - name: user_language
+      in: query
+      required: false
+      description: The user's language header
+      example: en-US,en;q=0.9
+      schema:
+        deprecated: false
+        type: string
+    - name: fast
+      in: query
+      required: false
+      description: >-
+        Whether to skip certain forensic checks that take longer to process.
+        Enabling this feature greatly reduces API response time without much
+        impact on accuracy
+      example: "true"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: mobile
+      in: query
+      required: false
+      description: >-
+        Whether this lookup should be treated as a mobile device. Recommended
+        for mobile lookups that do not have a user agent attached to the request
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: allow_public_access_points
+      in: query
+      required: false
+      description: >-
+        Whether to bypass certain checks for IP addresses from education and
+        research institutions, schools, and some corporate connections to better
+        accommodate audiences that frequently use public connections.
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: lighter_penalties
+      in: query
+      required: false
+      description: >-
+        Whether to lower detection rates and Fraud Scores for mixed quality IP
+        addresses
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: transaction_strictness
+      in: query
+      required: false
+      description: >-
+        Adjust the weights for penalties applied due to irregularities and
+        fraudulent patterns detected on order and transaction details that can
+        be optionally provided on each API request
+      example: "0"
+      schema:
+        deprecated: false
+        type: integer
+        minimum: 0
+        maximum: 2
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/json; charset=UTF-8
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+              fraud_score:
+                type: integer
+              country_code:
+                type: string
+              region:
+                type: string
+              city:
+                type: string
+              ISP:
+                type: string
+              ASN:
+                type: integer
+              organization:
+                type: string
+              is_crawler:
+                type: boolean
+              timezone:
+                type: string
+              mobile:
+                type: boolean
+              host:
+                type: string
+              proxy:
+                type: boolean
+              vpn:
+                type: boolean
+              tor:
+                type: boolean
+              active_vpn:
+                type: boolean
+              active_tor:
+                type: boolean
+              recent_abuse:
+                type: boolean
+              bot_status:
+                type: boolean
+              connection_type:
+                type: string
+              abuse_velocity:
+                type: string
+              shared_connection:
+                type: boolean
+              dynamic_connection:
+                type: boolean
+              frequent_abuser:
+                type: boolean
+              high_risk_attacks:
+                type: boolean
+              security_scanner:
+                type: boolean
+              trusted_network:
+                type: boolean
+              zip_code:
+                type: string
+              latitude:
+                type: number
+              longitude:
+                type: number
+              abuse_events:
+                type: array
+                items: {}
+              request_id:
+                type: string
+          example:
+            success: true
+            message: Success
+            fraud_score: 0
+            country_code: US
+            region: Colorado
+            city: Denver
+            ISP: Cloudflare
+            ASN: 13335
+            organization: Cloudflare
+            is_crawler: false
+            timezone: America/Denver
+            mobile: false
+            host: 1.1.1.1
+            proxy: false
+            vpn: false
+            tor: false
+            active_vpn: false
+            active_tor: false
+            recent_abuse: false
+            bot_status: false
+            connection_type: Data Center
+            abuse_velocity: none
+            shared_connection: true
+            dynamic_connection: false
+            frequent_abuser: false
+            high_risk_attacks: false
+            security_scanner: false
+            trusted_network: true
+            zip_code: N/A
+            latitude: -33.86000061
+            longitude: 151.21000671
+            abuse_events: []
+            request_id: ZyrtsRLXTO

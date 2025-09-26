@@ -1,0 +1,47 @@
+parameters:
+  - name: startDate
+    in: path
+    required: true
+    description: >-
+      Retrieve all entries in the feed from beyond this date, beginning at
+      12:00AM UTC
+    example: "2025-09-01"
+    schema:
+      deprecated: false
+      type: string
+      format: date
+  - name: endDate
+    in: path
+    required: true
+    description: Retrieve all entries in the feed up this date
+    example: "2025-09-30"
+    schema:
+      deprecated: false
+      type: string
+      format: date
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: Gzip (Custom Time Range)
+  tags:
+    - IP Address Abuse Feed
+  parameters: []
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/gzip; charset=UTF-8
+      description: Success
+      content:
+        application/gzip: {}

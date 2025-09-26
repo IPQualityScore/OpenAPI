@@ -1,0 +1,4634 @@
+openapi: 3.0.0
+info:
+  title: IPQualityScore API
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: API Support
+    url: https://www.ipqualityscore.com/documentation/overview
+    email: support@ipqualityscore.com
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit/
+  version: 0.2.0 # last updated: 2025-09-10
+servers:
+  - url: https://ipqualityscore.com/api
+paths:
+  /json/account/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Credit Usage
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  credits:
+                    type: integer
+                  usage:
+                    type: integer
+                  proxy_usage:
+                    type: integer
+                  email_usage:
+                    type: integer
+                  fingerprint_usage:
+                    type: integer
+                  mobile_sdk_usage:
+                    type: integer
+                  url_usage:
+                    type: integer
+                  phone_usage:
+                    type: integer
+                  country_code:
+                    type: string
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Success
+                credits: 4999762
+                usage: 92
+                proxy_usage: 54
+                email_usage: 38
+                fingerprint_usage: 0
+                mobile_sdk_usage: 0
+                url_usage: 60
+                phone_usage: 68
+                country_code: US
+                request_id: a0GjTtGwvr
+  /xml/account/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: XML
+      tags:
+        - Credit Usage
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                      message:
+                        type: string
+                      credits:
+                        type: integer
+                      usage:
+                        type: integer
+                      proxy_usage:
+                        type: integer
+                      email_usage:
+                        type: integer
+                      fingerprint_usage:
+                        type: integer
+                      mobile_sdk_usage:
+                        type: integer
+                      url_usage:
+                        type: integer
+                      phone_usage:
+                        type: integer
+                      country_code:
+                        type: string
+                      request_id:
+                        type: string
+              example:
+                result:
+                  success: true
+                  message: Success
+                  credits: 4999762
+                  usage: 92
+                  proxy_usage: 54
+                  email_usage: 38
+                  fingerprint_usage: 0
+                  mobile_sdk_usage: 0
+                  url_usage: 60
+                  phone_usage: 68
+                  country_code: US
+                  request_id: a0GjTtGwvr
+  /json/loginhistory/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Login History
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  login_logs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ID:
+                          type: string
+                        UserID:
+                          type: string
+                        IP:
+                          type: string
+                        Hostname:
+                          type: string
+                        Browser:
+                          type: string
+                          format: style
+                        FraudScore:
+                          type: string
+                        CountryCode:
+                          type: string
+                        OrgISP:
+                          type: string
+                        Email:
+                          type: string
+                          format: email
+                        LoginSuccess:
+                          type: boolean
+                        Attempts:
+                          type: string
+                        Validated:
+                          type: boolean
+                        Deleted:
+                          type: boolean
+                        Genesis:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                            timezone_type:
+                              type: integer
+                            timezone:
+                              type: string
+                  total_logins:
+                    type: integer
+                  request_id:
+                    type: string
+              example:
+                message: Success
+                success: true
+                login_logs:
+                  - ID: "155834371"
+                    UserID: "7674771"
+                    IP: 1.1.1.1
+                    Hostname: one.one.one.one
+                    Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+                    FraudScore: "0.00"
+                    CountryCode: US
+                    OrgISP: Cloudflare
+                    Email: user@gmail.com
+                    LoginSuccess: true
+                    Attempts: "0"
+                    Validated: false
+                    Deleted: false
+                    Genesis:
+                      date: "2025-05-30 00:05:34.000000"
+                      timezone_type: 3
+                      timezone: America/New_York
+                  - ID: "155934241"
+                    UserID: "7674771"
+                    IP: 1.0.0.1
+                    Hostname: one.one.one.one
+                    Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+                    FraudScore: "0.00"
+                    CountryCode: US
+                    OrgISP: Cloudflare
+                    Email: user@gmail.com
+                    LoginSuccess: true
+                    Attempts: "0"
+                    Validated: false
+                    Deleted: false
+                    Genesis:
+                      date: "2025-05-31 11:44:08.000000"
+                      timezone_type: 3
+                      timezone: America/New_York
+                total_logins: 2
+                request_id: aNjZAE7P8g
+  /xml/loginhistory/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: XML
+      tags:
+        - Login History
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      success:
+                        type: boolean
+                      login_logs:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            ID:
+                              type: string
+                            UserID:
+                              type: string
+                            IP:
+                              type: string
+                            Hostname:
+                              type: string
+                            Browser:
+                              type: string
+                              format: style
+                            FraudScore:
+                              type: string
+                            CountryCode:
+                              type: string
+                            OrgISP:
+                              type: string
+                            Email:
+                              type: string
+                              format: email
+                            LoginSuccess:
+                              type: boolean
+                            Attempts:
+                              type: string
+                            Validated:
+                              type: boolean
+                            Deleted:
+                              type: boolean
+                            Genesis:
+                              type: object
+                              properties:
+                                date:
+                                  type: string
+                                timezone_type:
+                                  type: integer
+                                timezone:
+                                  type: string
+                      total_logins:
+                        type: integer
+                      request_id:
+                        type: string
+              example:
+                result:
+                  message: Success
+                  success: true
+                  login_logs:
+                    - ID: "155834371"
+                      UserID: "7674771"
+                      IP: 1.1.1.1
+                      Hostname: one.one.one.one
+                      Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+                      FraudScore: "0.00"
+                      CountryCode: US
+                      OrgISP: Cloudflare
+                      Email: user@gmail.com
+                      LoginSuccess: true
+                      Attempts: "0"
+                      Validated: false
+                      Deleted: false
+                      Genesis:
+                        date: "2025-05-30 00:05:34.000000"
+                        timezone_type: 3
+                        timezone: America/New_York
+                    - ID: "155934241"
+                      UserID: "7674771"
+                      IP: 1.0.0.1
+                      Hostname: one.one.one.one
+                      Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+                      FraudScore: "0.00"
+                      CountryCode: US
+                      OrgISP: Cloudflare
+                      Email: user@gmail.com
+                      LoginSuccess: true
+                      Attempts: "0"
+                      Validated: false
+                      Deleted: false
+                      Genesis:
+                        date: "2025-05-31 11:44:08.000000"
+                        timezone_type: 3
+                        timezone: America/New_York
+                  total_logins: 2
+                  request_id: aNjZAE7P8g
+  /json/leaked/{type}/{apiKey}:
+    parameters:
+      - name: type
+        in: path
+        required: true
+        description: The type of data to search for
+        example: password
+        schema:
+          deprecated: false
+          type: string
+      - $ref: "#/components/parameters/apiKey"
+    post:
+      summary: JSON
+      tags:
+        - Dark Web Leak
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  request_hash:
+                    type: string
+                  source:
+                    type: array
+                    items:
+                      type: string
+                  exposed:
+                    type: boolean
+                  first_seen:
+                    type: object
+                    properties:
+                      human:
+                        type: string
+                      timestamp:
+                        type: integer
+                      iso:
+                        type: string
+                        format: date-time
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Success
+                request_hash: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+                source:
+                  - Exploit Antipublic
+                exposed: true
+                first_seen:
+                  human: 2 years ago
+                  timestamp: 1681115849
+                  iso: "2023-04-10T04:37:29-04:00"
+                request_id: Zz1OOrY2ep
+  /xml/leaked/{type}/{apiKey}:
+    parameters:
+      - name: type
+        in: path
+        required: true
+        description: The type of data to search for
+        example: password
+        schema:
+          deprecated: false
+          type: string
+      - $ref: "#/components/parameters/apiKey"
+    post:
+      summary: XML
+      tags:
+        - Dark Web Leak
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                      message:
+                        type: string
+                      request_hash:
+                        type: string
+                      source:
+                        type: array
+                        items:
+                          type: string
+                      exposed:
+                        type: boolean
+                      first_seen:
+                        type: object
+                        properties:
+                          human:
+                            type: string
+                          timestamp:
+                            type: integer
+                          iso:
+                            type: string
+                            format: date-time
+                      request_id:
+                        type: string
+              example:
+                result:
+                  success: true
+                  message: Success
+                  request_hash: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+                  source:
+                    - Exploit Antipublic
+                  exposed: true
+                  first_seen:
+                    human: 2 years ago
+                    timestamp: 1681115849
+                    iso: "2023-04-10T04:37:29-04:00"
+                  request_id: Zz1OOrY2ep
+  /json/email/{apiKey}/{email}:
+    parameters:
+      - name: email
+        in: path
+        required: true
+        description: The email address to analyze
+        example: noreply@ipqualityscore.com
+        schema:
+          deprecated: false
+          type: string
+          format: email
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Email Verification
+      parameters:
+        - name: fast
+          in: query
+          required: false
+          description: Whether to perform an SMTP check with the mail service provider, greatly increasing the API speed
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: timeout
+          in: query
+          required: false
+          description: The maximum number of seconds to wait for a reply from a mail service provider
+          example: "7"
+          schema:
+            deprecated: false
+            type: integer
+            default: "7"
+            minimum: 1
+            maximum: 60
+        - name: suggest_domain
+          in: query
+          required: false
+          description: Whether to force analysis to see if the email address's domain has a typo and if it should be corrected to a popular mail service
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: strictness
+          in: query
+          required: false
+          description: Sets how strictly spam traps and honeypots are detected by our system, depending on how comfortable you are with identifying emails suspected of being spam traps
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 2
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  valid:
+                    type: boolean
+                  disposable:
+                    type: boolean
+                  smtp_score:
+                    type: integer
+                  overall_score:
+                    type: integer
+                  first_name:
+                    type: string
+                  generic:
+                    type: boolean
+                  common:
+                    type: boolean
+                  dns_valid:
+                    type: boolean
+                  honeypot:
+                    type: boolean
+                  deliverability:
+                    type: string
+                  frequent_complainer:
+                    type: boolean
+                  spam_trap_score:
+                    type: string
+                  catch_all:
+                    type: boolean
+                  timed_out:
+                    type: boolean
+                  suspect:
+                    type: boolean
+                  recent_abuse:
+                    type: boolean
+                  fraud_score:
+                    type: integer
+                  suggested_domain:
+                    type: string
+                  leaked:
+                    type: boolean
+                  domain_age:
+                    type: object
+                    properties:
+                      human:
+                        type: string
+                      timestamp:
+                        type: integer
+                      iso:
+                        type: string
+                        format: date-time
+                  first_seen:
+                    type: object
+                    properties:
+                      human:
+                        type: string
+                      timestamp:
+                        type: integer
+                      iso:
+                        type: string
+                        format: date-time
+                  domain_trust:
+                    type: string
+                  sanitized_email:
+                    type: string
+                    format: email
+                  domain_velocity:
+                    type: string
+                  user_activity:
+                    type: string
+                  associated_names:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      names:
+                        type: array
+                        items: {}
+                  associated_phone_numbers:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      phone_numbers:
+                        type: array
+                        items: {}
+                  risky_tld:
+                    type: boolean
+                  spf_record:
+                    type: boolean
+                  dmarc_record:
+                    type: boolean
+                  mx_records:
+                    type: array
+                    items:
+                      type: string
+                  a_records:
+                    type: array
+                    items:
+                      type: string
+                      format: ip-address
+                  request_id:
+                    type: string
+              example:
+                message: Success.
+                success: true
+                valid: true
+                disposable: false
+                smtp_score: 2
+                overall_score: 3
+                first_name: Unknown
+                generic: false
+                common: false
+                dns_valid: true
+                honeypot: true
+                deliverability: low
+                frequent_complainer: false
+                spam_trap_score: medium
+                catch_all: true
+                timed_out: false
+                suspect: true
+                recent_abuse: true
+                fraud_score: 100
+                suggested_domain: N/A
+                leaked: false
+                domain_age:
+                  human: 14 years ago
+                  timestamp: 1302837997
+                  iso: "2011-04-14T23:26:37-04:00"
+                first_seen:
+                  human: 6 years ago
+                  timestamp: 1557122946
+                  iso: "2019-05-06T02:09:06-04:00"
+                domain_trust: trusted
+                sanitized_email: noreply@ipqualityscore.com
+                domain_velocity: high
+                user_activity: Disabled for performance. Contact support for further assistance.
+                associated_names:
+                  status: No associated names found.
+                  names: []
+                associated_phone_numbers:
+                  status: No associated phone numbers found.
+                  phone_numbers: []
+                risky_tld: false
+                spf_record: false
+                dmarc_record: true
+                mx_records:
+                  - mx.zoho.com
+                  - mx2.zoho.com
+                  - mx3.zoho.com
+                a_records:
+                  - 104.26.2.60
+                  - 172.67.72.12
+                  - 104.26.3.60
+                request_id: ZytW9JsDtX
+  /xml/email/{apiKey}/{email}:
+    parameters:
+      - name: email
+        in: path
+        required: true
+        description: The email address to analyze
+        example: noreply@ipqualityscore.com
+        schema:
+          type: string
+          format: email
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: XML
+      tags:
+        - Email Verification
+      parameters:
+        - name: fast
+          in: query
+          required: false
+          description: Whether to perform an SMTP check with the mail service provider, greatly increasing the API speed
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: timeout
+          in: query
+          required: false
+          description: The maximum number of seconds to wait for a reply from a mail service provider
+          example: "7"
+          schema:
+            deprecated: false
+            type: integer
+            default: "7"
+            minimum: 1
+            maximum: 60
+        - name: suggest_domain
+          in: query
+          required: false
+          description: Whether to force analysis to see if the email address's domain has a typo and if it should be corrected to a popular mail service
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: strictness
+          in: query
+          required: false
+          description: Sets how strictly spam traps and honeypots are detected by our system, depending on how comfortable you are with identifying emails suspected of being spam traps
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 2
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      success:
+                        type: boolean
+                      valid:
+                        type: boolean
+                      disposable:
+                        type: boolean
+                      smtp_score:
+                        type: integer
+                      overall_score:
+                        type: integer
+                      first_name:
+                        type: string
+                      generic:
+                        type: boolean
+                      common:
+                        type: boolean
+                      dns_valid:
+                        type: boolean
+                      honeypot:
+                        type: boolean
+                      deliverability:
+                        type: string
+                      frequent_complainer:
+                        type: boolean
+                      spam_trap_score:
+                        type: string
+                      catch_all:
+                        type: boolean
+                      timed_out:
+                        type: boolean
+                      suspect:
+                        type: boolean
+                      recent_abuse:
+                        type: boolean
+                      fraud_score:
+                        type: integer
+                      suggested_domain:
+                        type: string
+                      leaked:
+                        type: boolean
+                      domain_age:
+                        type: object
+                        properties:
+                          human:
+                            type: string
+                          timestamp:
+                            type: integer
+                          iso:
+                            type: string
+                            format: date-time
+                      first_seen:
+                        type: object
+                        properties:
+                          human:
+                            type: string
+                          timestamp:
+                            type: integer
+                          iso:
+                            type: string
+                            format: date-time
+                      domain_trust:
+                        type: string
+                      sanitized_email:
+                        type: string
+                        format: email
+                      domain_velocity:
+                        type: string
+                      user_activity:
+                        type: string
+                      associated_names:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                          names:
+                            type: array
+                            items: {}
+                      associated_phone_numbers:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                          phone_numbers:
+                            type: array
+                            items: {}
+                      risky_tld:
+                        type: boolean
+                      spf_record:
+                        type: boolean
+                      dmarc_record:
+                        type: boolean
+                      mx_records:
+                        type: array
+                        items:
+                          type: string
+                      a_records:
+                        type: array
+                        items:
+                          type: string
+                          format: ip-address
+                      request_id:
+                        type: string
+              example:
+                result:
+                  message: Success.
+                  success: true
+                  valid: true
+                  disposable: false
+                  smtp_score: 2
+                  overall_score: 3
+                  first_name: Unknown
+                  generic: false
+                  common: false
+                  dns_valid: true
+                  honeypot: true
+                  deliverability: low
+                  frequent_complainer: false
+                  spam_trap_score: medium
+                  catch_all: true
+                  timed_out: false
+                  suspect: true
+                  recent_abuse: true
+                  fraud_score: 100
+                  suggested_domain: N/A
+                  leaked: false
+                  domain_age:
+                    human: 14 years ago
+                    timestamp: 1302837997
+                    iso: "2011-04-14T23:26:37-04:00"
+                  first_seen:
+                    human: 6 years ago
+                    timestamp: 1557122946
+                    iso: "2019-05-06T02:09:06-04:00"
+                  domain_trust: trusted
+                  sanitized_email: noreply@ipqualityscore.com
+                  domain_velocity: high
+                  user_activity: Disabled for performance. Contact support for further assistance.
+                  associated_names:
+                    status: No associated names found.
+                    names: []
+                  associated_phone_numbers:
+                    status: No associated phone numbers found.
+                    phone_numbers: []
+                  risky_tld: false
+                  spf_record: false
+                  dmarc_record: true
+                  mx_records:
+                    - mx.zoho.com
+                    - mx2.zoho.com
+                    - mx3.zoho.com
+                  a_records:
+                    - 104.26.2.60
+                    - 172.67.72.12
+                    - 104.26.3.60
+                  request_id: ZytW9JsDtX
+  /json/url/{apiKey}/{url}:
+    parameters:
+      - name: url
+        in: path
+        required: true
+        description: The URL to analyze
+        example: https%3A%2F%2Fexample.com
+        schema:
+          deprecated: false
+          type: string
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Malicious URL Scanner
+      parameters:
+        - name: strictness
+          in: query
+          required: false
+          description: How strictly the URL should be scanned
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 2
+        - name: fast
+          in: query
+          required: false
+          description: Whether the API should provide quicker response times using lighter checks and analysis
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: timeout
+          in: query
+          required: false
+          description: Maximum number of seconds to perform live page scanning and follow redirects
+          example: "2"
+          schema:
+            deprecated: false
+            type: integer
+            default: "2"
+            minimum: 1
+            maximum: 10
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  unsafe:
+                    type: boolean
+                  domain:
+                    type: string
+                  root_domain:
+                    type: string
+                  ip_address:
+                    type: string
+                    format: ip-address
+                  server:
+                    type: string
+                  content_type:
+                    type: string
+                  status_code:
+                    type: integer
+                  page_size:
+                    type: integer
+                  domain_rank:
+                    type: integer
+                  dns_valid:
+                    type: boolean
+                  parking:
+                    type: boolean
+                  spamming:
+                    type: boolean
+                  malware:
+                    type: boolean
+                  phishing:
+                    type: boolean
+                  suspicious:
+                    type: boolean
+                  adult:
+                    type: boolean
+                  risk_score:
+                    type: integer
+                  country_code:
+                    type: string
+                  category:
+                    type: string
+                  domain_age:
+                    type: object
+                    properties:
+                      human:
+                        type: string
+                      timestamp:
+                        type: integer
+                      iso:
+                        type: string
+                        format: date-time
+                  domain_trust:
+                    type: string
+                  redirected:
+                    type: boolean
+                  short_link_redirect:
+                    type: boolean
+                  hosted_content:
+                    type: boolean
+                  page_title:
+                    type: string
+                  risky_tld:
+                    type: boolean
+                  spf_record:
+                    type: boolean
+                  dmarc_record:
+                    type: boolean
+                  technologies:
+                    type: array
+                    items: {}
+                  a_records:
+                    type: array
+                    items:
+                      type: string
+                      format: ip-address
+                  mx_records:
+                    type: array
+                    items:
+                      type: string
+                  ns_records:
+                    type: array
+                    items:
+                      type: string
+                  language_code:
+                    type: string
+                  final_url:
+                    type: string
+                    format: uri
+                  scanned_url:
+                    type: string
+                    format: uri
+                  request_id:
+                    type: string
+              example:
+                message: Success.
+                success: true
+                unsafe: false
+                domain: example.com
+                root_domain: example.com
+                ip_address: 23.192.228.84
+                server: N/A
+                content_type: text/html
+                status_code: 200
+                page_size: 1256
+                domain_rank: 490
+                dns_valid: true
+                parking: false
+                spamming: true
+                malware: false
+                phishing: false
+                suspicious: true
+                adult: false
+                risk_score: 78
+                country_code: US
+                category: Computers & Internet
+                domain_age:
+                  human: 30 years ago
+                  timestamp: 808372800
+                  iso: "1995-08-14T00:00:00-04:00"
+                domain_trust: trusted
+                redirected: false
+                short_link_redirect: false
+                hosted_content: false
+                page_title: Example Domain
+                risky_tld: false
+                spf_record: true
+                dmarc_record: true
+                technologies: []
+                a_records:
+                  - 23.192.228.84
+                  - 23.192.228.80
+                  - 23.220.75.232
+                  - 23.220.75.245
+                  - 23.215.0.136
+                  - 23.215.0.138
+                  - 184.24.77.21
+                  - 184.24.77.5
+                mx_records:
+                  - ""
+                ns_records:
+                  - a.iana-servers.net
+                  - b.iana-servers.net
+                language_code: N/A
+                final_url: https://example.com
+                scanned_url: https://example.com
+                request_id: ZyxnObHPwy
+  /xml/url/{apiKey}/{url}:
+    parameters:
+      - name: url
+        in: path
+        required: true
+        description: The URL to analyze
+        example: https%3A%2F%2Fexample.com
+        schema:
+          deprecated: false
+          type: string
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: XML
+      tags:
+        - Malicious URL Scanner
+      parameters:
+        - name: strictness
+          in: query
+          required: false
+          description: How strictly the URL should be scanned
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 2
+        - name: fast
+          in: query
+          required: false
+          description: Whether the API should provide quicker response times using lighter checks and analysis
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: timeout
+          in: query
+          required: false
+          description: Maximum number of seconds to perform live page scanning and follow redirects
+          example: "2"
+          schema:
+            deprecated: false
+            type: integer
+            default: "2"
+            minimum: 1
+            maximum: 10
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      success:
+                        type: boolean
+                      unsafe:
+                        type: boolean
+                      domain:
+                        type: string
+                      root_domain:
+                        type: string
+                      ip_address:
+                        type: string
+                        format: ip-address
+                      server:
+                        type: string
+                      content_type:
+                        type: string
+                      status_code:
+                        type: integer
+                      page_size:
+                        type: integer
+                      domain_rank:
+                        type: integer
+                      dns_valid:
+                        type: boolean
+                      parking:
+                        type: boolean
+                      spamming:
+                        type: boolean
+                      malware:
+                        type: boolean
+                      phishing:
+                        type: boolean
+                      suspicious:
+                        type: boolean
+                      adult:
+                        type: boolean
+                      risk_score:
+                        type: integer
+                      country_code:
+                        type: string
+                      category:
+                        type: string
+                      domain_age:
+                        type: object
+                        properties:
+                          human:
+                            type: string
+                          timestamp:
+                            type: integer
+                          iso:
+                            type: string
+                            format: date-time
+                      domain_trust:
+                        type: string
+                      redirected:
+                        type: boolean
+                      short_link_redirect:
+                        type: boolean
+                      hosted_content:
+                        type: boolean
+                      page_title:
+                        type: string
+                      risky_tld:
+                        type: boolean
+                      spf_record:
+                        type: boolean
+                      dmarc_record:
+                        type: boolean
+                      technologies:
+                        type: array
+                        items: {}
+                      a_records:
+                        type: array
+                        items:
+                          type: string
+                          format: ip-address
+                      mx_records:
+                        type: array
+                        items:
+                          type: string
+                      ns_records:
+                        type: array
+                        items:
+                          type: string
+                      language_code:
+                        type: string
+                      final_url:
+                        type: string
+                        format: uri
+                      scanned_url:
+                        type: string
+                        format: uri
+                      request_id:
+                        type: string
+              example:
+                result:
+                  message: Success.
+                  success: true
+                  unsafe: false
+                  domain: example.com
+                  root_domain: example.com
+                  ip_address: 23.192.228.84
+                  server: N/A
+                  content_type: text/html
+                  status_code: 200
+                  page_size: 1256
+                  domain_rank: 490
+                  dns_valid: true
+                  parking: false
+                  spamming: true
+                  malware: false
+                  phishing: false
+                  suspicious: true
+                  adult: false
+                  risk_score: 78
+                  country_code: US
+                  category: Computers & Internet
+                  domain_age:
+                    human: 30 years ago
+                    timestamp: 808372800
+                    iso: "1995-08-14T00:00:00-04:00"
+                  domain_trust: trusted
+                  redirected: false
+                  short_link_redirect: false
+                  hosted_content: false
+                  page_title: Example Domain
+                  risky_tld: false
+                  spf_record: true
+                  dmarc_record: true
+                  technologies: []
+                  a_records:
+                    - 23.192.228.84
+                    - 23.192.228.80
+                    - 23.220.75.232
+                    - 23.220.75.245
+                    - 23.215.0.136
+                    - 23.215.0.138
+                    - 184.24.77.21
+                    - 184.24.77.5
+                  mx_records:
+                    - ""
+                  ns_records:
+                    - a.iana-servers.net
+                    - b.iana-servers.net
+                  language_code: N/A
+                  final_url: https://example.com
+                  scanned_url: https://example.com
+                  request_id: ZyxnObHPwy
+  /json/malware/{type}/{apiKey}:
+    parameters:
+      - name: type
+        in: path
+        required: true
+        description: The type of lookup to perform
+        example: lookup
+        schema:
+          deprecated: false
+          type: string
+          enum:
+            - scan
+            - lookup
+      - $ref: "#/components/parameters/apiKey"
+    post:
+      summary: JSON
+      tags:
+        - Malware File Scanner
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  file_name:
+                    type: string
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  file_hash:
+                    type: string
+                  type:
+                    type: string
+                  detected:
+                    type: boolean
+                  detected_scans:
+                    type: integer
+                  total_scans:
+                    type: integer
+                  result:
+                    type: array
+                    items: {}
+                  file_size:
+                    type: integer
+                  file_type:
+                    type: string
+                  sha1:
+                    type: string
+                  md5:
+                    type: string
+                  update_url:
+                    type: string
+                    format: uri
+                  request_id:
+                    type: string
+              example:
+                file_name: Free_Test_Data_100KB_PDF.pdf
+                success: true
+                message: Success
+                file_hash: 77bed2579b66ee9374525910717e2132cf7924b9715f012fbf95a7c0babfa657
+                type: lookup
+                detected: false
+                detected_scans: 0
+                total_scans: 0
+                result: []
+                file_size: 102602
+                file_type: application/pdf
+                sha1: 4f385194db1e7a73a9fdc8f5b69656bef8f67164
+                md5: b1157391bc54f3a3b5289fbd65e1a0eb
+                update_url: https://ipqualityscore.com/api/json/postback/{{apiKey}}?request_id=Zz6S8LmTAF
+                request_id: Zz6S8LmTAF
+  /xml/malware/{type}/{apiKey}:
+    parameters:
+      - name: type
+        in: path
+        required: true
+        description: The type of lookup to perform
+        example: lookup
+        schema:
+          deprecated: false
+          type: string
+          enum:
+            - scan
+            - lookup
+      - $ref: "#/components/parameters/apiKey"
+    post:
+      summary: XML
+      tags:
+        - Malware File Scanner
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      file_name:
+                        type: string
+                      success:
+                        type: boolean
+                      message:
+                        type: string
+                      file_hash:
+                        type: string
+                      type:
+                        type: string
+                      detected:
+                        type: boolean
+                      detected_scans:
+                        type: integer
+                      total_scans:
+                        type: integer
+                      result:
+                        type: array
+                        items: {}
+                      file_size:
+                        type: integer
+                      file_type:
+                        type: string
+                      sha1:
+                        type: string
+                      md5:
+                        type: string
+                      update_url:
+                        type: string
+                        format: uri
+                      request_id:
+                        type: string
+              example:
+                result:
+                  file_name: Free_Test_Data_100KB_PDF.pdf
+                  success: true
+                  message: Success
+                  file_hash: 77bed2579b66ee9374525910717e2132cf7924b9715f012fbf95a7c0babfa657
+                  type: lookup
+                  detected: false
+                  detected_scans: 0
+                  total_scans: 0
+                  result: []
+                  file_size: 102602
+                  file_type: application/pdf
+                  sha1: 4f385194db1e7a73a9fdc8f5b69656bef8f67164
+                  md5: b1157391bc54f3a3b5289fbd65e1a0eb
+                  update_url: https://ipqualityscore.com/api/json/postback/{{apiKey}}?request_id=Zz6S8LmTAF
+                  request_id: Zz6S8LmTAF
+  /json/phone/{apiKey}/{phoneNumber}:
+    parameters:
+      - name: phoneNumber
+        in: path
+        required: true
+        description: The phone number to analyze
+        example: "18007132618"
+        schema:
+          deprecated: false
+          type: integer
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Phone Number Validation
+      parameters:
+        - name: strictness
+          in: query
+          required: false
+          description: How in depth (strict) the reputation check should be
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 2
+        - name: country
+          in: query
+          required: false
+          description: The default country or countries this phone number is suspected to be associated with
+          example: US
+          schema:
+            deprecated: false
+            type: string
+        - name: enhanced_line_check
+          in: query
+          required: false
+          description: Whether to enable more advanced active line checks through our HLR lookup service
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: sms_pumping
+          in: query
+          required: false
+          description: Whether to enable the detection of SMS pumping attacks, where perpetrators artificially inflate the volume of traffic sent to websites and app touchpoints protected by SMS authentication
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: enhanced_name_check
+          in: query
+          required: false
+          description: Whether to enable enhanced name appending for a phone number
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  formatted:
+                    type: string
+                  local_format:
+                    type: string
+                  valid:
+                    type: boolean
+                  fraud_score:
+                    type: integer
+                  recent_abuse:
+                    type: boolean
+                  VOIP:
+                    type: boolean
+                  prepaid:
+                    type: boolean
+                    nullable: true
+                  risky:
+                    type: boolean
+                  active:
+                    type: boolean
+                  carrier:
+                    type: string
+                  line_type:
+                    type: string
+                  country:
+                    type: string
+                  city:
+                    type: string
+                  zip_code:
+                    type: string
+                  region:
+                    type: string
+                  dialing_code:
+                    type: integer
+                  active_status:
+                    type: string
+                  sms_domain:
+                    type: string
+                  associated_email_addresses:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      emails:
+                        type: array
+                        items: {}
+                  user_activity:
+                    type: string
+                  mnc:
+                    type: string
+                  mcc:
+                    type: string
+                  leaked:
+                    type: boolean
+                  spammer:
+                    type: boolean
+                  request_id:
+                    type: string
+                  name:
+                    type: string
+                  timezone:
+                    type: string
+                  do_not_call:
+                    type: boolean
+                  accurate_country_code:
+                    type: boolean
+                  sms_email:
+                    type: string
+              example:
+                message: Phone is valid.
+                success: true
+                formatted: "+18007132618"
+                local_format: (800) 713-2618
+                valid: true
+                fraud_score: 100
+                recent_abuse: true
+                VOIP: false
+                prepaid: null
+                risky: true
+                active: true
+                carrier: SomosGov
+                line_type: Toll Free
+                country: US
+                city: Telephone
+                zip_code: "75488"
+                region: TX
+                dialing_code: 1
+                active_status: N/A
+                sms_domain: N/A
+                associated_email_addresses:
+                  status: No associated emails found.
+                  emails: []
+                user_activity: Disabled for performance. Contact support for further assistance.
+                mnc: N/A
+                mcc: N/A
+                leaked: false
+                spammer: false
+                request_id: ZyvVBKGWvE
+                name: N/A
+                timezone: America/Chicago
+                do_not_call: false
+                accurate_country_code: false
+                sms_email: N/A
+  /xml/phone/{apiKey}/{phoneNumber}:
+    parameters:
+      - name: phoneNumber
+        in: path
+        required: true
+        description: The phone number to analyze
+        example: "18007132618"
+        schema:
+          deprecated: false
+          type: integer
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: XML
+      tags:
+        - Phone Number Validation
+      parameters:
+        - name: strictness
+          in: query
+          required: false
+          description: How in depth (strict) the reputation check should be
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 2
+        - name: country
+          in: query
+          required: false
+          description: The default country or countries this phone number is suspected to be associated with
+          example: US
+          schema:
+            deprecated: false
+            type: string
+        - name: enhanced_line_check
+          in: query
+          required: false
+          description: Whether to enable more advanced active line checks through our HLR lookup service
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: sms_pumping
+          in: query
+          required: false
+          description: Whether to enable the detection of SMS pumping attacks, where perpetrators artificially inflate the volume of traffic sent to websites and app touchpoints protected by SMS authentication
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: enhanced_name_check
+          in: query
+          required: false
+          description: Whether to enable enhanced name appending for a phone number
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      success:
+                        type: boolean
+                      formatted:
+                        type: string
+                      local_format:
+                        type: string
+                      valid:
+                        type: boolean
+                      fraud_score:
+                        type: integer
+                      recent_abuse:
+                        type: boolean
+                      VOIP:
+                        type: boolean
+                      prepaid:
+                        type: boolean
+                        nullable: true
+                      risky:
+                        type: boolean
+                      active:
+                        type: boolean
+                      carrier:
+                        type: string
+                      line_type:
+                        type: string
+                      country:
+                        type: string
+                      city:
+                        type: string
+                      zip_code:
+                        type: string
+                      region:
+                        type: string
+                      dialing_code:
+                        type: integer
+                      active_status:
+                        type: string
+                      sms_domain:
+                        type: string
+                      associated_email_addresses:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                          emails:
+                            type: array
+                            items: {}
+                      user_activity:
+                        type: string
+                      mnc:
+                        type: string
+                      mcc:
+                        type: string
+                      leaked:
+                        type: boolean
+                      spammer:
+                        type: boolean
+                      request_id:
+                        type: string
+                      name:
+                        type: string
+                      timezone:
+                        type: string
+                      do_not_call:
+                        type: boolean
+                      accurate_country_code:
+                        type: boolean
+                      sms_email:
+                        type: string
+              example:
+                result:
+                  message: Phone is valid.
+                  success: true
+                  formatted: "+18007132618"
+                  local_format: (800) 713-2618
+                  valid: true
+                  fraud_score: 100
+                  recent_abuse: true
+                  VOIP: false
+                  prepaid: null
+                  risky: true
+                  active: true
+                  carrier: SomosGov
+                  line_type: Toll Free
+                  country: US
+                  city: Telephone
+                  zip_code: "75488"
+                  region: TX
+                  dialing_code: 1
+                  active_status: N/A
+                  sms_domain: N/A
+                  associated_email_addresses:
+                    status: No associated emails found.
+                    emails: []
+                  user_activity: Disabled for performance. Contact support for further assistance.
+                  mnc: N/A
+                  mcc: N/A
+                  leaked: false
+                  spammer: false
+                  request_id: ZyvVBKGWvE
+                  name: N/A
+                  timezone: America/Chicago
+                  do_not_call: false
+                  accurate_country_code: false
+                  sms_email: N/A
+  /json/ip/{apiKey}/{ipAddress}:
+    parameters:
+      - name: ipAddress
+        in: path
+        required: true
+        description: The IP address to analyze
+        example: 1.1.1.1
+        schema:
+          deprecated: false
+          type: string
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Proxy & VPN Detection
+      parameters:
+        - name: strictness
+          in: query
+          required: false
+          description: How in depth (strict) the query will be. Higher values take longer to process and may provide a higher false-positive rate
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 3
+        - name: user_agent
+          in: query
+          required: false
+          description: A user agent string (browser) allowing additional checks to be performed to see if the user is a bot or running an invalid browser
+          example: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+          schema:
+            deprecated: false
+            type: string
+        - name: user_language
+          in: query
+          required: false
+          description: The user's language header
+          example: en-US,en;q=0.9
+          schema:
+            deprecated: false
+            type: string
+        - name: fast
+          in: query
+          required: false
+          description: Whether to skip certain forensic checks that take longer to process. Enabling this feature greatly reduces API response time without much impact on accuracy
+          example: "true"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: mobile
+          in: query
+          required: false
+          description: Whether this lookup should be treated as a mobile device. Recommended for mobile lookups that do not have a user agent attached to the request
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: allow_public_access_points
+          in: query
+          required: false
+          description: Whether to bypass certain checks for IP addresses from education and research institutions, schools, and some corporate connections to better accommodate audiences that frequently use public connections.
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: lighter_penalties
+          in: query
+          required: false
+          description: Whether to lower detection rates and Fraud Scores for mixed quality IP addresses
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: transaction_strictness
+          in: query
+          required: false
+          description: Adjust the weights for penalties applied due to irregularities and fraudulent patterns detected on order and transaction details that can be optionally provided on each API request
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 2
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  fraud_score:
+                    type: integer
+                  country_code:
+                    type: string
+                  region:
+                    type: string
+                  city:
+                    type: string
+                  ISP:
+                    type: string
+                  ASN:
+                    type: integer
+                  organization:
+                    type: string
+                  is_crawler:
+                    type: boolean
+                  timezone:
+                    type: string
+                  mobile:
+                    type: boolean
+                  host:
+                    type: string
+                  proxy:
+                    type: boolean
+                  vpn:
+                    type: boolean
+                  tor:
+                    type: boolean
+                  active_vpn:
+                    type: boolean
+                  active_tor:
+                    type: boolean
+                  recent_abuse:
+                    type: boolean
+                  bot_status:
+                    type: boolean
+                  connection_type:
+                    type: string
+                  abuse_velocity:
+                    type: string
+                  shared_connection:
+                    type: boolean
+                  dynamic_connection:
+                    type: boolean
+                  frequent_abuser:
+                    type: boolean
+                  high_risk_attacks:
+                    type: boolean
+                  security_scanner:
+                    type: boolean
+                  trusted_network:
+                    type: boolean
+                  zip_code:
+                    type: string
+                  latitude:
+                    type: number
+                  longitude:
+                    type: number
+                  abuse_events:
+                    type: array
+                    items: {}
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Success
+                fraud_score: 0
+                country_code: US
+                region: Colorado
+                city: Denver
+                ISP: Cloudflare
+                ASN: 13335
+                organization: Cloudflare
+                is_crawler: false
+                timezone: America/Denver
+                mobile: false
+                host: 1.1.1.1
+                proxy: false
+                vpn: false
+                tor: false
+                active_vpn: false
+                active_tor: false
+                recent_abuse: false
+                bot_status: false
+                connection_type: Data Center
+                abuse_velocity: none
+                shared_connection: true
+                dynamic_connection: false
+                frequent_abuser: false
+                high_risk_attacks: false
+                security_scanner: false
+                trusted_network: true
+                zip_code: N/A
+                latitude: -33.86000061
+                longitude: 151.21000671
+                abuse_events: []
+                request_id: ZyrtsRLXTO
+  /xml/ip/{apiKey}/{ipAddress}:
+    parameters:
+      - name: ipAddress
+        in: path
+        required: true
+        description: The IP address to analyze
+        example: 1.1.1.1
+        schema:
+          deprecated: false
+          type: string
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: XML
+      tags:
+        - Proxy & VPN Detection
+      parameters:
+        - name: strictness
+          in: query
+          required: false
+          description: How in depth (strict) the query will be. Higher values take longer to process and may provide a higher false-positive rate
+          example: "0"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 3
+        - name: user_agent
+          in: query
+          required: false
+          description: A user agent string (browser) allowing additional checks to be performed to see if the user is a bot or running an invalid browser
+          example: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+          schema:
+            deprecated: false
+            type: string
+        - name: user_language
+          in: query
+          required: false
+          description: The user's language header
+          example: en-US,en;q=0.9
+          schema:
+            deprecated: false
+            type: string
+        - name: fast
+          in: query
+          required: false
+          description: Whether to skip certain forensic checks that take longer to process. Enabling this feature greatly reduces API response time without much impact on accuracy
+          example: "true"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: mobile
+          in: query
+          required: false
+          description: Whether this lookup should be treated as a mobile device. Recommended for mobile lookups that do not have a user agent attached to the request
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: allow_public_access_points
+          in: query
+          required: false
+          description: Whether to bypass certain checks for IP addresses from education and research institutions, schools, and some corporate connections to better accommodate audiences that frequently use public connections.
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: lighter_penalties
+          in: query
+          required: false
+          description: Whether to lower detection rates and Fraud Scores for mixed quality IP addresses
+          example: "false"
+          schema:
+            deprecated: false
+            type: boolean
+        - name: transaction_strictness
+          in: query
+          required: false
+          description: Adjust the weights for penalties applied due to irregularities and fraudulent patterns detected on order and transaction details that can be optionally provided on each API request
+          example: "0"
+          schema:
+            deprecated: false
+            type: number
+            minimum: 0
+            maximum: 2
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                      message:
+                        type: string
+                      fraud_score:
+                        type: integer
+                      country_code:
+                        type: string
+                      region:
+                        type: string
+                      city:
+                        type: string
+                      ISP:
+                        type: string
+                      ASN:
+                        type: integer
+                      organization:
+                        type: string
+                      is_crawler:
+                        type: boolean
+                      timezone:
+                        type: string
+                      mobile:
+                        type: boolean
+                      host:
+                        type: string
+                      proxy:
+                        type: boolean
+                      vpn:
+                        type: boolean
+                      tor:
+                        type: boolean
+                      active_vpn:
+                        type: boolean
+                      active_tor:
+                        type: boolean
+                      recent_abuse:
+                        type: boolean
+                      bot_status:
+                        type: boolean
+                      connection_type:
+                        type: string
+                      abuse_velocity:
+                        type: string
+                      shared_connection:
+                        type: boolean
+                      dynamic_connection:
+                        type: boolean
+                      frequent_abuser:
+                        type: boolean
+                      high_risk_attacks:
+                        type: boolean
+                      security_scanner:
+                        type: boolean
+                      trusted_network:
+                        type: boolean
+                      zip_code:
+                        type: string
+                      latitude:
+                        type: number
+                      longitude:
+                        type: number
+                      abuse_events:
+                        type: array
+                        items: {}
+                      request_id:
+                        type: string
+              example:
+                result:
+                  success: true
+                  message: Success
+                  fraud_score: 0
+                  country_code: US
+                  region: Colorado
+                  city: Denver
+                  ISP: Cloudflare
+                  ASN: 13335
+                  organization: Cloudflare
+                  is_crawler: false
+                  timezone: America/Denver
+                  mobile: false
+                  host: 1.1.1.1
+                  proxy: false
+                  vpn: false
+                  tor: false
+                  active_vpn: false
+                  active_tor: false
+                  recent_abuse: false
+                  bot_status: false
+                  connection_type: Data Center
+                  abuse_velocity: none
+                  shared_connection: true
+                  dynamic_connection: false
+                  frequent_abuser: false
+                  high_risk_attacks: false
+                  security_scanner: false
+                  trusted_network: true
+                  zip_code: N/A
+                  latitude: -33.86000061
+                  longitude: 151.21000671
+                  abuse_events: []
+                  request_id: ZyrtsRLXTO
+  /json/requests/{apiKey}/list:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Request List
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: The original request's type
+          example: proxy
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - proxy
+              - email
+              - phone
+              - devicetracker
+              - mobiletracker
+              - url
+              - malware_scan
+              - leaked_email
+              - leaked_username
+              - leaked_password
+        - name: page
+          in: query
+          required: false
+          description: The page number you are requesting
+          example: "1"
+          schema:
+            deprecated: false
+            type: integer
+            default: "1"
+            minimum: 1
+        - name: limit
+          in: query
+          required: false
+          description: The amount of results that will be returned
+          example: "25"
+          schema:
+            deprecated: false
+            type: integer
+            default: "25"
+            minimum: 1
+            maximum: 250
+        - name: start_date
+          in: query
+          required: true
+          description: Fetch records newer than or equal to the date specified
+          example: "2025-01-01"
+          schema:
+            deprecated: false
+            type: string
+            format: date
+        - name: stop_date
+          in: query
+          required: false
+          description: Fetch records older than or equal to the date specified
+          example: "2025-01-31"
+          schema:
+            deprecated: false
+            type: string
+            format: date
+        - name: tracker_id
+          in: query
+          required: false
+          description: Narrow the scope of a variable lookup for a device tracker type
+          example: "555"
+          schema:
+            deprecated: false
+            type: integer
+        - name: device_id
+          in: query
+          required: false
+          description: Search all matching device ID queries with device fingerprinting
+          example: a8b5fb99a8f5defdb435e86a1532bb78
+          schema:
+            deprecated: false
+            type: string
+        - name: min_fraud_score
+          in: query
+          required: false
+          description: Limit results to only contain fraud scores greater than or equal to this number
+          example: "45"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: max_fraud_score
+          in: query
+          required: false
+          description: Limit results to only contain fraud scores less than or equal to this number
+          example: "80"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: ip_address
+          in: query
+          required: false
+          description: Search all matching IP address queries for "proxy", "devicetracker", and "mobiletracker" types
+          example: 8.8.8.8
+          schema:
+            deprecated: false
+            type: string
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  requests:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        success:
+                          type: boolean
+                        fraud_score:
+                          type: integer
+                        country_code:
+                          type: string
+                        region:
+                          type: string
+                        city:
+                          type: string
+                        ISP:
+                          type: string
+                        ASN:
+                          type: integer
+                        organization:
+                          type: string
+                        is_crawler:
+                          type: boolean
+                        timezone:
+                          type: string
+                        mobile:
+                          type: boolean
+                        host:
+                          type: string
+                        proxy:
+                          type: boolean
+                        vpn:
+                          type: boolean
+                        tor:
+                          type: boolean
+                        active_vpn:
+                          type: boolean
+                        active_tor:
+                          type: boolean
+                        recent_abuse:
+                          type: boolean
+                        bot_status:
+                          type: boolean
+                        connection_type:
+                          type: string
+                        abuse_velocity:
+                          type: string
+                        shared_connection:
+                          type: boolean
+                        dynamic_connection:
+                          type: boolean
+                        frequent_abuser:
+                          type: boolean
+                        high_risk_attacks:
+                          type: boolean
+                        security_scanner:
+                          type: boolean
+                        trusted_network:
+                          type: boolean
+                        zip_code:
+                          type: string
+                        latitude:
+                          type: number
+                        longitude:
+                          type: integer
+                        abuse_events:
+                          type: array
+                          items: {}
+                        request_id:
+                          type: string
+                        click_date:
+                          type: string
+                        variables:
+                          type: array
+                          items: {}
+                        ip:
+                          type: string
+                  request_count:
+                    type: integer
+                  current_page:
+                    type: integer
+                  total_pages:
+                    type: integer
+                  max_results_per_page:
+                    type: integer
+                  total_requests:
+                    type: integer
+                  request_id:
+                    type: string
+              example:
+                success: true
+                requests:
+                  - success: true
+                    fraud_score: 0
+                    country_code: US
+                    region: Colorado
+                    city: Denver
+                    ISP: Cloudflare
+                    ASN: 13335
+                    organization: Cloudflare
+                    is_crawler: false
+                    timezone: America/Denver
+                    mobile: false
+                    host: one.one.one.one
+                    proxy: false
+                    vpn: false
+                    tor: false
+                    active_vpn: false
+                    active_tor: false
+                    recent_abuse: false
+                    bot_status: true
+                    connection_type: Data Center
+                    abuse_velocity: none
+                    shared_connection: false
+                    dynamic_connection: false
+                    frequent_abuser: false
+                    high_risk_attacks: false
+                    security_scanner: false
+                    trusted_network: false
+                    zip_code: N/A
+                    latitude: 39.75
+                    longitude: -105
+                    abuse_events: []
+                    request_id: Y07hN3Mk7I
+                    click_date: "2025-06-12 21:49:17"
+                    variables: []
+                    ip: 1.1.1.1
+                request_count: 1
+                current_page: 1
+                total_pages: 507
+                max_results_per_page: 1
+                total_requests: 507
+                request_id: a3s2KXm0ur
+  /xml/requests/{apiKey}/list:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: XML
+      tags:
+        - Request List
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: The original request's type
+          example: proxy
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - proxy
+              - email
+              - phone
+              - devicetracker
+              - mobiletracker
+              - url
+              - malware_scan
+              - leaked_email
+              - leaked_username
+              - leaked_password
+        - name: page
+          in: query
+          required: false
+          description: The page number you are requesting
+          example: "1"
+          schema:
+            deprecated: false
+            type: integer
+            default: "1"
+            minimum: 1
+        - name: limit
+          in: query
+          required: false
+          description: The amount of results that will be returned
+          example: "25"
+          schema:
+            deprecated: false
+            type: integer
+            default: "25"
+            minimum: 1
+            maximum: 250
+        - name: start_date
+          in: query
+          required: true
+          description: Fetch records newer than or equal to the date specified
+          example: "2025-01-01"
+          schema:
+            deprecated: false
+            type: string
+            format: date
+        - name: stop_date
+          in: query
+          required: false
+          description: Fetch records older than or equal to the date specified
+          example: "2025-01-31"
+          schema:
+            deprecated: false
+            type: string
+            format: date
+        - name: tracker_id
+          in: query
+          required: false
+          description: Narrow the scope of a variable lookup for a device tracker type
+          example: "555"
+          schema:
+            deprecated: false
+            type: integer
+        - name: device_id
+          in: query
+          required: false
+          description: Search all matching device ID queries with device fingerprinting
+          example: a8b5fb99a8f5defdb435e86a1532bb78
+          schema:
+            deprecated: false
+            type: string
+        - name: min_fraud_score
+          in: query
+          required: false
+          description: Limit results to only contain fraud scores greater than or equal to this number
+          example: "45"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: max_fraud_score
+          in: query
+          required: false
+          description: Limit results to only contain fraud scores less than or equal to this number
+          example: "80"
+          schema:
+            deprecated: false
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: ip_address
+          in: query
+          required: false
+          description: Search all matching IP address queries for "proxy", "devicetracker", and "mobiletracker" types
+          example: 8.8.8.8
+          schema:
+            deprecated: false
+            type: string
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                      requests:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            success:
+                              type: boolean
+                            fraud_score:
+                              type: integer
+                            country_code:
+                              type: string
+                            region:
+                              type: string
+                            city:
+                              type: string
+                            ISP:
+                              type: string
+                            ASN:
+                              type: integer
+                            organization:
+                              type: string
+                            is_crawler:
+                              type: boolean
+                            timezone:
+                              type: string
+                            mobile:
+                              type: boolean
+                            host:
+                              type: string
+                            proxy:
+                              type: boolean
+                            vpn:
+                              type: boolean
+                            tor:
+                              type: boolean
+                            active_vpn:
+                              type: boolean
+                            active_tor:
+                              type: boolean
+                            recent_abuse:
+                              type: boolean
+                            bot_status:
+                              type: boolean
+                            connection_type:
+                              type: string
+                            abuse_velocity:
+                              type: string
+                            shared_connection:
+                              type: boolean
+                            dynamic_connection:
+                              type: boolean
+                            frequent_abuser:
+                              type: boolean
+                            high_risk_attacks:
+                              type: boolean
+                            security_scanner:
+                              type: boolean
+                            trusted_network:
+                              type: boolean
+                            zip_code:
+                              type: string
+                            latitude:
+                              type: number
+                            longitude:
+                              type: integer
+                            abuse_events:
+                              type: array
+                              items: {}
+                            request_id:
+                              type: string
+                            click_date:
+                              type: string
+                            variables:
+                              type: array
+                              items: {}
+                            ip:
+                              type: string
+                      request_count:
+                        type: integer
+                      current_page:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      max_results_per_page:
+                        type: integer
+                      total_requests:
+                        type: integer
+                      request_id:
+                        type: string
+              example:
+                result:
+                  success: true
+                  requests:
+                    - success: true
+                      fraud_score: 0
+                      country_code: US
+                      region: Colorado
+                      city: Denver
+                      ISP: Cloudflare
+                      ASN: 13335
+                      organization: Cloudflare
+                      is_crawler: false
+                      timezone: America/Denver
+                      mobile: false
+                      host: one.one.one.one
+                      proxy: false
+                      vpn: false
+                      tor: false
+                      active_vpn: false
+                      active_tor: false
+                      recent_abuse: false
+                      bot_status: true
+                      connection_type: Data Center
+                      abuse_velocity: none
+                      shared_connection: false
+                      dynamic_connection: false
+                      frequent_abuser: false
+                      high_risk_attacks: false
+                      security_scanner: false
+                      trusted_network: false
+                      zip_code: N/A
+                      latitude: 39.75
+                      longitude: -105
+                      abuse_events: []
+                      request_id: Y07hN3Mk7I
+                      click_date: "2025-06-12 21:49:17"
+                      variables: []
+                      ip: 1.1.1.1
+                  request_count: 1
+                  current_page: 1
+                  total_pages: 507
+                  max_results_per_page: 1
+                  total_requests: 507
+                  request_id: a3s2KXm0ur
+  /json/country/list:
+    parameters: []
+    get:
+      summary: JSON
+      tags:
+        - Country List
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  countries:
+                    type: object
+                    properties:
+                      US:
+                        type: string
+                      CA:
+                        type: string
+                      GB:
+                        type: string
+                      AF:
+                        type: string
+                      AX:
+                        type: string
+                      AL:
+                        type: string
+                      DZ:
+                        type: string
+                      AS:
+                        type: string
+                      AD:
+                        type: string
+                      AO:
+                        type: string
+                      AI:
+                        type: string
+                      AQ:
+                        type: string
+                      AG:
+                        type: string
+                      AR:
+                        type: string
+                      AM:
+                        type: string
+                      AW:
+                        type: string
+                      AU:
+                        type: string
+                      AT:
+                        type: string
+                      AZ:
+                        type: string
+                      BS:
+                        type: string
+                      BH:
+                        type: string
+                      BD:
+                        type: string
+                      BB:
+                        type: string
+                      BY:
+                        type: string
+                      BE:
+                        type: string
+                      BZ:
+                        type: string
+                      BJ:
+                        type: string
+                      BM:
+                        type: string
+                      BT:
+                        type: string
+                      BO:
+                        type: string
+                      BA:
+                        type: string
+                      BW:
+                        type: string
+                      BV:
+                        type: string
+                      BR:
+                        type: string
+                      IO:
+                        type: string
+                      BN:
+                        type: string
+                      BG:
+                        type: string
+                      BF:
+                        type: string
+                      BI:
+                        type: string
+                      KH:
+                        type: string
+                      CM:
+                        type: string
+                      CV:
+                        type: string
+                      KY:
+                        type: string
+                      CF:
+                        type: string
+                      TD:
+                        type: string
+                      CL:
+                        type: string
+                      CN:
+                        type: string
+                      CX:
+                        type: string
+                      CC:
+                        type: string
+                      CO:
+                        type: string
+                      KM:
+                        type: string
+                      CG:
+                        type: string
+                      CD:
+                        type: string
+                      CK:
+                        type: string
+                      CR:
+                        type: string
+                      CI:
+                        type: string
+                      HR:
+                        type: string
+                      CU:
+                        type: string
+                      CY:
+                        type: string
+                      CZ:
+                        type: string
+                      DK:
+                        type: string
+                      DJ:
+                        type: string
+                      DM:
+                        type: string
+                      DO:
+                        type: string
+                      EC:
+                        type: string
+                      EG:
+                        type: string
+                      SV:
+                        type: string
+                      GQ:
+                        type: string
+                      ER:
+                        type: string
+                      EE:
+                        type: string
+                      ET:
+                        type: string
+                      FK:
+                        type: string
+                      FO:
+                        type: string
+                      FJ:
+                        type: string
+                      FI:
+                        type: string
+                      FR:
+                        type: string
+                      GF:
+                        type: string
+                      PF:
+                        type: string
+                      TF:
+                        type: string
+                      GA:
+                        type: string
+                      GM:
+                        type: string
+                      GE:
+                        type: string
+                      DE:
+                        type: string
+                      GH:
+                        type: string
+                      GI:
+                        type: string
+                      GR:
+                        type: string
+                      GL:
+                        type: string
+                      GD:
+                        type: string
+                      GP:
+                        type: string
+                      GU:
+                        type: string
+                      GT:
+                        type: string
+                      GG:
+                        type: string
+                      GN:
+                        type: string
+                      GW:
+                        type: string
+                      GY:
+                        type: string
+                      HT:
+                        type: string
+                      HM:
+                        type: string
+                      VA:
+                        type: string
+                      HN:
+                        type: string
+                      HK:
+                        type: string
+                      HU:
+                        type: string
+                      IS:
+                        type: string
+                      IN:
+                        type: string
+                      ID:
+                        type: string
+                      IR:
+                        type: string
+                      IQ:
+                        type: string
+                      IE:
+                        type: string
+                      IM:
+                        type: string
+                      IL:
+                        type: string
+                      IT:
+                        type: string
+                      JM:
+                        type: string
+                      JP:
+                        type: string
+                      JE:
+                        type: string
+                      JO:
+                        type: string
+                      KZ:
+                        type: string
+                      KE:
+                        type: string
+                      KI:
+                        type: string
+                      KP:
+                        type: string
+                      KR:
+                        type: string
+                      KW:
+                        type: string
+                      KG:
+                        type: string
+                      LA:
+                        type: string
+                      LV:
+                        type: string
+                      LB:
+                        type: string
+                      LS:
+                        type: string
+                      LR:
+                        type: string
+                      LY:
+                        type: string
+                      LI:
+                        type: string
+                      LT:
+                        type: string
+                      LU:
+                        type: string
+                      MO:
+                        type: string
+                      MK:
+                        type: string
+                      MG:
+                        type: string
+                      MW:
+                        type: string
+                      MY:
+                        type: string
+                      MV:
+                        type: string
+                      ML:
+                        type: string
+                      MT:
+                        type: string
+                      MH:
+                        type: string
+                      MQ:
+                        type: string
+                      MR:
+                        type: string
+                      MU:
+                        type: string
+                      YT:
+                        type: string
+                      MX:
+                        type: string
+                      FM:
+                        type: string
+                      MD:
+                        type: string
+                      MC:
+                        type: string
+                      MN:
+                        type: string
+                      ME:
+                        type: string
+                      MS:
+                        type: string
+                      MA:
+                        type: string
+                      MZ:
+                        type: string
+                      MM:
+                        type: string
+                      NA:
+                        type: string
+                      NR:
+                        type: string
+                      NP:
+                        type: string
+                      NL:
+                        type: string
+                      AN:
+                        type: string
+                      NC:
+                        type: string
+                      NZ:
+                        type: string
+                      NI:
+                        type: string
+                      NE:
+                        type: string
+                      NG:
+                        type: string
+                      NU:
+                        type: string
+                      NF:
+                        type: string
+                      MP:
+                        type: string
+                      "NO":
+                        type: string
+                      OM:
+                        type: string
+                      PK:
+                        type: string
+                      PW:
+                        type: string
+                      PS:
+                        type: string
+                      PA:
+                        type: string
+                      PG:
+                        type: string
+                      PY:
+                        type: string
+                      PE:
+                        type: string
+                      PH:
+                        type: string
+                      PN:
+                        type: string
+                      PL:
+                        type: string
+                      PT:
+                        type: string
+                      PR:
+                        type: string
+                      QA:
+                        type: string
+                      RE:
+                        type: string
+                      RO:
+                        type: string
+                      RU:
+                        type: string
+                      RW:
+                        type: string
+                      BL:
+                        type: string
+                      SH:
+                        type: string
+                      KN:
+                        type: string
+                      LC:
+                        type: string
+                      MF:
+                        type: string
+                      PM:
+                        type: string
+                      VC:
+                        type: string
+                      WS:
+                        type: string
+                      SM:
+                        type: string
+                      ST:
+                        type: string
+                      SA:
+                        type: string
+                      SN:
+                        type: string
+                      RS:
+                        type: string
+                      SC:
+                        type: string
+                      SL:
+                        type: string
+                      SG:
+                        type: string
+                      SK:
+                        type: string
+                      SI:
+                        type: string
+                      SB:
+                        type: string
+                      SO:
+                        type: string
+                      ZA:
+                        type: string
+                      GS:
+                        type: string
+                      ES:
+                        type: string
+                      LK:
+                        type: string
+                      SD:
+                        type: string
+                      SR:
+                        type: string
+                      SJ:
+                        type: string
+                      SZ:
+                        type: string
+                      SE:
+                        type: string
+                      CH:
+                        type: string
+                      SY:
+                        type: string
+                      TW:
+                        type: string
+                      TJ:
+                        type: string
+                      TZ:
+                        type: string
+                      TH:
+                        type: string
+                      TL:
+                        type: string
+                      TG:
+                        type: string
+                      TK:
+                        type: string
+                      TO:
+                        type: string
+                      TT:
+                        type: string
+                      TN:
+                        type: string
+                      TR:
+                        type: string
+                      TM:
+                        type: string
+                      TC:
+                        type: string
+                      TV:
+                        type: string
+                      UG:
+                        type: string
+                      UA:
+                        type: string
+                      AE:
+                        type: string
+                      UM:
+                        type: string
+                      UY:
+                        type: string
+                      UZ:
+                        type: string
+                      VU:
+                        type: string
+                      VE:
+                        type: string
+                      VN:
+                        type: string
+                      VG:
+                        type: string
+                      VI:
+                        type: string
+                      WF:
+                        type: string
+                      EH:
+                        type: string
+                      YE:
+                        type: string
+                      ZM:
+                        type: string
+                      ZW:
+                        type: string
+                      XK:
+                        type: string
+                      SS:
+                        type: string
+              example:
+                message: Country List
+                success: true
+                countries:
+                  US: United States
+                  CA: Canada
+                  GB: United Kingdom
+                  AF: Afghanistan
+                  AX: Aland Islands
+                  AL: Albania
+                  DZ: Algeria
+                  AS: American Samoa
+                  AD: Andorra
+                  AO: Angola
+                  AI: Anguilla
+                  AQ: Antarctica
+                  AG: Antigua and Barbuda
+                  AR: Argentina
+                  AM: Armenia
+                  AW: Aruba
+                  AU: Australia
+                  AT: Austria
+                  AZ: Azerbaijan
+                  BS: Bahamas
+                  BH: Bahrain
+                  BD: Bangladesh
+                  BB: Barbados
+                  BY: Belarus
+                  BE: Belgium
+                  BZ: Belize
+                  BJ: Benin
+                  BM: Bermuda
+                  BT: Bhutan
+                  BO: Bolivia
+                  BA: Bosnia and Herzegovina
+                  BW: Botswana
+                  BV: Bouvet Island
+                  BR: Brazil
+                  IO: British Indian Ocean Territory
+                  BN: Brunei Darussalam
+                  BG: Bulgaria
+                  BF: Burkina Faso
+                  BI: Burundi
+                  KH: Cambodia
+                  CM: Cameroon
+                  CV: Cape Verde
+                  KY: Cayman Islands
+                  CF: Central African Republic
+                  TD: Chad
+                  CL: Chile
+                  CN: China
+                  CX: Christmas Island
+                  CC: Cocos (Keeling) Islands
+                  CO: Colombia
+                  KM: Comoros
+                  CG: Congo
+                  CD: Congo, The Democratic Republic of the
+                  CK: Cook Islands
+                  CR: Costa Rica
+                  CI: Cote D'Ivoire
+                  HR: Croatia
+                  CU: Cuba
+                  CY: Cyprus
+                  CZ: Czech Republic
+                  DK: Denmark
+                  DJ: Djibouti
+                  DM: Dominica
+                  DO: Dominican Republic
+                  EC: Ecuador
+                  EG: Egypt
+                  SV: El Salvador
+                  GQ: Equatorial Guinea
+                  ER: Eritrea
+                  EE: Estonia
+                  ET: Ethiopia
+                  FK: Falkland Islands (Malvinas)
+                  FO: Faroe Islands
+                  FJ: Fiji
+                  FI: Finland
+                  FR: France
+                  GF: French Guiana
+                  PF: French Polynesia
+                  TF: French Southern Territories
+                  GA: Gabon
+                  GM: Gambia
+                  GE: Georgia
+                  DE: Germany
+                  GH: Ghana
+                  GI: Gibraltar
+                  GR: Greece
+                  GL: Greenland
+                  GD: Grenada
+                  GP: Guadeloupe
+                  GU: Guam
+                  GT: Guatemala
+                  GG: Guernsey
+                  GN: Guinea
+                  GW: Guinea-Bissau
+                  GY: Guyana
+                  HT: Haiti
+                  HM: Heard Island and McDonald Islands
+                  VA: Holy See (Vatican City State)
+                  HN: Honduras
+                  HK: Hong Kong
+                  HU: Hungary
+                  IS: Iceland
+                  IN: India
+                  ID: Indonesia
+                  IR: Iran, Islamic Republic of
+                  IQ: Iraq
+                  IE: Ireland
+                  IM: Isle of Man
+                  IL: Israel
+                  IT: Italy
+                  JM: Jamaica
+                  JP: Japan
+                  JE: Jersey
+                  JO: Jordan
+                  KZ: Kazakhstan
+                  KE: Kenya
+                  KI: Kiribati
+                  KP: Korea, Democratic People's Republic of
+                  KR: Korea, Republic of
+                  KW: Kuwait
+                  KG: Kyrgyzstan
+                  LA: Lao People's Democratic Republic
+                  LV: Latvia
+                  LB: Lebanon
+                  LS: Lesotho
+                  LR: Liberia
+                  LY: Libyan Arab Jamahiriya
+                  LI: Liechtenstein
+                  LT: Lithuania
+                  LU: Luxembourg
+                  MO: Macao
+                  MK: Macedonia, The Former Yugoslav Republic of
+                  MG: Madagascar
+                  MW: Malawi
+                  MY: Malaysia
+                  MV: Maldives
+                  ML: Mali
+                  MT: Malta
+                  MH: Marshall Islands
+                  MQ: Martinique
+                  MR: Mauritania
+                  MU: Mauritius
+                  YT: Mayotte
+                  MX: Mexico
+                  FM: Micronesia, Federated States of
+                  MD: Moldova, Republic of
+                  MC: Monaco
+                  MN: Mongolia
+                  ME: Montenegro
+                  MS: Montserrat
+                  MA: Morocco
+                  MZ: Mozambique
+                  MM: Myanmar
+                  NA: Namibia
+                  NR: Nauru
+                  NP: Nepal
+                  NL: Netherlands
+                  AN: Netherlands Antilles
+                  NC: New Caledonia
+                  NZ: New Zealand
+                  NI: Nicaragua
+                  NE: Niger
+                  NG: Nigeria
+                  NU: Niue
+                  NF: Norfolk Island
+                  MP: Northern Mariana Islands
+                  "NO": Norway
+                  OM: Oman
+                  PK: Pakistan
+                  PW: Palau
+                  PS: Palestinian Territory, Occupied
+                  PA: Panama
+                  PG: Papua New Guinea
+                  PY: Paraguay
+                  PE: Peru
+                  PH: Philippines
+                  PN: Pitcairn
+                  PL: Poland
+                  PT: Portugal
+                  PR: Puerto Rico
+                  QA: Qatar
+                  RE: Reunion
+                  RO: Romania
+                  RU: Russian Federation
+                  RW: Rwanda
+                  BL: Saint Barthelemy
+                  SH: Saint Helena
+                  KN: Saint Kitts and Nevis
+                  LC: Saint Lucia
+                  MF: Saint Martin
+                  PM: Saint Pierre and Miquelon
+                  VC: Saint Vincent and the Grenadines
+                  WS: Samoa
+                  SM: San Marino
+                  ST: Sao Tome and Principe
+                  SA: Saudi Arabia
+                  SN: Senegal
+                  RS: Serbia
+                  SC: Seychelles
+                  SL: Sierra Leone
+                  SG: Singapore
+                  SK: Slovakia
+                  SI: Slovenia
+                  SB: Solomon Islands
+                  SO: Somalia
+                  ZA: South Africa
+                  GS: South Georgia and the South Sandwich Islands
+                  ES: Spain
+                  LK: Sri Lanka
+                  SD: Sudan
+                  SR: Suriname
+                  SJ: Svalbard and Jan Mayen
+                  SZ: Swaziland
+                  SE: Sweden
+                  CH: Switzerland
+                  SY: Syrian Arab Republic
+                  TW: Taiwan, Province Of China
+                  TJ: Tajikistan
+                  TZ: Tanzania, United Republic of
+                  TH: Thailand
+                  TL: Timor-Leste
+                  TG: Togo
+                  TK: Tokelau
+                  TO: Tonga
+                  TT: Trinidad and Tobago
+                  TN: Tunisia
+                  TR: Turkey
+                  TM: Turkmenistan
+                  TC: Turks and Caicos Islands
+                  TV: Tuvalu
+                  UG: Uganda
+                  UA: Ukraine
+                  AE: United Arab Emirates
+                  UM: United States Minor Outlying Islands
+                  UY: Uruguay
+                  UZ: Uzbekistan
+                  VU: Vanuatu
+                  VE: Venezuela
+                  VN: Viet Nam
+                  VG: Virgin Islands, British
+                  VI: Virgin Islands, U.S.
+                  WF: Wallis And Futuna
+                  EH: Western Sahara
+                  YE: Yemen
+                  ZM: Zambia
+                  ZW: Zimbabwe
+                  XK: Kosovo
+                  SS: South Sudan
+  /raw/country/list:
+    parameters: []
+    get:
+      summary: Raw
+      tags:
+        - Country List
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/plain;charset=UTF-8
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |
+                US : United States
+                CA : Canada
+                GB : United Kingdom
+                AF : Afghanistan
+                AX : Aland Islands
+                AL : Albania
+                DZ : Algeria
+                AS : American Samoa
+                AD : Andorra
+                AO : Angola
+                AI : Anguilla
+                AQ : Antarctica
+                AG : Antigua and Barbuda
+                AR : Argentina
+                AM : Armenia
+                AW : Aruba
+                AU : Australia
+                AT : Austria
+                AZ : Azerbaijan
+                BS : Bahamas
+                BH : Bahrain
+                BD : Bangladesh
+                BB : Barbados
+                BY : Belarus
+                BE : Belgium
+                BZ : Belize
+                BJ : Benin
+                BM : Bermuda
+                BT : Bhutan
+                BO : Bolivia
+                BA : Bosnia and Herzegovina
+                BW : Botswana
+                BV : Bouvet Island
+                BR : Brazil
+                IO : British Indian Ocean Territory
+                BN : Brunei Darussalam
+                BG : Bulgaria
+                BF : Burkina Faso
+                BI : Burundi
+                KH : Cambodia
+                CM : Cameroon
+                CV : Cape Verde
+                KY : Cayman Islands
+                CF : Central African Republic
+                TD : Chad
+                CL : Chile
+                CN : China
+                CX : Christmas Island
+                CC : Cocos (Keeling) Islands
+                CO : Colombia
+                KM : Comoros
+                CG : Congo
+                CD : Congo, The Democratic Republic of the
+                CK : Cook Islands
+                CR : Costa Rica
+                CI : Cote D'Ivoire
+                HR : Croatia
+                CU : Cuba
+                CY : Cyprus
+                CZ : Czech Republic
+                DK : Denmark
+                DJ : Djibouti
+                DM : Dominica
+                DO : Dominican Republic
+                EC : Ecuador
+                EG : Egypt
+                SV : El Salvador
+                GQ : Equatorial Guinea
+                ER : Eritrea
+                EE : Estonia
+                ET : Ethiopia
+                FK : Falkland Islands (Malvinas)
+                FO : Faroe Islands
+                FJ : Fiji
+                FI : Finland
+                FR : France
+                GF : French Guiana
+                PF : French Polynesia
+                TF : French Southern Territories
+                GA : Gabon
+                GM : Gambia
+                GE : Georgia
+                DE : Germany
+                GH : Ghana
+                GI : Gibraltar
+                GR : Greece
+                GL : Greenland
+                GD : Grenada
+                GP : Guadeloupe
+                GU : Guam
+                GT : Guatemala
+                GG : Guernsey
+                GN : Guinea
+                GW : Guinea-Bissau
+                GY : Guyana
+                HT : Haiti
+                HM : Heard Island and McDonald Islands
+                VA : Holy See (Vatican City State)
+                HN : Honduras
+                HK : Hong Kong
+                HU : Hungary
+                IS : Iceland
+                IN : India
+                ID : Indonesia
+                IR : Iran, Islamic Republic of
+                IQ : Iraq
+                IE : Ireland
+                IM : Isle of Man
+                IL : Israel
+                IT : Italy
+                JM : Jamaica
+                JP : Japan
+                JE : Jersey
+                JO : Jordan
+                KZ : Kazakhstan
+                KE : Kenya
+                KI : Kiribati
+                KP : Korea, Democratic People's Republic of
+                KR : Korea, Republic of
+                KW : Kuwait
+                KG : Kyrgyzstan
+                LA : Lao People's Democratic Republic
+                LV : Latvia
+                LB : Lebanon
+                LS : Lesotho
+                LR : Liberia
+                LY : Libyan Arab Jamahiriya
+                LI : Liechtenstein
+                LT : Lithuania
+                LU : Luxembourg
+                MO : Macao
+                MK : Macedonia, The Former Yugoslav Republic of
+                MG : Madagascar
+                MW : Malawi
+                MY : Malaysia
+                MV : Maldives
+                ML : Mali
+                MT : Malta
+                MH : Marshall Islands
+                MQ : Martinique
+                MR : Mauritania
+                MU : Mauritius
+                YT : Mayotte
+                MX : Mexico
+                FM : Micronesia, Federated States of
+                MD : Moldova, Republic of
+                MC : Monaco
+                MN : Mongolia
+                ME : Montenegro
+                MS : Montserrat
+                MA : Morocco
+                MZ : Mozambique
+                MM : Myanmar
+                NA : Namibia
+                NR : Nauru
+                NP : Nepal
+                NL : Netherlands
+                AN : Netherlands Antilles
+                NC : New Caledonia
+                NZ : New Zealand
+                NI : Nicaragua
+                NE : Niger
+                NG : Nigeria
+                NU : Niue
+                NF : Norfolk Island
+                MP : Northern Mariana Islands
+                NO : Norway
+                OM : Oman
+                PK : Pakistan
+                PW : Palau
+                PS : Palestinian Territory, Occupied
+                PA : Panama
+                PG : Papua New Guinea
+                PY : Paraguay
+                PE : Peru
+                PH : Philippines
+                PN : Pitcairn
+                PL : Poland
+                PT : Portugal
+                PR : Puerto Rico
+                QA : Qatar
+                RE : Reunion
+                RO : Romania
+                RU : Russian Federation
+                RW : Rwanda
+                BL : Saint Barthelemy
+                SH : Saint Helena
+                KN : Saint Kitts and Nevis
+                LC : Saint Lucia
+                MF : Saint Martin
+                PM : Saint Pierre and Miquelon
+                VC : Saint Vincent and the Grenadines
+                WS : Samoa
+                SM : San Marino
+                ST : Sao Tome and Principe
+                SA : Saudi Arabia
+                SN : Senegal
+                RS : Serbia
+                SC : Seychelles
+                SL : Sierra Leone
+                SG : Singapore
+                SK : Slovakia
+                SI : Slovenia
+                SB : Solomon Islands
+                SO : Somalia
+                ZA : South Africa
+                GS : South Georgia and the South Sandwich Islands
+                ES : Spain
+                LK : Sri Lanka
+                SD : Sudan
+                SR : Suriname
+                SJ : Svalbard and Jan Mayen
+                SZ : Swaziland
+                SE : Sweden
+                CH : Switzerland
+                SY : Syrian Arab Republic
+                TW : Taiwan, Province Of China
+                TJ : Tajikistan
+                TZ : Tanzania, United Republic of
+                TH : Thailand
+                TL : Timor-Leste
+                TG : Togo
+                TK : Tokelau
+                TO : Tonga
+                TT : Trinidad and Tobago
+                TN : Tunisia
+                TR : Turkey
+                TM : Turkmenistan
+                TC : Turks and Caicos Islands
+                TV : Tuvalu
+                UG : Uganda
+                UA : Ukraine
+                AE : United Arab Emirates
+                UM : United States Minor Outlying Islands
+                UY : Uruguay
+                UZ : Uzbekistan
+                VU : Vanuatu
+                VE : Venezuela
+                VN : Viet Nam
+                VG : Virgin Islands, British
+                VI : Virgin Islands, U.S.
+                WF : Wallis And Futuna
+                EH : Western Sahara
+                YE : Yemen
+                ZM : Zambia
+                ZW : Zimbabwe
+                XK : Kosovo
+                SS : South Sudan
+  /ipfeed/gzip/{apiKey}/full/{type}:
+    parameters:
+      - name: type
+        in: path
+        required: true
+        description: The requested time range
+        example: new
+        schema:
+          deprecated: false
+          type: string
+          enum:
+            - latest
+            - new
+            - hour
+            - last24hours
+            - today
+            - yesterday
+            - week
+            - month
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: Gzip
+      tags:
+        - IP Address Abuse Feed
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/gzip; charset=UTF-8
+          description: Success
+          content:
+            application/gzip: {}
+  /ipfeed/gzip/{apiKey}/full/{startDate}/{endDate}:
+    parameters:
+      - name: startDate
+        in: path
+        required: true
+        description: Retrieve all entries in the feed from beyond this date, beginning at 12:00AM UTC
+        example: "2025-09-01"
+        schema:
+          deprecated: false
+          type: string
+          format: date
+      - name: endDate
+        in: path
+        required: true
+        description: Retrieve all entries in the feed up this date
+        example: "2025-09-30"
+        schema:
+          deprecated: false
+          type: string
+          format: date
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: Gzip (Custom Time Range)
+      tags:
+        - IP Address Abuse Feed
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/gzip; charset=UTF-8
+          description: Success
+          content:
+            application/gzip: {}
+  /json/allowlist/create/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Create Allowlist Entry
+      parameters:
+        - name: value
+          in: query
+          required: true
+          description: The value you wish to add to the allowlist
+          example: 1.1.1.1
+          schema:
+            deprecated: false
+            type: string
+        - name: value_type
+          in: query
+          required: true
+          description: The type of value you're adding to the allowlist
+          example: ip
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - ip
+              - cidr
+              - isp
+              - deviceid
+              - email
+              - domain
+              - phone
+        - name: type
+          in: query
+          required: true
+          description: The API you wish to add this value to the allowlist for
+          example: proxy
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - proxy
+              - devicetracker
+              - mobiletracker
+              - email
+              - url
+              - phone
+        - name: reason
+          in: query
+          required: false
+          description: The reason why you added this value to the allowlist
+          schema:
+            type: string
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Successfully inserted Allow List entry.
+                request_id: aMA9XB9p1Z
+  /json/allowlist/list/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - List Allowlist Entries
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
+                        value_type:
+                          type: string
+                        reason:
+                          type: string
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Success
+                data:
+                  - type: proxy
+                    value: 1.1.1.1
+                    value_type: ip
+                    reason: "null"
+                  - type: devicetracker
+                    value: 1.0.0.1
+                    value_type: ip
+                    reason: "null"
+                request_id: aMAVTh7HFL
+  /json/blocklist/list/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - List Blocklist Entries
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
+                        value_type:
+                          type: string
+                        reason:
+                          type: string
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Success
+                data:
+                  - type: proxy
+                    value: 1.1.1.1
+                    value_type: ip
+                    reason: "null"
+                  - type: devicetracker
+                    value: 1.0.0.1
+                    value_type: ip
+                    reason: "null"
+                request_id: aMAXXhvK4m
+  /json/allowlist/delete/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Delete Allowlist Entry
+      parameters:
+        - name: value
+          in: query
+          required: true
+          description: The value you wish to remove from the allowlist
+          example: 1.1.1.1
+          schema:
+            deprecated: false
+            type: string
+        - name: value_type
+          in: query
+          required: true
+          description: The type of value you're removing from the allowlist
+          example: ip
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - ip
+              - cidr
+              - isp
+              - deviceid
+              - email
+              - domain
+              - phone
+        - name: type
+          in: query
+          required: true
+          description: The API you wish to remove this value from the allowlist for
+          example: proxy
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - proxy
+              - devicetracker
+              - mobiletracker
+              - email
+              - url
+              - phone
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Successfully deleted Allow List entry.
+                request_id: aMAcHo3Fkj
+  /json/blocklist/delete/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Delete Blocklist Entry
+      parameters:
+        - name: value
+          in: query
+          required: true
+          description: The value you wish to remove from the allowlist
+          example: 1.1.1.1
+          schema:
+            deprecated: false
+            type: string
+        - name: value_type
+          in: query
+          required: true
+          description: The type of value you're removing from the allowlist
+          example: ip
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - ip
+              - cidr
+              - isp
+              - deviceid
+              - email
+              - domain
+              - phone
+        - name: type
+          in: query
+          required: true
+          description: The API you wish to remove this value from the allowlist for
+          example: proxy
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - proxy
+              - devicetracker
+              - mobiletracker
+              - email
+              - url
+              - phone
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items: {}
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Successfully deleted Block List entry.
+                data: []
+                request_id: aMAeQlzIUi
+  /json/blocklist/create/{apiKey}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: JSON
+      tags:
+        - Create Blocklist Entry
+      parameters:
+        - name: value
+          in: query
+          required: true
+          description: The value you wish to add to the blocklist
+          example: 1.1.1.1
+          schema:
+            deprecated: false
+            type: string
+        - name: value_type
+          in: query
+          required: true
+          description: The type of value you're adding to the blocklist
+          example: ip
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - ip
+              - cidr
+              - isp
+              - deviceid
+              - vendorid
+              - email
+              - domain
+              - phone
+        - name: type
+          in: query
+          required: true
+          description: The API you wish to add this value to the blocklistfor
+          example: proxy
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - proxy
+              - devicetracker
+              - mobiletracker
+              - email
+              - url
+              - phone
+        - name: reason
+          in: query
+          required: false
+          description: The reason why you added this value to the blocklist
+          schema:
+            type: string
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items: {}
+                  request_id:
+                    type: string
+              example:
+                success: true
+                message: Successfully inserted Block List entry.
+                data: []
+                request_id: aMAg12Jl7E
+components:
+  parameters:
+    apiKey:
+      name: apiKey
+      in: path
+      required: true
+      description: Your IPQualityScore API key
+      schema:
+        type: string
+      example: "{{apiKey}}"
+  headers:
+    Date:
+      schema:
+        type: string
+      example: Mon, 08 Sep 2025 19:41:22 GMT
+    Transfer-Encoding:
+      schema:
+        type: string
+      example: chunked
+    Connection:
+      schema:
+        type: string
+      example: keep-alive
+    Content-Encoding:
+      schema:
+        type: string
+      example: br
+    X-Powered-By:
+      schema:
+        type: string
+      example: IPQualityScore

@@ -1,0 +1,219 @@
+parameters:
+  - name: url
+    in: path
+    required: true
+    description: The URL to analyze
+    example: https%3A%2F%2Fexample.com
+    schema:
+      deprecated: false
+      type: string
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: JSON
+  tags:
+    - Malicious URL Scanner
+  parameters:
+    - name: strictness
+      in: query
+      required: false
+      description: How strictly the URL should be scanned
+      example: "0"
+      schema:
+        deprecated: false
+        type: integer
+        minimum: 0
+        maximum: 2
+    - name: fast
+      in: query
+      required: false
+      description: >-
+        Whether the API should provide quicker response times using lighter
+        checks and analysis
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: timeout
+      in: query
+      required: false
+      description: >-
+        Maximum number of seconds to perform live page scanning and follow
+        redirects
+      example: "2"
+      schema:
+        deprecated: false
+        type: integer
+        default: "2"
+        minimum: 1
+        maximum: 10
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/json; charset=UTF-8
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              success:
+                type: boolean
+              unsafe:
+                type: boolean
+              domain:
+                type: string
+              root_domain:
+                type: string
+              ip_address:
+                type: string
+                format: ip-address
+              server:
+                type: string
+              content_type:
+                type: string
+              status_code:
+                type: integer
+              page_size:
+                type: integer
+              domain_rank:
+                type: integer
+              dns_valid:
+                type: boolean
+              parking:
+                type: boolean
+              spamming:
+                type: boolean
+              malware:
+                type: boolean
+              phishing:
+                type: boolean
+              suspicious:
+                type: boolean
+              adult:
+                type: boolean
+              risk_score:
+                type: integer
+              country_code:
+                type: string
+              category:
+                type: string
+              domain_age:
+                type: object
+                properties:
+                  human:
+                    type: string
+                  timestamp:
+                    type: integer
+                  iso:
+                    type: string
+                    format: date-time
+              domain_trust:
+                type: string
+              redirected:
+                type: boolean
+              short_link_redirect:
+                type: boolean
+              hosted_content:
+                type: boolean
+              page_title:
+                type: string
+              risky_tld:
+                type: boolean
+              spf_record:
+                type: boolean
+              dmarc_record:
+                type: boolean
+              technologies:
+                type: array
+                items: {}
+              a_records:
+                type: array
+                items:
+                  type: string
+                  format: ip-address
+              mx_records:
+                type: array
+                items:
+                  type: string
+              ns_records:
+                type: array
+                items:
+                  type: string
+              language_code:
+                type: string
+              final_url:
+                type: string
+                format: uri
+              scanned_url:
+                type: string
+                format: uri
+              request_id:
+                type: string
+          example:
+            message: Success.
+            success: true
+            unsafe: false
+            domain: example.com
+            root_domain: example.com
+            ip_address: 23.192.228.84
+            server: N/A
+            content_type: text/html
+            status_code: 200
+            page_size: 1256
+            domain_rank: 490
+            dns_valid: true
+            parking: false
+            spamming: true
+            malware: false
+            phishing: false
+            suspicious: true
+            adult: false
+            risk_score: 78
+            country_code: US
+            category: Computers & Internet
+            domain_age:
+              human: 30 years ago
+              timestamp: 808372800
+              iso: "1995-08-14T00:00:00-04:00"
+            domain_trust: trusted
+            redirected: false
+            short_link_redirect: false
+            hosted_content: false
+            page_title: Example Domain
+            risky_tld: false
+            spf_record: true
+            dmarc_record: true
+            technologies: []
+            a_records:
+              - 23.192.228.84
+              - 23.192.228.80
+              - 23.220.75.232
+              - 23.220.75.245
+              - 23.215.0.136
+              - 23.215.0.138
+              - 184.24.77.21
+              - 184.24.77.5
+            mx_records:
+              - ""
+            ns_records:
+              - a.iana-servers.net
+              - b.iana-servers.net
+            language_code: N/A
+            final_url: https://example.com
+            scanned_url: https://example.com
+            request_id: ZyxnObHPwy

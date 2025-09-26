@@ -1,0 +1,85 @@
+parameters:
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: JSON
+  tags:
+    - Create Allowlist Entry
+  parameters:
+    - name: value
+      in: query
+      required: true
+      description: The value you wish to add to the allowlist
+      example: 1.1.1.1
+      schema:
+        deprecated: false
+        type: string
+    - name: value_type
+      in: query
+      required: true
+      description: The type of value you're adding to the allowlist
+      example: ip
+      schema:
+        deprecated: false
+        type: string
+        enum:
+          - ip
+          - cidr
+          - isp
+          - deviceid
+          - email
+          - domain
+          - phone
+    - name: type
+      in: query
+      required: true
+      description: The API you wish to add this value to the allowlist for
+      example: proxy
+      schema:
+        deprecated: false
+        type: string
+        enum:
+          - proxy
+          - devicetracker
+          - mobiletracker
+          - email
+          - url
+          - phone
+    - name: reason
+      in: query
+      required: false
+      description: The reason why you added this value to the allowlist
+      schema:
+        type: string
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/json; charset=UTF-8
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+              request_id:
+                type: string
+          example:
+            success: true
+            message: Successfully inserted Allow List entry.
+            request_id: aMA9XB9p1Z

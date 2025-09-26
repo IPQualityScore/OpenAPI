@@ -1,0 +1,71 @@
+parameters:
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: XML
+  tags:
+    - Credit Usage
+  parameters: []
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: text/xml;charset=UTF-8
+      description: Success
+      content:
+        application/xml:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  credits:
+                    type: integer
+                  usage:
+                    type: integer
+                  proxy_usage:
+                    type: integer
+                  email_usage:
+                    type: integer
+                  fingerprint_usage:
+                    type: integer
+                  mobile_sdk_usage:
+                    type: integer
+                  url_usage:
+                    type: integer
+                  phone_usage:
+                    type: integer
+                  country_code:
+                    type: string
+                  request_id:
+                    type: string
+          example:
+            result:
+              success: true
+              message: Success
+              credits: 4999762
+              usage: 92
+              proxy_usage: 54
+              email_usage: 38
+              fingerprint_usage: 0
+              mobile_sdk_usage: 0
+              url_usage: 60
+              phone_usage: 68
+              country_code: US
+              request_id: a0GjTtGwvr

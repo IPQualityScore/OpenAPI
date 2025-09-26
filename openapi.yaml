@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: IPQualityScore API
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: API Support
+    url: https://www.ipqualityscore.com/documentation/overview
+    email: support@ipqualityscore.com
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit/
+  version: 0.2.0 # last updated: 2025-09-10
+servers:
+  - url: https://ipqualityscore.com/api
+paths:
+  /json/account/{apiKey}:
+    $ref: paths/json_account_{apiKey}.yaml
+  /xml/account/{apiKey}:
+    $ref: paths/xml_account_{apiKey}.yaml
+  /json/loginhistory/{apiKey}:
+    $ref: paths/json_loginhistory_{apiKey}.yaml
+  /xml/loginhistory/{apiKey}:
+    $ref: paths/xml_loginhistory_{apiKey}.yaml
+  /json/leaked/{type}/{apiKey}:
+    $ref: paths/json_leaked_{type}_{apiKey}.yaml
+  /xml/leaked/{type}/{apiKey}:
+    $ref: paths/xml_leaked_{type}_{apiKey}.yaml
+  /json/email/{apiKey}/{email}:
+    $ref: paths/json_email_{apiKey}_{email}.yaml
+  /xml/email/{apiKey}/{email}:
+    $ref: paths/xml_email_{apiKey}_{email}.yaml
+  /json/url/{apiKey}/{url}:
+    $ref: paths/json_url_{apiKey}_{url}.yaml
+  /xml/url/{apiKey}/{url}:
+    $ref: paths/xml_url_{apiKey}_{url}.yaml
+  /json/malware/{type}/{apiKey}:
+    $ref: paths/json_malware_{type}_{apiKey}.yaml
+  /xml/malware/{type}/{apiKey}:
+    $ref: paths/xml_malware_{type}_{apiKey}.yaml
+  /json/phone/{apiKey}/{phoneNumber}:
+    $ref: paths/json_phone_{apiKey}_{phoneNumber}.yaml
+  /xml/phone/{apiKey}/{phoneNumber}:
+    $ref: paths/xml_phone_{apiKey}_{phoneNumber}.yaml
+  /json/ip/{apiKey}/{ipAddress}:
+    $ref: paths/json_ip_{apiKey}_{ipAddress}.yaml
+  /xml/ip/{apiKey}/{ipAddress}:
+    $ref: paths/xml_ip_{apiKey}_{ipAddress}.yaml
+  /json/requests/{apiKey}/list:
+    $ref: paths/json_requests_{apiKey}_list.yaml
+  /xml/requests/{apiKey}/list:
+    $ref: paths/xml_requests_{apiKey}_list.yaml
+  /json/country/list:
+    $ref: paths/json_country_list.yaml
+  /raw/country/list:
+    $ref: paths/raw_country_list.yaml
+  /ipfeed/gzip/{apiKey}/full/{type}:
+    $ref: paths/ipfeed_gzip_{apiKey}_full_{type}.yaml
+  /ipfeed/gzip/{apiKey}/full/{startDate}/{endDate}:
+    $ref: paths/ipfeed_gzip_{apiKey}_full_{startDate}_{endDate}.yaml
+  /json/allowlist/create/{apiKey}:
+    $ref: paths/json_allowlist_create_{apiKey}.yaml
+  /json/allowlist/list/{apiKey}:
+    $ref: paths/json_allowlist_list_{apiKey}.yaml
+  /json/blocklist/list/{apiKey}:
+    $ref: paths/json_blocklist_list_{apiKey}.yaml
+  /json/allowlist/delete/{apiKey}:
+    $ref: paths/json_allowlist_delete_{apiKey}.yaml
+  /json/blocklist/delete/{apiKey}:
+    $ref: paths/json_blocklist_delete_{apiKey}.yaml
+  /json/blocklist/create/{apiKey}:
+    $ref: paths/json_blocklist_create_{apiKey}.yaml

@@ -1,0 +1,128 @@
+parameters:
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: XML
+  tags:
+    - Login History
+  parameters: []
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: text/xml;charset=UTF-8
+      description: Success
+      content:
+        application/xml:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  login_logs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ID:
+                          type: string
+                        UserID:
+                          type: string
+                        IP:
+                          type: string
+                        Hostname:
+                          type: string
+                        Browser:
+                          type: string
+                          format: style
+                        FraudScore:
+                          type: string
+                        CountryCode:
+                          type: string
+                        OrgISP:
+                          type: string
+                        Email:
+                          type: string
+                          format: email
+                        LoginSuccess:
+                          type: boolean
+                        Attempts:
+                          type: string
+                        Validated:
+                          type: boolean
+                        Deleted:
+                          type: boolean
+                        Genesis:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                            timezone_type:
+                              type: integer
+                            timezone:
+                              type: string
+                  total_logins:
+                    type: integer
+                  request_id:
+                    type: string
+          example:
+            result:
+              message: Success
+              success: true
+              login_logs:
+                - ID: "155834371"
+                  UserID: "7674771"
+                  IP: 1.1.1.1
+                  Hostname: one.one.one.one
+                  Browser: >-
+                    Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0)
+                    Gecko/20100101 Firefox/138.0
+                  FraudScore: "0.00"
+                  CountryCode: US
+                  OrgISP: Cloudflare
+                  Email: user@gmail.com
+                  LoginSuccess: true
+                  Attempts: "0"
+                  Validated: false
+                  Deleted: false
+                  Genesis:
+                    date: "2025-05-30 00:05:34.000000"
+                    timezone_type: 3
+                    timezone: America/New_York
+                - ID: "155934241"
+                  UserID: "7674771"
+                  IP: 1.0.0.1
+                  Hostname: one.one.one.one
+                  Browser: >-
+                    Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0)
+                    Gecko/20100101 Firefox/138.0
+                  FraudScore: "0.00"
+                  CountryCode: US
+                  OrgISP: Cloudflare
+                  Email: user@gmail.com
+                  LoginSuccess: true
+                  Attempts: "0"
+                  Validated: false
+                  Deleted: false
+                  Genesis:
+                    date: "2025-05-31 11:44:08.000000"
+                    timezone_type: 3
+                    timezone: America/New_York
+              total_logins: 2
+              request_id: aNjZAE7P8g

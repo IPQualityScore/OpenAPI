@@ -1,0 +1,44 @@
+parameters:
+  - name: type
+    in: path
+    required: true
+    description: The requested time range
+    example: new
+    schema:
+      deprecated: false
+      type: string
+      enum:
+        - latest
+        - new
+        - hour
+        - last24hours
+        - today
+        - yesterday
+        - week
+        - month
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: Gzip
+  tags:
+    - IP Address Abuse Feed
+  parameters: []
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/gzip; charset=UTF-8
+      description: Success
+      content:
+        application/gzip: {}

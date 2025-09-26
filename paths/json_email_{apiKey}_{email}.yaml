@@ -1,0 +1,241 @@
+parameters:
+  - name: email
+    in: path
+    required: true
+    description: The email address to analyze
+    example: noreply@ipqualityscore.com
+    schema:
+      deprecated: false
+      type: string
+      format: email
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: JSON
+  tags:
+    - Email Verification
+  parameters:
+    - name: fast
+      in: query
+      required: false
+      description: >-
+        Whether to perform an SMTP check with the mail service provider, greatly
+        increasing the API speed
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: timeout
+      in: query
+      required: false
+      description: >-
+        The maximum number of seconds to wait for a reply from a mail service
+        provider
+      example: "7"
+      schema:
+        deprecated: false
+        type: integer
+        default: "7"
+        minimum: 1
+        maximum: 60
+    - name: suggest_domain
+      in: query
+      required: false
+      description: >-
+        Whether to force analysis to see if the email address's domain has a
+        typo and if it should be corrected to a popular mail service
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: strictness
+      in: query
+      required: false
+      description: >-
+        Sets how strictly spam traps and honeypots are detected by our system,
+        depending on how comfortable you are with identifying emails suspected
+        of being spam traps
+      example: "0"
+      schema:
+        deprecated: false
+        type: integer
+        minimum: 0
+        maximum: 2
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/json; charset=UTF-8
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              success:
+                type: boolean
+              valid:
+                type: boolean
+              disposable:
+                type: boolean
+              smtp_score:
+                type: integer
+              overall_score:
+                type: integer
+              first_name:
+                type: string
+              generic:
+                type: boolean
+              common:
+                type: boolean
+              dns_valid:
+                type: boolean
+              honeypot:
+                type: boolean
+              deliverability:
+                type: string
+              frequent_complainer:
+                type: boolean
+              spam_trap_score:
+                type: string
+              catch_all:
+                type: boolean
+              timed_out:
+                type: boolean
+              suspect:
+                type: boolean
+              recent_abuse:
+                type: boolean
+              fraud_score:
+                type: integer
+              suggested_domain:
+                type: string
+              leaked:
+                type: boolean
+              domain_age:
+                type: object
+                properties:
+                  human:
+                    type: string
+                  timestamp:
+                    type: integer
+                  iso:
+                    type: string
+                    format: date-time
+              first_seen:
+                type: object
+                properties:
+                  human:
+                    type: string
+                  timestamp:
+                    type: integer
+                  iso:
+                    type: string
+                    format: date-time
+              domain_trust:
+                type: string
+              sanitized_email:
+                type: string
+                format: email
+              domain_velocity:
+                type: string
+              user_activity:
+                type: string
+              associated_names:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  names:
+                    type: array
+                    items: {}
+              associated_phone_numbers:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  phone_numbers:
+                    type: array
+                    items: {}
+              risky_tld:
+                type: boolean
+              spf_record:
+                type: boolean
+              dmarc_record:
+                type: boolean
+              mx_records:
+                type: array
+                items:
+                  type: string
+              a_records:
+                type: array
+                items:
+                  type: string
+                  format: ip-address
+              request_id:
+                type: string
+          example:
+            message: Success.
+            success: true
+            valid: true
+            disposable: false
+            smtp_score: 2
+            overall_score: 3
+            first_name: Unknown
+            generic: false
+            common: false
+            dns_valid: true
+            honeypot: true
+            deliverability: low
+            frequent_complainer: false
+            spam_trap_score: medium
+            catch_all: true
+            timed_out: false
+            suspect: true
+            recent_abuse: true
+            fraud_score: 100
+            suggested_domain: N/A
+            leaked: false
+            domain_age:
+              human: 14 years ago
+              timestamp: 1302837997
+              iso: "2011-04-14T23:26:37-04:00"
+            first_seen:
+              human: 6 years ago
+              timestamp: 1557122946
+              iso: "2019-05-06T02:09:06-04:00"
+            domain_trust: trusted
+            sanitized_email: noreply@ipqualityscore.com
+            domain_velocity: high
+            user_activity: Disabled for performance. Contact support for further assistance.
+            associated_names:
+              status: No associated names found.
+              names: []
+            associated_phone_numbers:
+              status: No associated phone numbers found.
+              phone_numbers: []
+            risky_tld: false
+            spf_record: false
+            dmarc_record: true
+            mx_records:
+              - mx.zoho.com
+              - mx2.zoho.com
+              - mx3.zoho.com
+            a_records:
+              - 104.26.2.60
+              - 172.67.72.12
+              - 104.26.3.60
+            request_id: ZytW9JsDtX

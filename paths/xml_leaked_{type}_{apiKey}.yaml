@@ -1,0 +1,78 @@
+parameters:
+  - name: type
+    in: path
+    required: true
+    description: The type of data to search for
+    example: password
+    schema:
+      deprecated: false
+      type: string
+  - $ref: ../components/parameters/apiKey.yaml
+post:
+  summary: XML
+  tags:
+    - Dark Web Leak
+  parameters: []
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: text/xml;charset=UTF-8
+      description: Success
+      content:
+        application/xml:
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  request_hash:
+                    type: string
+                  source:
+                    type: array
+                    items:
+                      type: string
+                  exposed:
+                    type: boolean
+                  first_seen:
+                    type: object
+                    properties:
+                      human:
+                        type: string
+                      timestamp:
+                        type: integer
+                      iso:
+                        type: string
+                        format: date-time
+                  request_id:
+                    type: string
+          example:
+            result:
+              success: true
+              message: Success
+              request_hash: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+              source:
+                - Exploit Antipublic
+              exposed: true
+              first_seen:
+                human: 2 years ago
+                timestamp: 1681115849
+                iso: "2023-04-10T04:37:29-04:00"
+              request_id: Zz1OOrY2ep

@@ -1,0 +1,7 @@
+name: apiKey
+in: path
+required: true
+description: Your IPQualityScore API key
+schema:
+  type: string
+example: "{{apiKey}}"

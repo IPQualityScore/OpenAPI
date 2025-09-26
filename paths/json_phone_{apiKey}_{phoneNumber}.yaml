@@ -1,0 +1,193 @@
+parameters:
+  - name: phoneNumber
+    in: path
+    required: true
+    description: The phone number to analyze
+    example: "18007132618"
+    schema:
+      deprecated: false
+      type: integer
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: JSON
+  tags:
+    - Phone Number Validation
+  parameters:
+    - name: strictness
+      in: query
+      required: false
+      description: How in depth (strict) the reputation check should be
+      example: "0"
+      schema:
+        deprecated: false
+        type: integer
+        minimum: 0
+        maximum: 2
+    - name: country
+      in: query
+      required: false
+      description: >-
+        The default country or countries this phone number is suspected to be
+        associated with
+      example: US
+      schema:
+        deprecated: false
+        type: string
+    - name: enhanced_line_check
+      in: query
+      required: false
+      description: >-
+        Whether to enable more advanced active line checks through our HLR
+        lookup service
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: sms_pumping
+      in: query
+      required: false
+      description: >-
+        Whether to enable the detection of SMS pumping attacks, where
+        perpetrators artificially inflate the volume of traffic sent to websites
+        and app touchpoints protected by SMS authentication
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+    - name: enhanced_name_check
+      in: query
+      required: false
+      description: Whether to enable enhanced name appending for a phone number
+      example: "false"
+      schema:
+        deprecated: false
+        type: boolean
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/json; charset=UTF-8
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              success:
+                type: boolean
+              formatted:
+                type: string
+              local_format:
+                type: string
+              valid:
+                type: boolean
+              fraud_score:
+                type: integer
+              recent_abuse:
+                type: boolean
+              VOIP:
+                type: boolean
+              prepaid:
+                type: boolean
+                nullable: true
+              risky:
+                type: boolean
+              active:
+                type: boolean
+              carrier:
+                type: string
+              line_type:
+                type: string
+              country:
+                type: string
+              city:
+                type: string
+              zip_code:
+                type: string
+              region:
+                type: string
+              dialing_code:
+                type: integer
+              active_status:
+                type: string
+              sms_domain:
+                type: string
+              associated_email_addresses:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  emails:
+                    type: array
+                    items: {}
+              user_activity:
+                type: string
+              mnc:
+                type: string
+              mcc:
+                type: string
+              leaked:
+                type: boolean
+              spammer:
+                type: boolean
+              request_id:
+                type: string
+              name:
+                type: string
+              timezone:
+                type: string
+              do_not_call:
+                type: boolean
+              accurate_country_code:
+                type: boolean
+              sms_email:
+                type: string
+          example:
+            message: Phone is valid.
+            success: true
+            formatted: "+18007132618"
+            local_format: (800) 713-2618
+            valid: true
+            fraud_score: 100
+            recent_abuse: true
+            VOIP: false
+            prepaid: null
+            risky: true
+            active: true
+            carrier: SomosGov
+            line_type: Toll Free
+            country: US
+            city: Telephone
+            zip_code: "75488"
+            region: TX
+            dialing_code: 1
+            active_status: N/A
+            sms_domain: N/A
+            associated_email_addresses:
+              status: No associated emails found.
+              emails: []
+            user_activity: Disabled for performance. Contact support for further assistance.
+            mnc: N/A
+            mcc: N/A
+            leaked: false
+            spammer: false
+            request_id: ZyvVBKGWvE
+            name: N/A
+            timezone: America/Chicago
+            do_not_call: false
+            accurate_country_code: false
+            sms_email: N/A

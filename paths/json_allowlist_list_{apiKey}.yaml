@@ -1,0 +1,62 @@
+parameters:
+  - $ref: ../components/parameters/apiKey.yaml
+get:
+  summary: JSON
+  tags:
+    - List Allowlist Entries
+  parameters: []
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/json; charset=UTF-8
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    value:
+                      type: string
+                    value_type:
+                      type: string
+                    reason:
+                      type: string
+              request_id:
+                type: string
+          example:
+            success: true
+            message: Success
+            data:
+              - type: proxy
+                value: 1.1.1.1
+                value_type: ip
+                reason: "null"
+              - type: devicetracker
+                value: 1.0.0.1
+                value_type: ip
+                reason: "null"
+            request_id: aMAVTh7HFL
