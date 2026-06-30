@@ -1,0 +1,88 @@
+parameters:
+  - $ref: ../components/parameters/apiKey.yaml
+  - name: csvId
+    in: path
+    required: true
+    description: The specific ID for your CSV
+    schema:
+      type: integer
+get:
+  summary: Status (JSON)
+  tags:
+    - Bulk Validation CSV
+  parameters: []
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/json; charset=UTF-8
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              success:
+                type: boolean
+              id:
+                type: integer
+              file_name:
+                type: string
+              type:
+                type: string
+              strictness:
+                type: integer
+              status:
+                type: string
+              aborted:
+                type: boolean
+              invalid_records:
+                type: integer
+              downloads:
+                type: object
+                properties:
+                  pristine:
+                    nullable: true
+                  clean:
+                    nullable: true
+                  bad:
+                    type: string
+                    format: uri
+                  all:
+                    type: string
+                    format: uri
+              request_id:
+                type: string
+              api_version:
+                type: integer
+          example:
+            message: Success
+            success: true
+            id: 3498646
+            file_name: "email_2026-06-25 12:05:26"
+            type: email
+            strictness: 0
+            status: FINISHED
+            aborted: false
+            invalid_records: 1
+            downloads:
+              pristine: null
+              clean: null
+              bad: https://downloads.ipqualityscore.com/download?download=W2DEMhCoTOCuj9iHiJpRYUmieCUeRxh4DUJU2OQGHFn5CROoDfNvbTxVCAP6AMNNDAwKLMVq2Qil9aD83lTtfJWyGSwsXC7jZSLLxIVo36WQBoFwQPTFPLSkXadhdlRWcq4Q7RUQQucASHGTHZfThRoeDfXaHOmvOGdvY5JEnHSf28IjkG9drnvuyN58U8cfRg2ZRM9VQvxuNZFM73OJq6cleWLe9XJ080OpMY7XGOrh2zuf0jRZOqzzyuqkqGzR&filename=email_2026-06-25+12%3A05%3A26-IPQualityScore-Email-Verification-Invalid-Results.csv
+              all: https://downloads.ipqualityscore.com/download?download=Y5bBOwdhk5EPqRtBh2ZpyW5enl2PLGPgTVbOlcfRkJI1jx2rvYvqVGVNtvB3jxnjYtnLOksOExN0voefFuogKUobLytk3cvPrst7WwbcbVG1qj3BBgsnYVu7YsGaBlRPI8Sswd2i82um7NbSpf4wKfnlA9tNYvUtQuNvsa7fcQdMCoAO0bVInXczukDsQeDmxBG5pvLMR8uEh1ydWtKnSoygGV1h7BMXJAYq59pTSmi2RYW14TxySHN4bzN4TP58&filename=email_2026-06-25+12%3A05%3A26-IPQualityScore-Email-Verification-All-Results.csv
+            request_id: ig3VkM6UBU
+            api_version: 1

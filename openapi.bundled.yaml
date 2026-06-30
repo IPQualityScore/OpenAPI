@@ -9,7 +9,7 @@ info:
   license:
     name: MIT
     url: https://opensource.org/license/mit/
-  version: 0.2.0 # last updated: 2025-09-10
+  version: 0.3.0 # last updated: 2026-06-25
 servers:
   - url: https://ipqualityscore.com/api
 paths:
@@ -4601,6 +4601,688 @@ paths:
                 message: Successfully inserted Block List entry.
                 data: []
                 request_id: aMAg12Jl7E
+  /json/csv/{apiKey}/{fileType}/upload:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+      - name: fileType
+        in: path
+        required: true
+        description: The type of CSV
+        schema:
+          type: string
+          enum:
+            - proxy
+            - email
+            - url
+            - phone
+            - leaked_email
+            - leaked_password
+            - leaked_username
+    post:
+      summary: Upload (JSON)
+      tags:
+        - Bulk Validation CSV
+      parameters:
+        - name: url
+          in: query
+          required: false
+          description: The full link to download the file you wish to process
+          schema:
+            type: string
+            format: uri
+        - name: file_name
+          in: query
+          required: false
+          description: An optional name for this file
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: string
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to upload
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  id:
+                    type: integer
+                  file_name:
+                    type: string
+                  type:
+                    type: string
+                  strictness:
+                    type: integer
+                  status:
+                    type: string
+                  aborted:
+                    nullable: true
+                  invalid_records:
+                    type: integer
+                  status_url:
+                    type: string
+                    format: uri
+                  downloads:
+                    type: object
+                    properties:
+                      pristine:
+                        nullable: true
+                      clean:
+                        nullable: true
+                      bad:
+                        nullable: true
+                      all:
+                        nullable: true
+                  request_id:
+                    type: string
+                  api_version:
+                    type: integer
+              example:
+                message: Success
+                success: true
+                id: 3868534
+                file_name: "proxy_2026-06-25 11:44:13"
+                type: proxy
+                strictness: 0
+                status: NEW
+                aborted: null
+                invalid_records: 0
+                status_url: https://www.ipqualityscore.com/api/json/csv/KB0ZyCp4fT5lcAw8ewBhBPeEy6NPNK3G/status/3868534
+                downloads:
+                  pristine: null
+                  clean: null
+                  bad: null
+                  all: null
+                request_id: idiPh8y55B
+                api_version: 1
+  /xml/csv/{apiKey}/{fileType}/upload:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+      - name: fileType
+        in: path
+        required: true
+        description: The type of CSV
+        schema:
+          type: string
+          enum:
+            - proxy
+            - email
+            - url
+            - phone
+            - leaked_email
+            - leaked_password
+            - leaked_username
+    post:
+      summary: Upload (XML)
+      tags:
+        - Bulk Validation CSV
+      parameters:
+        - name: url
+          in: query
+          required: false
+          description: The full link to download the file you wish to process
+          schema:
+            type: string
+            format: uri
+        - name: file_name
+          in: query
+          required: false
+          description: An optional name for this file
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: string
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to upload
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      success:
+                        type: boolean
+                      id:
+                        type: integer
+                      file_name:
+                        type: string
+                      type:
+                        type: string
+                      strictness:
+                        type: integer
+                      status:
+                        type: string
+                      aborted:
+                        nullable: true
+                      invalid_records:
+                        type: integer
+                      status_url:
+                        type: string
+                        format: uri
+                      downloads:
+                        type: object
+                        properties:
+                          pristine:
+                            nullable: true
+                          clean:
+                            nullable: true
+                          bad:
+                            nullable: true
+                          all:
+                            nullable: true
+                      request_id:
+                        type: string
+                      api_version:
+                        type: integer
+              example:
+                result:
+                  message: Success
+                  success: true
+                  id: 3868534
+                  file_name: "proxy_2026-06-25 11:44:13"
+                  type: proxy
+                  strictness: 0
+                  status: NEW
+                  aborted: null
+                  invalid_records: 0
+                  status_url: https://www.ipqualityscore.com/api/xml/csv/KB0ZyCp4fT5lcAw8ewBhBPeEy6NPNK3G/status/3868534
+                  downloads:
+                    pristine: null
+                    clean: null
+                    bad: null
+                    all: null
+                  request_id: idiPh8y55B
+                  api_version: 1
+  /json/csv/{apiKey}/status/{csvId}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+      - name: csvId
+        in: path
+        required: true
+        description: The specific ID for your CSV
+        schema:
+          type: integer
+    get:
+      summary: Status (JSON)
+      tags:
+        - Bulk Validation CSV
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  id:
+                    type: integer
+                  file_name:
+                    type: string
+                  type:
+                    type: string
+                  strictness:
+                    type: integer
+                  status:
+                    type: string
+                  aborted:
+                    type: boolean
+                  invalid_records:
+                    type: integer
+                  downloads:
+                    type: object
+                    properties:
+                      pristine:
+                        nullable: true
+                      clean:
+                        nullable: true
+                      bad:
+                        type: string
+                        format: uri
+                      all:
+                        type: string
+                        format: uri
+                  request_id:
+                    type: string
+                  api_version:
+                    type: integer
+              example:
+                message: Success
+                success: true
+                id: 3498646
+                file_name: "email_2026-06-25 12:05:26"
+                type: email
+                strictness: 0
+                status: FINISHED
+                aborted: false
+                invalid_records: 1
+                downloads:
+                  pristine: null
+                  clean: null
+                  bad: https://downloads.ipqualityscore.com/download?download=W2DEMhCoTOCuj9iHiJpRYUmieCUeRxh4DUJU2OQGHFn5CROoDfNvbTxVCAP6AMNNDAwKLMVq2Qil9aD83lTtfJWyGSwsXC7jZSLLxIVo36WQBoFwQPTFPLSkXadhdlRWcq4Q7RUQQucASHGTHZfThRoeDfXaHOmvOGdvY5JEnHSf28IjkG9drnvuyN58U8cfRg2ZRM9VQvxuNZFM73OJq6cleWLe9XJ080OpMY7XGOrh2zuf0jRZOqzzyuqkqGzR&filename=email_2026-06-25+12%3A05%3A26-IPQualityScore-Email-Verification-Invalid-Results.csv
+                  all: https://downloads.ipqualityscore.com/download?download=Y5bBOwdhk5EPqRtBh2ZpyW5enl2PLGPgTVbOlcfRkJI1jx2rvYvqVGVNtvB3jxnjYtnLOksOExN0voefFuogKUobLytk3cvPrst7WwbcbVG1qj3BBgsnYVu7YsGaBlRPI8Sswd2i82um7NbSpf4wKfnlA9tNYvUtQuNvsa7fcQdMCoAO0bVInXczukDsQeDmxBG5pvLMR8uEh1ydWtKnSoygGV1h7BMXJAYq59pTSmi2RYW14TxySHN4bzN4TP58&filename=email_2026-06-25+12%3A05%3A26-IPQualityScore-Email-Verification-All-Results.csv
+                request_id: ig3VkM6UBU
+                api_version: 1
+  /xml/csv/{apiKey}/status/{csvId}:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+      - name: csvId
+        in: path
+        required: true
+        description: The specific ID for your CSV
+        schema:
+          type: integer
+    get:
+      summary: Status (XML)
+      tags:
+        - Bulk Validation CSV
+      parameters: []
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      success:
+                        type: boolean
+                      id:
+                        type: integer
+                      file_name:
+                        type: string
+                      type:
+                        type: string
+                      strictness:
+                        type: integer
+                      status:
+                        type: string
+                      aborted:
+                        type: boolean
+                      invalid_records:
+                        type: integer
+                      downloads:
+                        type: object
+                        properties:
+                          pristine:
+                            nullable: true
+                          clean:
+                            nullable: true
+                          bad:
+                            type: string
+                            format: uri
+                          all:
+                            type: string
+                            format: uri
+                      request_id:
+                        type: string
+                      api_version:
+                        type: integer
+              example:
+                result:
+                  message: Success
+                  success: true
+                  id: 3498646
+                  file_name: "email_2026-06-25 12:05:26"
+                  type: email
+                  strictness: 0
+                  status: FINISHED
+                  aborted: false
+                  invalid_records: 1
+                  downloads:
+                    pristine: null
+                    clean: null
+                    bad: https://downloads.ipqualityscore.com/download?download=W2DEMhCoTOCuj9iHiJpRYUmieCUeRxh4DUJU2OQGHFn5CROoDfNvbTxVCAP6AMNNDAwKLMVq2Qil9aD83lTtfJWyGSwsXC7jZSLLxIVo36WQBoFwQPTFPLSkXadhdlRWcq4Q7RUQQucASHGTHZfThRoeDfXaHOmvOGdvY5JEnHSf28IjkG9drnvuyN58U8cfRg2ZRM9VQvxuNZFM73OJq6cleWLe9XJ080OpMY7XGOrh2zuf0jRZOqzzyuqkqGzR&filename=email_2026-06-25+12%3A05%3A26-IPQualityScore-Email-Verification-Invalid-Results.csv
+                    all: https://downloads.ipqualityscore.com/download?download=Y5bBOwdhk5EPqRtBh2ZpyW5enl2PLGPgTVbOlcfRkJI1jx2rvYvqVGVNtvB3jxnjYtnLOksOExN0voefFuogKUobLytk3cvPrst7WwbcbVG1qj3BBgsnYVu7YsGaBlRPI8Sswd2i82um7NbSpf4wKfnlA9tNYvUtQuNvsa7fcQdMCoAO0bVInXczukDsQeDmxBG5pvLMR8uEh1ydWtKnSoygGV1h7BMXJAYq59pTSmi2RYW14TxySHN4bzN4TP58&filename=email_2026-06-25+12%3A05%3A26-IPQualityScore-Email-Verification-All-Results.csv
+                  request_id: ig3VkM6UBU
+                  api_version: 1
+  /json/csv/{apiKey}/list:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: List (JSON)
+      tags:
+        - Bulk Validation CSV
+      parameters:
+        - name: type
+          in: query
+          required: false
+          description: The type of CSVs to list
+          schema:
+            type: string
+            enum:
+              - proxy
+              - email
+              - url
+              - phone
+              - leaked_email
+              - leaked_password
+              - leaked_username
+        - name: page
+          in: query
+          required: false
+          description: The page number of results to return
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=UTF-8
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  csvs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        file_name:
+                          type: string
+                        type:
+                          type: string
+                        strictness:
+                          type: integer
+                        status:
+                          type: string
+                        aborted:
+                          type: boolean
+                        invalid_records:
+                          type: integer
+                        status_url:
+                          type: string
+                          format: uri
+                  total_csvs:
+                    type: integer
+                  total_pages:
+                    type: integer
+                  page:
+                    type: integer
+                  request_id:
+                    type: string
+                  api_version:
+                    type: integer
+              example:
+                message: Success
+                success: true
+                csvs:
+                  - id: 3398874
+                    file_name: "email_2026-06-25 12:14:06"
+                    type: email
+                    strictness: 0
+                    status: FINISHED
+                    aborted: false
+                    invalid_records: 1
+                    status_url: https://www.ipqualityscore.com/api/json/csv/cgHi6vaV3nosu1YeCCV01KwpQwT716It/status/3398874
+                  - id: 3398873
+                    file_name: "email_2026-06-25 12:13:20"
+                    type: email
+                    strictness: 0
+                    status: FINISHED
+                    aborted: false
+                    invalid_records: 1
+                    status_url: https://www.ipqualityscore.com/api/json/csv/cgHi6vaV3nosu1YeCCV01KwpQwT716It/status/3398873
+                total_csvs: 2
+                total_pages: 1
+                page: 1
+                request_id: ie6jj3lohy
+                api_version: 1
+  /xml/csv/{apiKey}/list:
+    parameters:
+      - $ref: "#/components/parameters/apiKey"
+    get:
+      summary: List (XML)
+      tags:
+        - Bulk Validation CSV
+      parameters:
+        - name: type
+          in: query
+          required: false
+          description: The type of CSVs to list
+          schema:
+            type: string
+            enum:
+              - proxy
+              - email
+              - url
+              - phone
+              - leaked_email
+              - leaked_password
+              - leaked_username
+        - name: page
+          in: query
+          required: false
+          description: The page number of results to return
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          headers:
+            Date:
+              $ref: "#/components/headers/Date"
+            Transfer-Encoding:
+              $ref: "#/components/headers/Transfer-Encoding"
+            Connection:
+              $ref: "#/components/headers/Connection"
+            Content-Encoding:
+              $ref: "#/components/headers/Content-Encoding"
+            X-Powered-By:
+              $ref: "#/components/headers/X-Powered-By"
+            Content-Type:
+              schema:
+                type: string
+              example: text/xml;charset=UTF-8
+          description: Success
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      success:
+                        type: boolean
+                      csvs:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            file_name:
+                              type: string
+                            type:
+                              type: string
+                            strictness:
+                              type: integer
+                            status:
+                              type: string
+                            aborted:
+                              type: boolean
+                            invalid_records:
+                              type: integer
+                            status_url:
+                              type: string
+                              format: uri
+                      total_csvs:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      page:
+                        type: integer
+                      request_id:
+                        type: string
+                      api_version:
+                        type: integer
+              example:
+                result:
+                  message: Success
+                  success: true
+                  csvs:
+                    - id: 3398874
+                      file_name: "email_2026-06-25 12:14:06"
+                      type: email
+                      strictness: 0
+                      status: FINISHED
+                      aborted: false
+                      invalid_records: 1
+                      status_url: https://www.ipqualityscore.com/api/xml/csv/cgHi6vaV3nosu1YeCCV01KwpQwT716It/status/3398874
+                    - id: 3398873
+                      file_name: "email_2026-06-25 12:13:20"
+                      type: email
+                      strictness: 0
+                      status: FINISHED
+                      aborted: false
+                      invalid_records: 1
+                      status_url: https://www.ipqualityscore.com/api/xml/csv/cgHi6vaV3nosu1YeCCV01KwpQwT716It/status/3398873
+                  total_csvs: 2
+                  total_pages: 1
+                  page: 1
+                  request_id: ie6jj3lohy
+                  api_version: 1
 components:
   parameters:
     apiKey:

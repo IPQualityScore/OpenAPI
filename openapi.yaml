@@ -9,7 +9,7 @@ info:
   license:
     name: MIT
     url: https://opensource.org/license/mit/
-  version: 0.2.0 # last updated: 2025-09-10
+  version: 0.3.0 # last updated: 2026-06-25
 servers:
   - url: https://ipqualityscore.com/api
 paths:
@@ -69,3 +69,15 @@ paths:
     $ref: paths/json_blocklist_delete_{apiKey}.yaml
   /json/blocklist/create/{apiKey}:
     $ref: paths/json_blocklist_create_{apiKey}.yaml
+  /json/csv/{apiKey}/{fileType}/upload:
+    $ref: paths/json_csv_{apiKey}_{fileType}_upload.yaml
+  /xml/csv/{apiKey}/{fileType}/upload:
+    $ref: paths/xml_csv_{apiKey}_{fileType}_upload.yaml
+  /json/csv/{apiKey}/status/{csvId}:
+    $ref: paths/json_csv_{apiKey}_status_{csvId}.yaml
+  /xml/csv/{apiKey}/status/{csvId}:
+    $ref: paths/xml_csv_{apiKey}_status_{csvId}.yaml
+  /json/csv/{apiKey}/list:
+    $ref: paths/json_csv_{apiKey}_list.yaml
+  /xml/csv/{apiKey}/list:
+    $ref: paths/xml_csv_{apiKey}_list.yaml

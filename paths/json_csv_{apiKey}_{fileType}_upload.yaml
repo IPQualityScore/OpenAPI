@@ -1,0 +1,132 @@
+parameters:
+  - $ref: ../components/parameters/apiKey.yaml
+  - name: fileType
+    in: path
+    required: true
+    description: The type of CSV
+    schema:
+      type: string
+      enum:
+        - proxy
+        - email
+        - url
+        - phone
+        - leaked_email
+        - leaked_password
+        - leaked_username
+post:
+  summary: Upload (JSON)
+  tags:
+    - Bulk Validation CSV
+  parameters:
+    - name: url
+      in: query
+      required: false
+      description: The full link to download the file you wish to process
+      schema:
+        type: string
+        format: uri
+    - name: file_name
+      in: query
+      required: false
+      description: An optional name for this file
+      schema:
+        type: string
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            input:
+              type: array
+              items:
+                type: array
+                items:
+                  type: string
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            file:
+              type: string
+              format: binary
+              description: The file to upload
+  responses:
+    "200":
+      headers:
+        Date:
+          $ref: ../components/headers/Date.yaml
+        Transfer-Encoding:
+          $ref: ../components/headers/Transfer-Encoding.yaml
+        Connection:
+          $ref: ../components/headers/Connection.yaml
+        Content-Encoding:
+          $ref: ../components/headers/Content-Encoding.yaml
+        X-Powered-By:
+          $ref: ../components/headers/X-Powered-By.yaml
+        Content-Type:
+          schema:
+            type: string
+          example: application/json; charset=UTF-8
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              success:
+                type: boolean
+              id:
+                type: integer
+              file_name:
+                type: string
+              type:
+                type: string
+              strictness:
+                type: integer
+              status:
+                type: string
+              aborted:
+                nullable: true
+              invalid_records:
+                type: integer
+              status_url:
+                type: string
+                format: uri
+              downloads:
+                type: object
+                properties:
+                  pristine:
+                    nullable: true
+                  clean:
+                    nullable: true
+                  bad:
+                    nullable: true
+                  all:
+                    nullable: true
+              request_id:
+                type: string
+              api_version:
+                type: integer
+          example:
+            message: Success
+            success: true
+            id: 3868534
+            file_name: "proxy_2026-06-25 11:44:13"
+            type: proxy
+            strictness: 0
+            status: NEW
+            aborted: null
+            invalid_records: 0
+            status_url: https://www.ipqualityscore.com/api/json/csv/KB0ZyCp4fT5lcAw8ewBhBPeEy6NPNK3G/status/3868534
+            downloads:
+              pristine: null
+              clean: null
+              bad: null
+              all: null
+            request_id: idiPh8y55B
+            api_version: 1
